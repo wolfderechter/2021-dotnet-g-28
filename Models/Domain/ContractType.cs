@@ -78,5 +78,10 @@ namespace _2021_dotnet_g_28
             {
             }
         }
+
+        public void hoph()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

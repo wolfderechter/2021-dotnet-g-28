@@ -1,4 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="_2021_dotnet_g_28.Administrator" Collapsed="true">
+    <Position X="11.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\Administrator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Contract">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\Contract.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.ContractType">
+    <Position X="3" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACEAAAAAAAAAABAAEAAACAIAYAgCAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\ContractType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Gebruiker">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAACAAAgAAAIAAAAAEAAAAABAAAAAAAgAAAA=</HashCode>
+      <FileName>Models\Domain\Gebruiker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Klant">
+    <Position X="7" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAQAAABgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\Klant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.SupportManager">
+    <Position X="14" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Models\Domain\SupportManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Technieker">
+    <Position X="12" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\Technieker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Werknemer">
+    <Position X="8.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQEAgADAAAAAAAAAABAAAAAgAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\Werknemer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="_2021_dotnet_g_28.IContractTypeRepository">
+    <Position X="12.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\IContractTypeRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
