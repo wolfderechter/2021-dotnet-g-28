@@ -1,65 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="_2021_dotnet_g_28.Contract">
-    <Position X="7.25" Y="9.25" Width="1.5" />
+    <Position X="2.75" Y="8" Width="5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAAAAAAAAAACAAAAACAAAAAAAwAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Contract.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_2021_dotnet_g_28.ContractType">
-    <Position X="5.5" Y="10.5" Width="1.5" />
+    <Position X="8.75" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACEAAAAAAAAAABAAEAAACAAAYAgCAAAAAAAA=</HashCode>
       <FileName>Models\Domain\ContractType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_2021_dotnet_g_28.Gebruiker">
-    <Position X="9.25" Y="2" Width="2.75" />
+    <Position X="7" Y="1.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAQAAAACAAAgAAAIAAAAAEAACAABAAAAAAAgAAAA=</HashCode>
       <FileName>Models\Domain\Gebruiker.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_2021_dotnet_g_28.Klant">
-    <Position X="6.5" Y="5.25" Width="2.75" />
+    <Position X="2.75" Y="3.75" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAgAQEEEAAAAAAAQAAADkAAAAgAAAAIAAAAQAAAQAA=</HashCode>
+      <HashCode>AAAgQgAEEAAAAAAAQAAACkAAAAAAABAIAAAASAAAQAA=</HashCode>
       <FileName>Models\Domain\Klant.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Bedrijf" />
-    </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Contracten" />
+      <Property Name="Contactpersonen" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="_2021_dotnet_g_28.SupportManager">
-    <Position X="10" Y="9.5" Width="1.5" />
+    <Position X="11" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgQAA=</HashCode>
       <FileName>Models\Domain\SupportManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_2021_dotnet_g_28.Werknemer">
-    <Position X="10" Y="5.75" Width="1.5" />
+    <Position X="10.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQEAgADAAAAAAAAAABAAAAAgAAgAIAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Werknemer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="_2021_dotnet_g_28.Models.Domain.Bedrijf">
-    <Position X="4.25" Y="6.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAQAAAAAAAAAAAAAAABAAAAAgAAAAAAAAACAAAAAA=</HashCode>
-      <FileName>Models\Domain\Bedrijf.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Property Name="Contactpersonen" />
-    </ShowAsCollectionAssociation>
-  </Class>
   <Class Name="_2021_dotnet_g_28.Contactpersoon">
-    <Position X="4.25" Y="8.75" Width="1.5" />
+    <Position X="7" Y="5.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgACAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ContactPersoon.cs</FileName>

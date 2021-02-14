@@ -16,39 +16,8 @@ namespace _2021_dotnet_g_28
             }
         }
 
-        public String Naam
-        {
-            get => default;
-            set
-            {
-            }
-        }
 
         public DateTime KlantSinds
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public String Adres
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public String Gebruikersnaam
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public String Status
         {
             get => default;
             set
@@ -64,7 +33,31 @@ namespace _2021_dotnet_g_28
             }
         }
 
-        public Bedrijf Bedrijf
+
+        public IList<Contactpersoon> Contactpersonen
+        {
+            get => default;
+            set
+            {
+            }
+        }
+        public String BedrijfsNaam
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public String BedrijfsAdres
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public IList<String> Telefoonnummers
         {
             get => default;
             set
