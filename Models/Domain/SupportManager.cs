@@ -10,5 +10,10 @@ namespace _2021_dotnet_g_28
         {
             throw new System.NotImplementedException();
         }
+
+        public void ticketAanmaken()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

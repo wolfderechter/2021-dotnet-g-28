@@ -4,9 +4,9 @@ using System.Text;
 
 namespace _2021_dotnet_g_28
 {
-    public class Contract
+    public class Contactpersoon
     {
-        public int Nummer
+        public String Naam
         {
             get => default;
             set
@@ -14,7 +14,7 @@ namespace _2021_dotnet_g_28
             }
         }
 
-        public int Type
+        public String Voornaam
         {
             get => default;
             set
@@ -22,23 +22,7 @@ namespace _2021_dotnet_g_28
             }
         }
 
-        public int Status
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public DateTime StartDatum
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public DateTime EindDatum
+        public String Email
         {
             get => default;
             set

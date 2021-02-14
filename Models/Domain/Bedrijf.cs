@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace _2021_dotnet_g_28
+namespace _2021_dotnet_g_28.Models.Domain
 {
-    public class Contract
+    public class Bedrijf
     {
-        public int Nummer
+        public String Naam
         {
             get => default;
             set
@@ -14,7 +15,7 @@ namespace _2021_dotnet_g_28
             }
         }
 
-        public int Type
+        public String Adres
         {
             get => default;
             set
@@ -22,7 +23,7 @@ namespace _2021_dotnet_g_28
             }
         }
 
-        public int Status
+        public IList<String> Telefoonnummers
         {
             get => default;
             set
@@ -30,15 +31,7 @@ namespace _2021_dotnet_g_28
             }
         }
 
-        public DateTime StartDatum
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public DateTime EindDatum
+        public IList<Contactpersoon> Contactpersonen
         {
             get => default;
             set

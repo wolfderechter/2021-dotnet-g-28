@@ -38,7 +38,7 @@ namespace _2021_dotnet_g_28
             }
         }
 
-        public String Telefoonnummer
+        public IList<String> Telefoonnummer
         {
             get => default;
             set
@@ -55,6 +55,14 @@ namespace _2021_dotnet_g_28
         }
 
         public DateTime DatumInDienst
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public String Rol
         {
             get => default;
             set

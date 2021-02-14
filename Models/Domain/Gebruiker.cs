@@ -7,7 +7,7 @@ namespace _2021_dotnet_g_28
     public class Gebruiker
     {
         public IList<IList<String>> AanmeldPogingen;
-
+        private readonly int MaxAantalAanmeldpogingen = 5;
 
         public String Wachtwoord
         {
