@@ -23,6 +23,11 @@
   </Class>
   <Class Name="_2021_dotnet_g_28.Klant">
     <Position X="2.75" Y="3.75" Width="2.75" />
+    <AssociationLine Name="Contactpersonen" Type="_2021_dotnet_g_28.Contactpersoon">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.078" Y="0.081" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAgQgAAEAAAAAAAQAAACkAAAAAAABAIAAAASAAAQAA=</HashCode>
       <FileName>Models\Domain\Klant.cs</FileName>
@@ -42,12 +47,12 @@
   <Class Name="_2021_dotnet_g_28.Werknemer">
     <Position X="10.75" Y="3.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAQEAgADAAAAAAAAAABAAAAAgAAgAIAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAQEAgADAAAAAAAAAABAAAAAgAAgAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Werknemer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_2021_dotnet_g_28.Contactpersoon">
-    <Position X="7" Y="5.25" Width="2.5" />
+    <Position X="6.75" Y="5.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgACAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ContactPersoon.cs</FileName>

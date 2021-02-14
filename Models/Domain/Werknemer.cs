@@ -69,10 +69,5 @@ namespace _2021_dotnet_g_28
             {
             }
         }
-
-        public void test()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
