@@ -47,7 +47,7 @@ namespace _2021_dotnet_g_28
             }
         }
 
-        public bool IsBuitenWerkuren
+        public bool EnkelTijdensWerkUren
         {
             get => default;
             set

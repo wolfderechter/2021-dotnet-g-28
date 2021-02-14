@@ -30,7 +30,7 @@ namespace _2021_dotnet_g_28
             }
         }
 
-        public String Adress
+        public String Adres
         {
             get => default;
             set

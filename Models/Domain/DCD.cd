@@ -8,9 +8,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="_2021_dotnet_g_28.ContractType">
-    <Position X="8.75" Y="8" Width="1.5" />
+    <Position X="8" Y="8.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAACEAAAAAAAAAABAAEAAACAAAYAgCAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAACEAAAAAAAAAABAAEAAACAAAYAgAAgAAAAAA=</HashCode>
       <FileName>Models\Domain\ContractType.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -24,7 +24,7 @@
   <Class Name="_2021_dotnet_g_28.Klant">
     <Position X="2.75" Y="3.75" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAgQgAEEAAAAAAAQAAACkAAAAAAABAIAAAASAAAQAA=</HashCode>
+      <HashCode>AAAgQgAAEAAAAAAAQAAACkAAAAAAABAIAAAASAAAQAA=</HashCode>
       <FileName>Models\Domain\Klant.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -33,14 +33,14 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="_2021_dotnet_g_28.SupportManager">
-    <Position X="11" Y="7.5" Width="1.5" />
+    <Position X="11" Y="7.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgQAA=</HashCode>
       <FileName>Models\Domain\SupportManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_2021_dotnet_g_28.Werknemer">
-    <Position X="10.75" Y="3.75" Width="1.5" />
+    <Position X="10.75" Y="3.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAQEAgADAAAAAAAAAABAAAAAgAAgAIAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Werknemer.cs</FileName>
