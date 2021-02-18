@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="_2021_dotnet_g_28.Models.Domain.ContactPerson">
+    <Position X="6.75" Y="5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\Domain\ContactPerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.Contract">
+    <Position X="2" Y="5.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAEAAAAAgAAAAAAAAAQAAAEAAAAA=</HashCode>
+      <FileName>Models\Domain\Contract.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.Customer">
+    <Position X="1.25" Y="0.5" Width="4" />
+    <AssociationLine Name="ContactPersons" Type="_2021_dotnet_g_28.Models.Domain.ContactPerson" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="3.75" />
+        <Point X="8.188" Y="3.75" />
+        <Point X="8.188" Y="5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAIAAAAAwAAAJAAAAAggAKCAAAAEA=</HashCode>
+      <FileName>Models\Domain\Customer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="ContactPersons" />
+      <Property Name="Contracts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.Employee">
+    <Position X="11.5" Y="1.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AACAAEAAACAAAAAAEAAAAAAAAAoAAAAAAAAACAAAAAg=</HashCode>
+      <FileName>Models\Domain\Employee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.SupportManager">
+    <Position X="11.75" Y="5.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Models\Domain\SupportManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.User">
+    <Position X="6.25" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAABAAAQAAAAAAAAIAAwACAAAQAAAAAAA=</HashCode>
+      <FileName>Models\Domain\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
