@@ -1,4 +1,5 @@
 using _2021_dotnet_g_28.Data;
+using _2021_dotnet_g_28.Models.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,8 +31,20 @@ namespace _2021_dotnet_g_28
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                //password settings
+                //password requirements zeker navragen
+
+                //Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.MaxValue;
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                //user settings
+
+
+            });
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
@@ -62,7 +75,7 @@ namespace _2021_dotnet_g_28
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

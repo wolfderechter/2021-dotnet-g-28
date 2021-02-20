@@ -19,9 +19,14 @@
     <AssociationLine Name="ContactPersons" Type="_2021_dotnet_g_28.Models.Domain.ContactPerson" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="5.25" Y="3.75" />
-        <Point X="8.188" Y="3.75" />
+        <Point X="5.57" Y="3.75" />
+        <Point X="5.57" Y="4.239" />
+        <Point X="8.188" Y="4.239" />
         <Point X="8.188" Y="5" />
       </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.086" Y="0.467" />
+      </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAAIAAAAAwAAAJAAAAAggAKCAAAAEA=</HashCode>
@@ -44,13 +49,6 @@
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
       <FileName>Models\Domain\SupportManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="_2021_dotnet_g_28.Models.Domain.User">
-    <Position X="6.25" Y="0.5" Width="3.25" />
-    <TypeIdentifier>
-      <HashCode>AACAAAAAAAAAABAAAQAAAAAAAAIAAwACAAAQAAAAAAA=</HashCode>
-      <FileName>Models\Domain\User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
