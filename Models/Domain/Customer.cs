@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace _2021_dotnet_g_28.Models.Domain
 {
-    public class Customer : IdentityUser
+    public class Customer 
     {
         #region properties
-        public IList<ContactPerson> ContactPersons { get; set; }
-        public IList<Contract> Contracts { get; set; }
+        //public IList<ContactPerson> ContactPersons { get; set; }
+        //public IList<Contract> Contracts { get; set; }
         public String CompanyAdress { get; set; }
         public String CompanyName { get; set; }
         public int CustomerNr { get; set; }
         public DateTime CustomerInitDate { get; set; }
-        public IList<String> TelNrs { get; set; }
+        //public IList<String> TelNrs { get; set; }
         #endregion
 
         #region methods

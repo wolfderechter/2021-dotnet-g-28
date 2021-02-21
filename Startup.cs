@@ -45,6 +45,7 @@ namespace _2021_dotnet_g_28
 
 
             });
+            services.AddScoped<ApplicationDbInitializer>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
