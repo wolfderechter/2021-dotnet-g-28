@@ -11,6 +11,7 @@ namespace _2021_dotnet_g_28.Models.Domain
         public String Email { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
+        public Customer Customer { get; set; }
         #endregion
     }
 }
