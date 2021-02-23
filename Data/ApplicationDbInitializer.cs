@@ -37,7 +37,7 @@ namespace _2021_dotnet_g_28.Data
             IdentityUser user = new IdentityUser { UserName = Username };
             await _userManager.CreateAsync(user, "Paswoord_1");
             Username = "StefB";
-            user = new IdentityUser { UserName = Username };
+            user = new IdentityUser { UserName = Username, AccessFailedCount=3};
             await _userManager.CreateAsync(user, "Paswoord_1");
         }
     }

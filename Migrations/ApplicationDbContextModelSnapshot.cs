@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _2021_dotnet_g_28.Data;
 
-namespace _2021_dotnet_g_28.Data.Migrations
+namespace _2021_dotnet_g_28.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210223174027_test")]
-    partial class test
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,9 +227,6 @@ namespace _2021_dotnet_g_28.Data.Migrations
                     b.Property<int>("CustomerNr")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CustomerNr1")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -241,8 +236,6 @@ namespace _2021_dotnet_g_28.Data.Migrations
                     b.HasKey("Email");
 
                     b.HasIndex("CustomerNr");
-
-                    b.HasIndex("CustomerNr1");
 
                     b.ToTable("ContactPerson");
                 });
@@ -255,9 +248,6 @@ namespace _2021_dotnet_g_28.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CustomerNr")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CustomerNr1")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
@@ -275,8 +265,6 @@ namespace _2021_dotnet_g_28.Data.Migrations
                     b.HasKey("Number");
 
                     b.HasIndex("CustomerNr");
-
-                    b.HasIndex("CustomerNr1");
 
                     b.ToTable("Contract");
                 });
@@ -404,27 +392,19 @@ namespace _2021_dotnet_g_28.Data.Migrations
             modelBuilder.Entity("_2021_dotnet_g_28.Models.Domain.ContactPerson", b =>
                 {
                     b.HasOne("_2021_dotnet_g_28.Models.Domain.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerNr")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("_2021_dotnet_g_28.Models.Domain.Customer", null)
                         .WithMany("ContactPersons")
-                        .HasForeignKey("CustomerNr1");
+                        .HasForeignKey("CustomerNr")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("_2021_dotnet_g_28.Models.Domain.Contract", b =>
                 {
                     b.HasOne("_2021_dotnet_g_28.Models.Domain.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerNr")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("_2021_dotnet_g_28.Models.Domain.Customer", null)
                         .WithMany("Contracts")
-                        .HasForeignKey("CustomerNr1");
+                        .HasForeignKey("CustomerNr")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("_2021_dotnet_g_28.Models.Domain.SupportManager", b =>
