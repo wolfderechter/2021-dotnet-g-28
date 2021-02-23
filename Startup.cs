@@ -51,7 +51,7 @@ namespace _2021_dotnet_g_28
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,ApplicationDbInitializer applicationDbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -79,6 +79,8 @@ namespace _2021_dotnet_g_28
                     pattern: "{controller=Account}/{action=Login}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            applicationDbInitializer.InitializeData().Wait();
         }
     }
 }

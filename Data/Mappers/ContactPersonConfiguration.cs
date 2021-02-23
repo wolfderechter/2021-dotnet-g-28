@@ -15,6 +15,7 @@ namespace _2021_dotnet_g_28.Data.Mappers
             builder.ToTable("ContactPerson");
             builder.HasKey(t => t.Email);
             //builder.Property(t => t.Compa)
+            builder.HasOne(t => t.Customer).WithMany().IsRequired().OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

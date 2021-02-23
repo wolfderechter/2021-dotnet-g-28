@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace _2021_dotnet_g_28.Data.Mappers
 {
-    public class SupportManagerConfiguration : IEntityTypeConfiguration<SupportManager>
+    public class EmployeeConfiguration :IEntityTypeConfiguration<Employee>
     {
-        public void Configure(EntityTypeBuilder<SupportManager> builder)
+        public void Configure(EntityTypeBuilder<Employee> builder)
         {
-            builder.ToTable("SupportManager");
+            builder.ToTable("Employees");
             builder.HasKey(t => t.EmployeeNr);
+            
+            
         }
     }
 }

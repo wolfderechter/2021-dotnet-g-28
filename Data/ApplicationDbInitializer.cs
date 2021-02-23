@@ -18,14 +18,27 @@ namespace _2021_dotnet_g_28.Data
             _userManager = userManager;
         }
 
-        public async Task InitializeData()
+        public  async Task InitializeData()
         {
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
-                _dbContext.Customers.Add(new Customer());
+                await InitializeUsers();
+                _dbContext.Customers.Add(new Customer() { CompanyName = "HansAnders" });
                 _dbContext.SaveChanges();
             }
+
+            
+        }
+
+        private async Task InitializeUsers()
+        {
+            string Username = "NathanT";
+            IdentityUser user = new IdentityUser { UserName = Username };
+            await _userManager.CreateAsync(user, "Paswoord_1");
+            Username = "StefB";
+            user = new IdentityUser { UserName = Username };
+            await _userManager.CreateAsync(user, "Paswoord_1");
         }
     }
 }

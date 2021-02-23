@@ -39,6 +39,7 @@ namespace _2021_dotnet_g_28.Controllers
 
                 if (result.Succeeded)
                 {
+                    
                     return RedirectToAction("index", "home");
                 }
 
