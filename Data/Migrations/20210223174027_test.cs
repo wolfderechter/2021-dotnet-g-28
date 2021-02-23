@@ -35,18 +35,19 @@ namespace _2021_dotnet_g_28.Data.Migrations
                     LastName = table.Column<string>(nullable: true),
                     Role = table.Column<string>(nullable: true),
                     Discriminator = table.Column<string>(nullable: false),
-                    userId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employees", x => x.EmployeeNr);
-                    table.ForeignKey(
-                        name: "FK_Employees_AspNetUsers_userId",
-                        column: x => x.userId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
+                    //userId = table.Column<string>(nullable: true)
+                }//,
+                //constraints: table =>
+                //{
+                //    table.PrimaryKey("PK_Employees", x => x.EmployeeNr);
+                //    table.ForeignKey(
+                //        name: "FK_Employees_AspNetUsers_userId",
+                //        column: x => x.userId,
+                //        principalTable: "AspNetUsers",
+                //        principalColumn: "Id",
+                //        onDelete: ReferentialAction.Restrict);
+                //}
+                );
 
             migrationBuilder.CreateTable(
                 name: "ContactPerson",
@@ -125,10 +126,10 @@ namespace _2021_dotnet_g_28.Data.Migrations
                 table: "Contract",
                 column: "CustomerNr1");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Employees_userId",
-                table: "Employees",
-                column: "userId");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Employees_userId",
+            //    table: "Employees",
+            //    column: "userId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
