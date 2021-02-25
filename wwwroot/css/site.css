@@ -24,6 +24,25 @@ a {
   border-color: #1861ac;
 }
 
+/* Vertical navbar styles
+-------------------------------------------------- */
+.vertical-nav {
+    min-width: 17rem;
+    width: 17rem;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s;
+}
+
+.page-content {
+    width: calc(100% - 17rem);
+    margin-left: 17rem;
+    transition: all 0.4s;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -59,7 +78,7 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
+   /*Margin bottom by footer height */
   margin-bottom: 60px;
 }
 .footer {
@@ -67,5 +86,8 @@ body {
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  /*line-height: 60px;  Vertically center the text there */
 }
+
+
+

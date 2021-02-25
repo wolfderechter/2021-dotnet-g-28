@@ -40,7 +40,7 @@ namespace _2021_dotnet_g_28.Controllers
 
                 if (result.Succeeded)
                 {
-                    
+                    TempData["username"] = model.Username;
                     return RedirectToAction("index", "home");
                 }
                 if (result.IsLockedOut) {
