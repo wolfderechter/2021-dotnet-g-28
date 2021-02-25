@@ -17,9 +17,14 @@ namespace _2021_dotnet_g_28.Models.Domain
         public String Attachements { get; set; }
 
 
-        protected Ticket()
+        public Ticket(DateTime dateCreation, string title, string description, string type, string attatchements = "")
         {
-
+            //ticketNr nog onduidelijk
+            DateCreation = dateCreation;
+            Title = title;
+            Description = description;
+            Type = type;
+            Attachements = attatchements;
         }
 
 

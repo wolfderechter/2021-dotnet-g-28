@@ -1,4 +1,5 @@
 using _2021_dotnet_g_28.Data;
+using _2021_dotnet_g_28.Data.Repositories;
 using _2021_dotnet_g_28.Models.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,7 +46,9 @@ namespace _2021_dotnet_g_28
 
 
             });
+           
             services.AddScoped<ApplicationDbInitializer>();
+            services.AddScoped<ITicketRepository, TicketRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
