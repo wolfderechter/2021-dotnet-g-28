@@ -12,11 +12,11 @@ namespace _2021_dotnet_g_28.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<ContactPerson> builder)
         {
-            builder.ToTable("ContactPerson");
-            builder.HasKey(t => t.Email);
+            //builder.ToTable("ContactPerson");
+            //builder.HasKey(t => t.Email);
             //builder.Property(t => t.Compa)
             
-            //builder.HasOne(t => t.Customer).WithMany().IsRequired().OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(t => t.Tickets).WithOne().IsRequired().OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

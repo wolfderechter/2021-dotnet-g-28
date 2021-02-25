@@ -44,7 +44,7 @@ namespace _2021_dotnet_g_28.Controllers
                     return RedirectToAction("index", "home");
                 }
                 if (result.IsLockedOut) {
-                    ModelState.AddModelError(string.Empty, "je account is gelocked door teveel foute pogingen je moet 5 minuten wachten");
+                    ModelState.AddModelError(string.Empty, "Your account has been locked, please contact support for more information : support.sce@actemium.com ");
                     return View(model);
                 }
 

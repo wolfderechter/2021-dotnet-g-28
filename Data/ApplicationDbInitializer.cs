@@ -24,7 +24,7 @@ namespace _2021_dotnet_g_28.Data
             if (_dbContext.Database.EnsureCreated())
             {
                 await InitializeUsers();
-                _dbContext.Customers.Add(new Customer() { CompanyName = "HansAnders" });
+                _dbContext.Company.Add(new Company() { CompanyName = "HansAnders" });
                 _dbContext.SaveChanges();
             }
 
@@ -36,6 +36,7 @@ namespace _2021_dotnet_g_28.Data
             string Username = "NathanT";
             IdentityUser user = new IdentityUser { UserName = Username };
             await _userManager.CreateAsync(user, "Paswoord_1");
+           // await _userManager.AddToRoleAsync(
             Username = "StefB";
             user = new IdentityUser { UserName = Username, AccessFailedCount=3};
             await _userManager.CreateAsync(user, "Paswoord_1");

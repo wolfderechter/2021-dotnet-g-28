@@ -39,8 +39,8 @@ namespace _2021_dotnet_g_28
                 //password requirements zeker navragen
 
                 //Lockout settings
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
                 options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(1000000);
                 //user settings
 
 

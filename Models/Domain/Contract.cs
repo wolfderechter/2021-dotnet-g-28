@@ -13,7 +13,7 @@ namespace _2021_dotnet_g_28.Models.Domain
         public DateTime StartDate { get; set; }
         public int Status { get; set; }
         public int Type { get; set; }
-        public Customer Customer { get; set; }
+        public Company company { get; set; }
         #endregion
     }
 }

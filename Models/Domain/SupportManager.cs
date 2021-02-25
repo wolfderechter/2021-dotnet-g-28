@@ -6,20 +6,14 @@ using System.Threading.Tasks;
 
 namespace _2021_dotnet_g_28.Models.Domain
 {
-    public class SupportManager : Employee
+    public class SupportManager: IdentityUser
     {
-
-        public IdentityUser user { get; set; }
-        #region methods
-        public void ManageContractType()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CreateNewTicket()
-        {
-            throw new NotImplementedException();
-        }
+        #region properties
+        public String Adress { get; set; }
+        public DateTime DateInService { get; set; }
+        public String FirstName { get; set; }
+        public String LastName { get; set; }
+       // public ICollection<String> TelNr { get; set; }
         #endregion
     }
 }
