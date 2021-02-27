@@ -15,32 +15,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] Actemium</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/Login.css" rel="stylesheet" />
 </head>
-<body>
+<body class="text-center">
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main">
 
 
-            <div class="text-center">
+            <div>
                 <img src="~/img/logo-actemuim.png" alt="Actemuim logo" />
             </div>
             <h1>@ViewBag.Title</h1>
             <div class="row">
                 <div class="col-md-12">
-                    <form method="post">
+                    <form class="form-signin" method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="form-group">
-                            <label asp-for="Username"></label>
-                            <input asp-for="Username" class="form-control" />
+                            @*<label asp-for="Username"></label>*@
+                            <input asp-for="Username" class="form-control inputUsername" placeholder="Username"/>
                             <span asp-validation-for="Username" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Password"></label>
-                            <input asp-for="Password" class="form-control" />
+                            @*<label asp-for="Password"></label>*@
+                            <input type="password" asp-for="Password" class="form-control inputPassword" placeholder="Password"/>
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3 mt-3">
                             <div class="checkbox">
                                 <label asp-for="RememberMe">
                                     <input asp-for="RememberMe" />
