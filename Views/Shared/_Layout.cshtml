@@ -10,64 +10,38 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
-    @*<header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                    <div class="container">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">_2021_dotnet_g_28</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                            <partial name="_LoginPartial" />
-                            <ul class="navbar-nav flex-grow-1">
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-        </header>*@
-
     <!-- Vertical navbar -->
-    <div class="vertical-nav bg-white" id="sidebar">
+    <!--Add in every nav-item asp code when controllers-->
+    <!--<div class="vertical-nav bg-white" id="sidebar">
         <div class="py-4 px-3 bg-light">
-            <div class="media d-flex align-items-center">
-                <div class="media-body">
-                    <h4 class="m-0">@TempData["username"]</h4>
-                    <p class="font-weight-light text-muted mb-0">Contact Person</p>
-                </div>
-            </div>
+            <h4 class="m-0">@TempData["username"]</h4>
+            <p class="font-weight-light text-muted mb-0">Contact Person</p>
         </div>
 
-        <p class="text-gray text-uppercase px-3 small mt-4 mb-4 mb-0 dashboard-link"><span class="fas fa-home mr-3 icon"></span>Dashboard</p>
+        <p class="text-gray text-uppercase px-3 small mt-4 mb-4 dashboard-link"><span class="fas fa-home mr-3 icon"></span>Dashboard</p>
 
         <div class="underline"></div>
 
         <ul class="nav flex-column bg-white mt-4">
-            <li class="nav-item">
+            <li class="nav-item mt-2 mb-2">
                 <a href="#" class="nav-link text-dark dashboard-link">
                     <i class="fas fa-ticket-alt mr-3 text-primary fa-fw"></i>
                     TICKETS
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mb-2">
                 <a href="#" class="nav-link text-dark dashboard-link">
                     <i class="fas fa-chart-line mr-3 text-primary fa-fw"></i>
                     STATISTIEKEN
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mb-2">
                 <a href="#" class="nav-link text-dark dashboard-link">
                     <i class="fas fa-copy mr-3 text-primary fa-fw"></i>
                     CONTRACTEN
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mb-2">
                 <a href="#" class="nav-link text-dark dashboard-link">
                     <i class="fas fa-question-circle mr-3 text-primary fa-fw"></i>
                     FAQ
@@ -82,27 +56,32 @@
             </a>
             <a href="#" class="nav-link px-4 rounded-pill">
                 Afmelden
-                
+
             </a>
         </div>
-    </div>
+    </div>-->
 
     <!-- End vertical navbar -->
 
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
+    <!--TEST-->
 
-        @*<footer class="border-top footer text-muted">
-                <div class="container">
-                    &copy; 2021 - _2021_dotnet_g_28 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </div>
-            </footer>*@
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @RenderSection("Scripts", required: false)
+
+
+    <!--END TEST-->
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @*<footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - _2021_dotnet_g_28 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
