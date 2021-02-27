@@ -79,7 +79,7 @@ namespace _2021_dotnet_g_28
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Account}/{action=Login}/{id?}");
+                    pattern: "{controller=Ticket}/{action=Create}/{id?}");
                 endpoints.MapRazorPages();
             });
 

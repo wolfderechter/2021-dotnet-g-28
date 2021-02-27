@@ -3,18 +3,18 @@
   <Class Name="_2021_dotnet_g_28.Models.Domain.ContactPerson">
     <Position X="1.75" Y="4.25" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAg=</HashCode>
       <FileName>Models\Domain\ContactPerson.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_2021_dotnet_g_28.Models.Domain.Contract">
     <Position X="6.75" Y="4" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>AAEAAAAEAAAAAAAAAEAAAAAgAAAAAAAAAQAAAEAAAAA=</HashCode>
+      <HashCode>AAAAAAAEAAAAAAAAAEAAAAAgAAAAAAAAAQAAAEAAAAQ=</HashCode>
       <FileName>Models\Domain\Contract.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="_2021_dotnet_g_28.Models.Domain.Customer">
+  <Class Name="_2021_dotnet_g_28.Models.Domain.Company">
     <Position X="1.25" Y="0.5" Width="4" />
     <AssociationLine Name="ContactPersons" Type="_2021_dotnet_g_28.Models.Domain.ContactPerson">
       <MemberNameLabel ManuallyPlaced="true">
@@ -22,25 +22,18 @@
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAQAAAAAAAAAAAIAAAAAwAAAJAAAAAggAKCAAAAEA=</HashCode>
-      <FileName>Models\Domain\Customer.cs</FileName>
+      <HashCode>AAAAQAAAAAAAAAAAIAEAAAwAAAIAAAAAggAKCAAAAEA=</HashCode>
+      <FileName>Models\Domain\Company.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Contracts" />
       <Property Name="ContactPersons" />
+      <Property Name="Contracts" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="_2021_dotnet_g_28.Models.Domain.Employee">
-    <Position X="11.5" Y="1.75" Width="3.25" />
-    <TypeIdentifier>
-      <HashCode>AACAAEAAACAAAAAAEAAAAAAAAAoAAAAAAAAACAAAAAg=</HashCode>
-      <FileName>Models\Domain\Employee.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="_2021_dotnet_g_28.Models.Domain.SupportManager">
-    <Position X="11.75" Y="5.5" Width="2.5" />
+    <Position X="12.25" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <HashCode>AACAAEAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>Models\Domain\SupportManager.cs</FileName>
     </TypeIdentifier>
   </Class>
