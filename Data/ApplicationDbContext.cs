@@ -15,6 +15,7 @@ namespace _2021_dotnet_g_28.Data
         public DbSet<SupportManager> SupportManagers { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
 
+        public DbSet<ContactPerson> contactPeople { get; set; }
 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

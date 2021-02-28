@@ -12,8 +12,8 @@ namespace _2021_dotnet_g_28.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<ContactPerson> builder)
         {
-            //builder.ToTable("ContactPerson");
-            //builder.HasKey(t => t.Email);
+            builder.ToTable("ContactPerson");
+            builder.HasKey(t => t.Id);
             //builder.Property(t => t.Compa)
             
             builder.HasMany(t => t.Tickets).WithOne().IsRequired().OnDelete(DeleteBehavior.Cascade);

@@ -49,6 +49,7 @@ namespace _2021_dotnet_g_28
            
             services.AddScoped<ApplicationDbInitializer>();
             services.AddScoped<ITicketRepository, TicketRepository>();
+            services.AddScoped<IContactPersonRepository, ContactPersonRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
@@ -79,7 +80,7 @@ namespace _2021_dotnet_g_28
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Ticket}/{action=Create}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
                 endpoints.MapRazorPages();
             });
 
