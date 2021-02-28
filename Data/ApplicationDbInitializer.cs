@@ -53,8 +53,8 @@ namespace _2021_dotnet_g_28.Data
                 //makes tickets
                 Ticket ticket1 = new Ticket() { Title = "printer werkt niet.", Status = TicketEnum.status.Created, Type = TicketEnum.type.NoImpact, Description = "ik probeerde iets af te drukken maar het lukte niet kreeg foutmelding x15dc..... " };
                 Ticket ticket2 = new Ticket() { Title = "printer staat in BRAND!", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.ProductionWillStop, Description = "printer staat in brand achter dat ik op afdrukken klikte ontstond er een vlam " };
-                contactPerson1.Tickets = new Ticket[] { ticket1 };
-                contactPerson2.Tickets = new Ticket[] { ticket2 };
+                contactPerson1.AddTicket(ticket1);
+                contactPerson2.AddTicket(ticket2);
                 _dbContext.contactPeople.AddRange(contactPerson2, contactPerson1);
                 _dbContext.SaveChanges();
             }

@@ -42,12 +42,12 @@ namespace _2021_dotnet_g_28.Controllers
                 {
                     var user = await _userManager.GetUserAsync(User);
                     ContactPerson contact = _contactPersonRepository.getById(user.Id);
-
-                    var ticket = new Ticket();
+                    //nog aanvullen
+                    var ticket = new Ticket(ticketEditViewModel.Title, ticketEditViewModel.Description, ticketEditViewModel.Type);
                     _ticketRepository.Add(ticket);
+                    contact.AddTicket(ticket);
                     _ticketRepository.SaveChanges();
                     TempData["message"] = $"You successfully created a ticket.";
-                    Console.WriteLine();
                 }
                 catch
                 {
@@ -65,8 +65,8 @@ namespace _2021_dotnet_g_28.Controllers
         }
         private SelectList TypeTickets()
         {
-            var typeTickets = new List<TypeTicket>();
-            foreach (TypeTicket typeTicket in Enum.GetValues(typeof(TypeTicket)))
+            var typeTickets = new List<TicketEnum.type>();
+            foreach (TicketEnum.type typeTicket in Enum.GetValues(typeof(TicketEnum.type)))
             {
                 typeTickets.Add(typeTicket);
             }

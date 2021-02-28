@@ -16,5 +16,15 @@ namespace _2021_dotnet_g_28.Models.Domain
         public ICollection<Ticket> Tickets { get; set; }
         public IdentityUser user { get; set; }
         #endregion
+
+        public ContactPerson()
+        {
+            Tickets = new HashSet<Ticket>();
+        }
+
+        public void AddTicket(Ticket ticket)
+        {
+            Tickets.Add(ticket);
+        }
     }
 }
