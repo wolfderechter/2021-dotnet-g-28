@@ -32,6 +32,19 @@
         </header>*@
 
     <!-- Vertical navbar -->
+    <div class="container">
+        <main role="main" class="pb-3">
+            @if (TempData["message"] != null)
+            {
+                <div class="alert alert-success">@TempData["message"]</div>
+            }
+            @if (TempData["error"] != null)
+            {
+                <div class="alert alert-warning">@TempData["error"]</div>
+            }
+            @RenderBody()
+        </main>
+    </div>
     <div class="vertical-nav bg-white col-md-3" id="sidebar">
         <div class="py-4 px-3 mb-4 bg-light">
             <div class="media d-flex align-items-center">
@@ -79,20 +92,20 @@
     </div>
     <!-- End vertical navbar -->
 
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
-        @*<footer class="border-top footer text-muted">
-                <div class="container">
-                    &copy; 2021 - _2021_dotnet_g_28 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </div>
-            </footer>*@
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @RenderSection("Scripts", required: false)
+    @*<footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - _2021_dotnet_g_28 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
