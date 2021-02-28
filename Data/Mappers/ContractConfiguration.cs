@@ -13,7 +13,7 @@ namespace _2021_dotnet_g_28.Data.Mappers
         public void Configure(EntityTypeBuilder<Contract> builder)
         {
             builder.ToTable("Contract");
-            builder.HasKey(t => t.Number);
+            builder.HasKey(t => t.ContractNr);
             //builder.Property(t => t.Compa)
             //builder.HasOne(t => t.Customer).WithMany().IsRequired().OnDelete(DeleteBehavior.Cascade);
         }

@@ -18,8 +18,9 @@ namespace _2021_dotnet_g_28
             
             using(ApplicationDbContext context = new ApplicationDbContext())
             {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
+                //snellere opstart
+                //context.Database.EnsureDeleted();
+                //context.Database.EnsureCreated();
 
             }
         }

@@ -9,11 +9,11 @@ namespace _2021_dotnet_g_28.Models.Domain
     {
         #region properties
         public DateTime EndDate { get; set; }
-        public int Number { get; set; }
+        public int ContractNr { get; set; }
         public DateTime StartDate { get; set; }
-        public int Status { get; set; }
-        public int Type { get; set; }
-        public Company company { get; set; }
+        public ContractEnum.status Status { get; set; }
+        public ContractEnum.type Type { get; set; }
+        public Company Company { get; set; }
         #endregion
     }
 }

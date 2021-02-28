@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace _2021_dotnet_g_28.Data.Mappers
 {
-    public class ContactPersonConfiguration : IEntityTypeConfiguration<ContactPerson>
+    public class SupportManagerConfiguration : IEntityTypeConfiguration<SupportManager>
     {
-        public void Configure(EntityTypeBuilder<ContactPerson> builder)
+        public void Configure(EntityTypeBuilder<SupportManager> builder)
         {
-            builder.ToTable("ContactPersons");
+            builder.ToTable("SupportManagers");
             builder.HasKey(t => t.Id);
-            //builder.Property(t => t.Compa)
             
-            builder.HasMany(t => t.Tickets).WithOne().IsRequired().OnDelete(DeleteBehavior.Cascade);
         }
+    
+        
     }
 }
