@@ -22,11 +22,11 @@ namespace _2021_dotnet_g_28.Models.Domain
 
         public enum type
         {
-            [Display(Name = "1: productie geïmpacteerd, binnen 2u een oplossing")]
+            [Display(Name = "1: production impacted, within 2h a solution")]
             ProductionStopped = 1,
-            [Display(Name = "2: productie zal binnen een tijd stil vallen , binnen 4u oplossing")]
+            [Display(Name = "2: production will stop for a while, within 4h a solution")]
             ProductionWillStop = 2,
-            [Display(Name = "3: geen productie impact, binnen 3d een antwoord")]
+            [Display(Name = "3: no production impact, within 3 days a solution")]
             NoImpact = 3
         }
     }
