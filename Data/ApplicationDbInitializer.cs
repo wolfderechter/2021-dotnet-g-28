@@ -28,7 +28,7 @@ namespace _2021_dotnet_g_28.Data
                 _dbContext.SaveChanges();
             }
 
-            
+
         }
 
         private async Task InitializeUsers()

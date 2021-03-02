@@ -1,150 +1,136 @@
-﻿/* Vertical navbar styles
--------------------------------------------------- */
-/*.vertical-nav {
-    min-width: 17rem;
-    width: 17rem;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-    float: left;
+﻿:root {
+    font-size: 16px;
+    font-family: 'Arial';
+    --text-primary: black;
+    --text-secondary: light-grey;
+    --bg-primary: white;
+    --bg-secondary: #f2f2f2;
+    --transition-speed: 600ms;
 }
 
-.page-content {
-    width: calc(100% - 17rem);
+body{
+    color: black;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+body::-webkit-scrollbar{
+    width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track{
+    background-color: white;
+}
+
+body::-webkit-scrollbar-thumb{
+    background-color: blue;
+    border-radius: 5px;
+}
+
+main{
     margin-left: 5rem;
+    padding: 1rem;
 }
 
-.underline {
-    height: 2px !important;
-    width: 90% !important;
-    margin-left: 5% !important;
-    border-bottom: 2px solid #cccccc;
-}
-
-.dashboard-link {
-    font-family: 'Lato', sans-serif;
-    font-size: 20px;
-    color: #606060!important;
-}
-
-.icon {
-    color: #007bff !important;
-}
-
-.nav{
-    margin-bottom: 25rem;
-}
-
-
-.nav-link:hover {
-    background: #f5f5f5;
-    color: #606060 !important;
-}
-
-.buttons {
-    width: 70%;
-    padding-left: 1rem;
-}*/
-
-body {
-    font-size: .875rem;
-}
-
-.feather {
-    width: 16px;
-    height: 16px;
-    vertical-align: text-bottom;
-}
-
-/*
- * Sidebar
- */
-
-.sidebar {
+.navbar {
     position: fixed;
-    top: 0;
-    /* rtl:raw:
-  right: 0;
-  */
-    bottom: 0;
-    /* rtl:remove */
-    left: 0;
-    z-index: 100; /* Behind the navbar */
-    padding: 48px 0 0; /* Height of navbar */
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    background-color: var(--bg-primary);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    transition: width 600ms ease;
+    font-size: 23px;
+    overflow: scroll;
 }
 
-@media (max-width: 767.98px) {
-    .sidebar {
-        top: 5rem;
+.navbar::-webkit-scrollbar{
+    display: none;
+}
+
+.navbar-nav{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-item{
+    width: 100%;
+}
+
+.nav-item:last-child{
+    margin-top: auto;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    filter: grayscale(100%) opacity(0.7);
+    transition: var(--transition-speed);
+}
+
+.nav-link:hover{
+    filter: grayscale(0%) opacity(1);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+.link-text{
+    display: none;
+    margin-left: 1rem;
+}
+
+.nav-link i {
+    width: 2rem;
+    min-width: 2rem;
+    margin: 0 1.5rem;
+}
+
+/*small screen*/
+@media only screen and (max-width: 600px) {
+    .navbar {
+        bottom: 0;
+        width: 100vw;
+        height: 5rem;
+    }
+
+    .navbar-nav{
+        flex-direction: row;
+
+    }
+
+    .nav-link i {
+        width: 1.5rem;
+        min-width: 1.5rem;
+    }
+
+    .nav-link{
+        justify-content: center;
+    }
+
+    main{
+        margin: 0;
     }
 }
 
-.sidebar-sticky {
-    position: relative;
-    top: 0;
-    height: calc(100vh - 48px);
-    padding-top: .5rem;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-}
-
-.sidebar .nav-link {
-    font-weight: 500;
-    color: #333;
-}
-
-    .sidebar .nav-link .feather {
-        margin-right: 4px;
-        color: #727272;
+/*large screens*/
+@media only screen and (min-width: 600px) {
+    .navbar {
+        top: 0;
+        width: 5rem;
+        height: 100vh;
     }
 
-    .sidebar .nav-link.active {
-        color: #007bff;
+    .navbar:hover {
+        width: 16rem;
     }
 
-        .sidebar .nav-link:hover .feather,
-        .sidebar .nav-link.active .feather {
-            color: inherit;
-        }
-
-.sidebar-heading {
-    font-size: .75rem;
-    text-transform: uppercase;
-}
-
-/*
- * Navbar
- */
-
-.navbar-brand {
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-    font-size: 1rem;
-    background-color: rgba(0, 0, 0, .25);
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
-}
-
-.navbar .navbar-toggler {
-    top: .25rem;
-    right: 1rem;
-}
-
-.navbar .form-control {
-    padding: .75rem 1rem;
-    border-width: 0;
-    border-radius: 0;
-}
-
-.form-control-dark {
-    color: #fff;
-    background-color: rgba(255, 255, 255, .1);
-    border-color: rgba(255, 255, 255, .1);
-}
-
-    .form-control-dark:focus {
-        border-color: transparent;
-        box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+    .navbar:hover .link-text {
+         display: inline;
     }
+}
