@@ -37,7 +37,12 @@ namespace _2021_dotnet_g_28.Models.Domain
 
         }
 
-
+        public void EditTicket(string title, string description, TicketEnum.type type)
+        {
+            Title = title;
+            Description = description;
+            Type = type;
+        }
     }
 
     

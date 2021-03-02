@@ -72,5 +72,32 @@ namespace _2021_dotnet_g_28.Controllers
             }
             return new SelectList(typeTickets);
         }
+
+        public IActionResult Edit(int ticketNr)
+        {
+            Ticket ticket = _ticketRepository.GetBy(ticketNr);
+            if (ticket == null)
+                return NotFound();
+            ViewData["IsEdit"] = true;
+            ViewData["typeTickets"] = TypeTickets();
+            return View(new TicketEditViewModel(ticket));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int ticketNr, TicketEditViewModel ticketEditViewModel)
+        {
+            try
+            {
+                Ticket ticket = _ticketRepository.GetBy(ticketNr);
+                ticket.EditTicket(ticketEditViewModel.Title, ticketEditViewModel.Description, ticketEditViewModel.Type);
+                _ticketRepository.SaveChanges();
+                TempData["message"] = $"You successfully updated the ticket.";
+            }
+            catch
+            {
+                TempData["error"] = "Sorry, something went wrong, ticket was not updated...";
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
