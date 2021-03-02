@@ -91,6 +91,26 @@ main{
     margin: 0 1.5rem;
 }
 
+.logo {
+    width: 100%;
+    height: 5rem;
+}
+
+.logo img {
+    width: 50%;
+    height: 5rem;
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+    opacity: 0;
+    transition: 250ms;
+}
+
+#navbar:hover #img1 {
+    opacity: 1;
+}
+
+
 /*small screen*/
 @media only screen and (max-width: 600px) {
     .navbar {
@@ -114,6 +134,10 @@ main{
 
     main{
         margin: 0;
+    }
+
+    .logo{
+        display: none;
     }
 }
 
