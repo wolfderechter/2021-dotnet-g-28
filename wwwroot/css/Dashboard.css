@@ -101,7 +101,6 @@ main{
 
     .navbar-nav{
         flex-direction: row;
-
     }
 
     .nav-link i {
@@ -131,6 +130,6 @@ main{
     }
 
     .navbar:hover .link-text {
-         display: inline;
+        display: inline;
     }
 }
