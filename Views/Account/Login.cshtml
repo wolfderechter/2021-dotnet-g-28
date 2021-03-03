@@ -18,55 +18,14 @@
 </head>
 <body class="text-center">
     
-    
-    @*<div class="container">
-        <main role="main">
-
-
-            <div>
-                <img src="~/img/logo-actemuim.png" alt="Actemuim logo" />
-            </div>
-            <h1>@ViewBag.Title</h1>
-            <div class="row">
-                <div class="col-md-12">
-                    <form class="form-signin" method="post">
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="form-group">
-    <label asp-for="Username"></label>
-    <input asp-for="Username" class="form-control inputUsername" placeholder="Username"/>
-        <span asp-validation-for="Username" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-    <label asp-for="Password"></label>
-    <input type="password" asp-for="Password" class="form-control inputPassword" placeholder="Password"/>
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mb-3 mt-3">
-                            <div class="checkbox">
-                                <label asp-for="RememberMe">
-                                    <input asp-for="RememberMe" />
-                                    @Html.DisplayNameFor(m => m.RememberMe)
-                                </label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </form>
-                </div>
-            </div>
-        </main>
-    </div>*@
-    <!------------------------------------------------------------------------------------------------------------------------------------->
-
     <main class="form-signin">
         
         <form  method="post">
             <img class="mb-4" src="~/img/logo-actemuim.png" alt="Actemuim logo" width="300">
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
             <div asp-validation-summary="All" class="text-danger"></div>
-            @*<label for="inputEmail" class="visually-hidden">Email address</label>*@
-            <input type="text" id="inputUsername"  asp-for="Username" class="form-control" placeholder="Username" required autofocus>
-            @*<label for="inputPassword" class="visually-hidden">Password</label>*@
-            <input type="password" id="inputPassword" asp-for="Password" class="form-control" placeholder="Password" required>
+            <input type="text" id="inputUsername"  asp-for="Username" class="form-control" placeholder="Username" autofocus>
+            <input type="password" id="inputPassword" asp-for="Password" class="form-control" placeholder="Password">
             <div class="checkbox mb-3">
                 <label>
                     <input type="checkbox" value="remember-me" asp-for="RememberMe"> Remember me
