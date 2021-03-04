@@ -40,6 +40,7 @@ main{
     transition: width 600ms ease;
     font-size: 23px;
     overflow: scroll;
+    padding: 0;
 }
 
 .navbar::-webkit-scrollbar{
