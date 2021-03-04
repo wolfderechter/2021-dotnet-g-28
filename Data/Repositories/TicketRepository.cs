@@ -7,41 +7,41 @@ using System.Threading.Tasks;
 
 namespace _2021_dotnet_g_28.Data.Repositories
 {
-    public class TicketRepository : ITicketRepository { 
-
-    private readonly ApplicationDbContext _dbContext;
-    private readonly DbSet<Ticket> _tickets;
-
-    public TicketRepository(ApplicationDbContext dbContext)
+    public class TicketRepository : ITicketRepository
     {
-        _dbContext = dbContext;
-        _tickets = dbContext.Tickets;
-    }
 
-    public Ticket GetBy(int ticketNr)
-    {
-        return _tickets.SingleOrDefault(t => t.TicketNr == ticketNr);
-    }
+        private readonly ApplicationDbContext _dbContext;
+        private readonly DbSet<Ticket> _tickets;
 
-    public IEnumerable<Ticket> GetAll()
-    {
-        return _tickets.ToList();
-    }
+        public TicketRepository(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+            _tickets = dbContext.Tickets;
+        }
 
-    public void Add(Ticket ticket)
-    {
-        _tickets.Add(ticket);
-    }
+        public Ticket GetBy(int ticketNr)
+        {
+            return _tickets.SingleOrDefault(t => t.TicketNr == ticketNr);
+        }
 
-    public void Delete(Ticket ticket)
-    {
-        _tickets.Remove(ticket);
-    }
+        public IEnumerable<Ticket> GetAll()
+        {
+            return _tickets.ToList();
+        }
 
-    public void SaveChanges()
-    {
-        _dbContext.SaveChanges();
-    }
-    
+        public void Add(Ticket ticket)
+        {
+            _tickets.Add(ticket);
+        }
+
+        public void Delete(Ticket ticket)
+        {
+            _tickets.Remove(ticket);
+        }
+
+        public void SaveChanges()
+        {
+            _dbContext.SaveChanges();
+        }
     }
 }

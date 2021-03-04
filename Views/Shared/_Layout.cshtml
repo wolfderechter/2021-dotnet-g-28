@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] actemium</title>
+    <title>Actemium | @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     @*<link rel="stylesheet" href="~/css/site.css" />*@
     <link href="~/css/Dashboard.css" rel="stylesheet" />
@@ -18,7 +18,7 @@
                 <img src="~/img/logo-actemuim.png" id="img1" />
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a class="nav-link" asp-controller="Ticket" asp-action="Index">
                     <i class="fas fa-ticket-alt fa-fw"></i>
                     <span class="link-text">Tickets</span>
                 </a>

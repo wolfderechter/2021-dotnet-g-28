@@ -21,9 +21,22 @@ namespace _2021_dotnet_g_28.Controllers
             _userManager = userManager;
             _contactPersonRepository = contactPersonRepository;
         }
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+            //get signed in user
+            var user = await _userManager.GetUserAsync(User);
+
+            //get contactperson matching with signed in user
+            ContactPerson contactPerson = _contactPersonRepository.getById(user.Id);
+
+            //model initialiseren
+            TicketIndexViewModel model = new TicketIndexViewModel
+            {
+                Tickets = contactPerson.Tickets
+            };
+
+            return View(model);
         }
 
         public IActionResult Create()
