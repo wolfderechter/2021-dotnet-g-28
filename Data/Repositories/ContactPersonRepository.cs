@@ -23,7 +23,7 @@ namespace _2021_dotnet_g_28.Data.Repositories
 
         public ContactPerson getById(String userId)
         {
-            return _contactPeople.Include(c => c.Company).Single(c => c.user.Id == userId);
+            return _contactPeople.Include(c => c.Company).Single(c => c.User.Id == userId);
         }
     }
 }

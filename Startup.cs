@@ -70,6 +70,7 @@ namespace _2021_dotnet_g_28
             services.AddScoped<IContactPersonRepository, ContactPersonRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,7 +103,7 @@ namespace _2021_dotnet_g_28
                 endpoints.MapRazorPages();
             });
 
-            //applicationDbInitializer.InitializeData().Wait();
+            applicationDbInitializer.InitializeData().Wait();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace _2021_dotnet_g_28.Data
 
         public  async Task InitializeData()
         {
-            _dbContext.Database.EnsureDeleted();
+            //_dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             { 
                 //makes company
@@ -43,12 +43,12 @@ namespace _2021_dotnet_g_28.Data
                 string Username = "NathanT";
                 IdentityUser user = new IdentityUser { UserName = Username };
                 await _userManager.CreateAsync(user, "Paswoord_1");
-                ContactPerson contactPerson1 = new ContactPerson { user = user, Company = company };
+                ContactPerson contactPerson1 = new ContactPerson { User = user, Company = company };
                 await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Customer"));
                 Username = "StefB";
                 IdentityUser user2 = new IdentityUser { UserName = Username };
                 await _userManager.CreateAsync(user2, "Paswoord_1");
-                ContactPerson contactPerson2 = new ContactPerson { user = user2, Company = company };
+                ContactPerson contactPerson2 = new ContactPerson { User = user2, Company = company };
                 await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "Customer"));
                 //makes tickets
                 Ticket ticket1 = new Ticket() { Title = "printer werkt niet.",Status= TicketEnum.status.Created,Type=TicketEnum.type.NoImpact,Description="ik probeerde iets af te drukken maar het lukte niet kreeg foutmelding x15dc..... "};

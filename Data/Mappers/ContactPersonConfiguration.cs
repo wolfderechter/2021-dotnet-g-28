@@ -14,8 +14,6 @@ namespace _2021_dotnet_g_28.Data.Mappers
         {
             builder.ToTable("ContactPersons");
             builder.HasKey(t => t.Id);
-            //builder.Property(t => t.Compa)
-            
             builder.HasMany(t => t.Tickets).WithOne().IsRequired().OnDelete(DeleteBehavior.Cascade);
         }
     }

@@ -31,7 +31,6 @@ namespace _2021_dotnet_g_28.Data.Repositories
         public void Delete(Contract contract)
         {
             contract.Status = ContractEnum.status.NotActive;
-            _dbContext.SaveChanges();
         }
 
         public IEnumerable<Contract> GetAll()
@@ -39,14 +38,15 @@ namespace _2021_dotnet_g_28.Data.Repositories
             return _contracts;
         }
 
-        public IEnumerable<Contract> GetByIdAndStatus(IEnumerable<ContractEnum.status> statussen, int companyNr)
+        public IEnumerable<Contract> GetByIdAndStatusAndDuration(IEnumerable<ContractEnum.status> statussen, IEnumerable<int> Durations, int companyNr)
         {
-            return _contracts.Where(c => c.Company.CompanyNr == companyNr && statussen.Contains(c.Status)).ToList();
+            return _contracts.Where(c => c.Company.CompanyNr == companyNr && statussen.Contains(c.Status) && Durations.Contains(c.EndDate.Year-c.StartDate.Year)).ToList();
         }
 
         public Contract GetById(int contractNr)
         {
             return _contracts.FirstOrDefault(c => c.ContractNr == contractNr);
+
         }
 
         public void SaveChanges()
