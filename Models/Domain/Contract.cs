@@ -19,18 +19,27 @@ namespace _2021_dotnet_g_28.Models.Domain
         public DateTime StartDate { get; set; }
         public ContractEnum.status Status { get; set; }
         [Required]
-        public ContractEnum.type Type { get; set; }
+        public ContractType Type { get; set; }
         [Required]
         public Company Company { get; set; }
         [NotMapped]
         public int Duration { get { return EndDate.Year - StartDate.Year; } }
         #endregion
 
-        public Contract(ContractEnum.type type,DateTime endDate,Company company)
+
+        public Contract()
+        {
+            
+        }
+
+        public Contract(ContractType type,int Duration,Company company)
         {
             Type = type;
-            EndDate = endDate;
             Company = company;
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now.AddYears(Duration);
+            Company = company;
+            company.AddContract(this);
         }
     }
 }

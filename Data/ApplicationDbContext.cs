@@ -13,14 +13,13 @@ namespace _2021_dotnet_g_28.Data
         public DbSet<Company> Company { get; set; }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<SupportManager> SupportManagers { get; set; }
-        public DbSet<ContactPerson> contactPeople { get; set; }
-
-
+        public DbSet<ContactPerson> ContactPeople { get; set; }
+        public DbSet<ContractType> ContractType { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-          
+
         }
 
         public ApplicationDbContext()
@@ -35,6 +34,7 @@ namespace _2021_dotnet_g_28.Data
             modelBuilder.ApplyConfiguration(new ContactPersonConfiguration());
             modelBuilder.ApplyConfiguration(new TicketConfiguration());
             modelBuilder.ApplyConfiguration(new SupportManagerConfiguration());
+            modelBuilder.ApplyConfiguration(new ContractTypeConfiguration());
         }
 
     }

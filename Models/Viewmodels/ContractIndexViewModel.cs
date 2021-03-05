@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _2021_dotnet_g_28.Models.Viewmodels
 {
-    public class IndexViewModel
+    public class ContractIndexViewModel
     { 
         public List<StatusModel> CheckBoxItems { get; set; }
         public List<DuurModel> DuurCheckbox { get; set; }

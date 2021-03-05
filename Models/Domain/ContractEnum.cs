@@ -18,14 +18,5 @@ namespace _2021_dotnet_g_28.Models.Domain
             [Display(Name = "Not Active")]
             NotActive =5
         }
-
-        public enum type
-        {
-            [Display(Name = "24/7")]
-            Weekend = 1,
-            Weekdays =2
-        
-        }
-
     }
 }

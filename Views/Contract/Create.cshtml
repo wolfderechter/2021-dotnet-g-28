@@ -1,0 +1,93 @@
+﻿@model _2021_dotnet_g_28.Models.Viewmodels.ContractCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ContractCreateViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="duration" class="control-label"></label>
+                <input asp-for="duration" class="form-control" />
+                <span asp-validation-for="duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeName"></label>
+                <select asp-for="TypeName" asp-items="@(ViewData["ContractTypeNames"] as SelectList)" class="form-control">
+                    
+                </select>
+                <span asp-validation-for="TypeName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table">
+<thead class="thead-light">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractTypes.ElementAt(1).Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractTypes.ElementAt(1).MinDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractTypes.ElementAt(1).MaxResponseTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractTypes.ElementAt(1).IsOutsideBusinessHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractTypes.ElementAt(1).Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractTypes.ElementAt(1).CreationMethod)
+        </th>
+    </tr>
+</thead>
+<tbody class="table-hover">
+    @foreach (var item in Model.ContractTypes)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinDuration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxResponseTime)
+        </td>
+        <td>
+            <!--nog een oplossing vinden-->
+            @if (item.IsOutsideBusinessHours)
+                {<p>24/7</p>}
+            else
+                {<p>Weekdays (8-17)</p>}
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationMethod)
+        </td>
+    </tr>
+    }
+</tbody>
+</table>
+
+<div>
+    <a class="btn btn-primary" asp-action="Index">Back to List</a>
+</div>
+

@@ -14,7 +14,7 @@ namespace _2021_dotnet_g_28.Data.Repositories
         public ContactPersonRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _contactPeople = _dbContext.contactPeople;
+            _contactPeople = _dbContext.ContactPeople;
         }
         public IEnumerable<ContactPerson> getAll()
         {

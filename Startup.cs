@@ -68,6 +68,7 @@ namespace _2021_dotnet_g_28
             services.AddScoped<ApplicationDbInitializer>();
             services.AddScoped<IContractRepository, ContractRepository>();
             services.AddScoped<IContactPersonRepository, ContactPersonRepository>();
+            services.AddScoped<IContractTypeRepository, ContractTypeRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSession();

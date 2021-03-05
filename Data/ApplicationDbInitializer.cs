@@ -21,18 +21,24 @@ namespace _2021_dotnet_g_28.Data
 
         public  async Task InitializeData()
         {
-            //_dbContext.Database.EnsureDeleted();
+            _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             { 
                 //makes company
                 Company company = new Company() { CompanyName = "HansAnders", CompanyAdress = "grove Street", CustomerInitDate =DateTime.Now};
+                //makes ContractType
+                ContractType contractType = new ContractType() { Name = "StandaardContract" ,IsActive = true};
+                ContractType contractType2 = new ContractType() { Name = "contract1", IsActive = true };
+                ContractType contractType3 = new ContractType() { Name = "contract2", IsActive = true };
+                ContractType contractType4 = new ContractType() { Name = "contract3", IsActive = true };
+                ContractType contractType5 = new ContractType() { Name = "contract4", IsActive = true };
                 //makes contracts
-                Contract contractRunning1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Running, Type=ContractEnum.type.Weekend };
-                Contract contractRunning2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Running, Type = ContractEnum.type.Weekdays };
-                Contract contractInProgress1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.InProgress, Type = ContractEnum.type.Weekend };
-                Contract contractInProgress2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.InProgress, Type = ContractEnum.type.Weekdays };
-                Contract contractEnded1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Ended, Type = ContractEnum.type.Weekdays };
-                Contract contractEnded2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = ContractEnum.type.Weekend };
+                Contract contractRunning1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Running, Type= contractType };
+                Contract contractRunning2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Running, Type = contractType2 };
+                Contract contractInProgress1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.InProgress, Type = contractType3 };
+                Contract contractInProgress2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.InProgress, Type = contractType4 };
+                Contract contractEnded1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Ended, Type = contractType5 };
+                Contract contractEnded2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType };
 
                 //adds contracts to company
                 Contract[] contracts = new Contract[] { contractRunning1, contractRunning2, contractInProgress1, contractInProgress2, contractEnded1, contractEnded2 };
@@ -55,7 +61,7 @@ namespace _2021_dotnet_g_28.Data
                 Ticket ticket2 = new Ticket() { Title = "printer staat in BRAND!", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.ProductionWillStop, Description = "printer staat in brand achter dat ik op afdrukken klikte ontstond er een vlam " };
                 contactPerson1.Tickets = new Ticket[] { ticket1 };
                 contactPerson2.Tickets = new Ticket[] { ticket2 };
-                _dbContext.contactPeople.AddRange(contactPerson2, contactPerson1);
+                _dbContext.ContactPeople.AddRange(contactPerson2, contactPerson1);
                 _dbContext.SaveChanges();
             }
         }
