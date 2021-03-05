@@ -43,23 +43,32 @@ namespace _2021_dotnet_g_28.Data
                 string Username = "NathanT";
                 IdentityUser user = new IdentityUser { UserName = Username };
                 await _userManager.CreateAsync(user, "Paswoord_1");
-                ContactPerson contactPerson1 = new ContactPerson { user = user, Company = company };
+                ContactPerson contactPerson1 = new ContactPerson { User = user, Company = company };
                 await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Customer"));
                 Username = "StefB";
                 IdentityUser user2 = new IdentityUser { UserName = Username };
                 await _userManager.CreateAsync(user2, "Paswoord_1");
-                ContactPerson contactPerson2 = new ContactPerson { user = user2, Company = company };
+                ContactPerson contactPerson2 = new ContactPerson { User = user2, Company = company };
                 await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "Customer"));
                 //makes tickets
-                Ticket ticket1 = new Ticket() { Title = "printer werkt niet.", Status = TicketEnum.status.Created, Type = TicketEnum.type.NoImpact, Description = "ik probeerde iets af te drukken maar het lukte niet kreeg foutmelding x15dc..... " };
-                Ticket ticket2 = new Ticket() { Title = "printer staat in BRAND!", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.ProductionWillStop, Description = "printer staat in brand achter dat ik op afdrukken klikte ontstond er een vlam " };
+                Ticket ticket1 = new Ticket() { Title = "printer werkt niet.", Status = TicketEnum.status.Created, Type = TicketEnum.type.NoImpact, Description = "ik probeerde iets af te drukken maar het lukte niet kreeg foutmelding x15dc..... ", ContactPersonId = contactPerson1.Id };
+                Ticket ticket2 = new Ticket() { Title = "computer kapot.", Status = TicketEnum.status.Created, Type = TicketEnum.type.NoImpact, Description = "computer wil niet meer opstarten.", ContactPersonId = contactPerson2.Id };
+                Ticket ticket3 = new Ticket() { Title = "printer staat in BRAND!", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.ProductionWillStop, Description = "printer staat in brand achter dat ik op afdrukken klikte ontstond er een vlam ", ContactPersonId = contactPerson2.Id };
+                Ticket ticket4 = new Ticket() { Title = "server ontploft.", Status = TicketEnum.status.ResponseReceived, Type = TicketEnum.type.ProductionStopped, Description = "server is ontploft.", ContactPersonId = contactPerson2.Id };
+                Ticket ticket5 = new Ticket() { Title = "airco gestopt.", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.NoImpact, Description = "airco is gestopt met werken.", ContactPersonId = contactPerson2.Id };
+                Ticket ticket6 = new Ticket() { Title = "computer freeze.", Status = TicketEnum.status.Closed, Type = TicketEnum.type.NoImpact, Description = "computer bevriest heel de tijd.", ContactPersonId = contactPerson2.Id };
+                
                 contactPerson1.AddTicket(ticket1);
+                
                 contactPerson2.AddTicket(ticket2);
+                contactPerson2.AddTicket(ticket3);
+                contactPerson2.AddTicket(ticket4);
+                contactPerson2.AddTicket(ticket5);
+                contactPerson2.AddTicket(ticket6);
+                
                 _dbContext.contactPeople.AddRange(contactPerson2, contactPerson1);
                 _dbContext.SaveChanges();
             }
-
-
         }
 
         private async Task InitializeUsers()

@@ -41,7 +41,7 @@ namespace _2021_dotnet_g_28.Controllers
                 if (result.Succeeded)
                 {
                     TempData["username"] = model.Username;
-                    return RedirectToAction("index", "home");
+                    return RedirectToAction("Index", "Ticket");
                 }
                 if (result.IsLockedOut) {
                     ModelState.AddModelError(string.Empty, "Your account has been locked, please contact support for more information : support.sce@actemium.com ");

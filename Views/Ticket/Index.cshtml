@@ -5,42 +5,24 @@
     ViewData["Title"] = "Tickets";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+<table>
+    <tr>
+        <th>Ticketnr</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach(var item in Model.Tickets)
+    {
         <tr>
-            @*<th>
-                
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateCreation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Remark)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Attachements)
-            </th>
-            <th></th>*@
+            <td>@item.TicketNr</td>
+            <td>@item.Title</td>
+            <td>@item.Status</td>
+            <td><button>Wijzigen</button></td>
+            <td><button>Close</button></td>
         </tr>
-    </thead>
-    <tbody>
-
-    </tbody>
+    }
 </table>

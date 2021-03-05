@@ -15,6 +15,7 @@ namespace _2021_dotnet_g_28.Models.Domain
         public TicketEnum.type Type { get; set; }
         public String Remark { get; set; }
         public String Attachments { get; set; }
+        public int ContactPersonId { get; set; }
 
 
         public Ticket(DateTime dateCreation, string title, string description, TicketEnum.type type, string attatchements = "")

@@ -33,7 +33,7 @@ namespace _2021_dotnet_g_28.Controllers
             //model initialiseren
             TicketIndexViewModel model = new TicketIndexViewModel
             {
-                Tickets = contactPerson.Tickets
+                Tickets = _ticketRepository.GetByContactPersonId(contactPerson.Id)
             };
 
             return View(model);

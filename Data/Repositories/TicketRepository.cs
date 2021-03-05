@@ -43,5 +43,10 @@ namespace _2021_dotnet_g_28.Data.Repositories
         {
             _dbContext.SaveChanges();
         }
+
+        public IEnumerable<Ticket> GetByContactPersonId(int contactPersonId)
+        {
+            return _tickets.Where(t => t.ContactPersonId == contactPersonId).ToList();
+        }
     }
 }
