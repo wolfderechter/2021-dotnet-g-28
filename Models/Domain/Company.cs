@@ -28,7 +28,7 @@ namespace _2021_dotnet_g_28.Models.Domain
         {
             if (contract.Status == ContractEnum.status.InProgress || contract.Status == ContractEnum.status.Running) 
             {
-                if (Contracts.Any(c => c.Status == contract.Status))
+                if (Contracts.Any(c => c.Status == ContractEnum.status.InProgress || c.Status == ContractEnum.status.Running))
                     throw new ArgumentException($"A company can only have one contract with status {contract.Status}.");
             }
             Contracts.Add(contract);

@@ -21,7 +21,7 @@ namespace _2021_dotnet_g_28.Data
 
         public  async Task InitializeData()
         {
-            _dbContext.Database.EnsureDeleted();
+            //_dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             { 
                 //makes company
@@ -41,7 +41,7 @@ namespace _2021_dotnet_g_28.Data
                 Contract contractEnded2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType };
 
                 //adds contracts to company
-                Contract[] contracts = new Contract[] { contractRunning1, contractRunning2, contractInProgress1, contractInProgress2, contractEnded1, contractEnded2 };
+                List<Contract> contracts = new List<Contract> { contractRunning1, contractRunning2, contractInProgress1, contractInProgress2, contractEnded1, contractEnded2 };
                 company.Contracts = contracts;
                 //makes contactpeople
                 _dbContext.Company.Add(company);
