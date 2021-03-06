@@ -111,7 +111,6 @@ main{
     opacity: 1;
 }
 
-
 /*small screen*/
 @media only screen and (max-width: 600px) {
     .navbar {
