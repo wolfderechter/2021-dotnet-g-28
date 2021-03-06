@@ -118,12 +118,13 @@ namespace _2021_dotnet_g_28.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ContractTypeNames"] = GetCategoriesSelectList();
+            model.ContractTypes = _contractTypeRepository.GetAllActive();
             return View(model);
         }
         private SelectList GetCategoriesSelectList()
         {
             return new SelectList(_contractTypeRepository.GetAllActive().OrderBy(g => g.Name).ToList(),
-                nameof(ContractType.Name), nameof(ContractType.Name),0);
+                nameof(ContractType.Name), nameof(ContractType.Name));
         }
 
         private async Task<ContactPerson> GetLoggedInContactPerson() 
