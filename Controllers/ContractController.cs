@@ -94,6 +94,7 @@ namespace _2021_dotnet_g_28.Controllers
         {
             ContractCreateViewModel model = new ContractCreateViewModel();
             model.ContractTypes= _contractTypeRepository.GetAllActive();
+            ViewData["ContractTypeNames"] = GetCategoriesSelectList();
             return View(model);
         }
 
@@ -121,8 +122,8 @@ namespace _2021_dotnet_g_28.Controllers
         }
         private SelectList GetCategoriesSelectList()
         {
-            return new SelectList(_contractTypeRepository.GetAllActive().OrderBy(c=> c.Name).ToList(),
-                nameof(ContractType.Name));
+            return new SelectList(_contractTypeRepository.GetAllActive().OrderBy(g => g.Name).ToList(),
+                nameof(ContractType.Name), nameof(ContractType.Name),0);
         }
 
         private async Task<ContactPerson> GetLoggedInContactPerson() 

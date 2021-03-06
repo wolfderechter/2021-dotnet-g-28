@@ -19,6 +19,10 @@ namespace _2021_dotnet_g_28.Models.Domain
         //public ICollection<String> TelNrs { get; set; }
         #endregion
 
+        public Company()
+        {
+            Contracts = new List<Contract>();
+        }
         #region methods
         public void AddContract(Contract contract)
         {

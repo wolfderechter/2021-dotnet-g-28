@@ -72,10 +72,7 @@
                     @Html.DisplayFor(modelItem => item.EndDate.Date)
                 </td>
                 <td>
-                    <button class="btn btn-square btn-primary">
-                        @Html.ActionLink("Edit", "Edit", new { contractNr = @item.ContractNr })
-                    </button>
-                    <button class="btn btn-square btn-warning">
+                    <button class="btn btn-warning btn-sm">
                         @Html.ActionLink("Details", "Details", new { contractNr = @item.ContractNr })
                     </button>
                     <a class="btn btn-danger btn-sm" data-target="#confirm-delete" data-toggle="modal" data-item-id="@item.ContractNr">Delete</a>

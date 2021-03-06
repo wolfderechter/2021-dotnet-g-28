@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label asp-for="TypeName"></label>
                 <select asp-for="TypeName" asp-items="@(ViewData["ContractTypeNames"] as SelectList)" class="form-control">
-                    
+                    <option disabled value="">-- select contract type --</option>
                 </select>
                 <span asp-validation-for="TypeName" class="text-danger"></span>
             </div>

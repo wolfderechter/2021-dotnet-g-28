@@ -38,6 +38,7 @@ namespace _2021_dotnet_g_28.Models.Domain
             Company = company;
             StartDate = DateTime.Now;
             EndDate = DateTime.Now.AddYears(Duration);
+            Status = ContractEnum.status.InProgress;
             Company = company;
             company.AddContract(this);
         }
