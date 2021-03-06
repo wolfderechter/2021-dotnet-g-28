@@ -4,80 +4,63 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] actemium</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
+
     <link href="~/css/Dashboard.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
-    <!-- Vertical navbar -->
-    <!--Add in every nav-item asp code when controllers-->
-    <div class="vertical-nav bg-white" id="sidebar">
-        <div class="py-4 px-3 bg-light">
-            <h4 class="m-0">@TempData["username"]</h4>
-            <p class="font-weight-light text-muted mb-0">Contact Person</p>
-        </div>
 
-        <p class="text-gray text-uppercase px-3 small mt-4 mb-4 dashboard-link"><span class="fas fa-home mr-3 icon"></span>Dashboard</p>
-
-        <div class="underline"></div>
-
-        <ul class="nav flex-column bg-white mt-4">
-            <li class="nav-item mt-2 mb-2">
-                <a class="nav-link text-dark dashboard-link" asp-controller="Ticket" asp-action="Index">
-                    <i class="fas fa-ticket-alt mr-3 text-primary fa-fw"></i>
-                    TICKETS
+    <!-- Vertical navbar --> 
+    <nav class="navbar" id="navbar">
+        <ul class="navbar-nav">
+            <li class="logo">
+                <img src="~/img/logo-actemuim.png" id="img1" />
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-ticket-alt fa-fw"></i>
+                    <span class="link-text">Tickets</span>
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a href="#" class="nav-link text-dark dashboard-link">
-                    <i class="fas fa-chart-line mr-3 text-primary fa-fw"></i>
-
-                    STATISTIEKEN
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-chart-line fa-fw"></i>
+                    <span class="link-text">Statistics</span>
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link text-dark dashboard-link" asp-controller="Contract" asp-action="index">
-                    <i class="fas fa-copy mr-3 text-primary fa-fw"></i>
-                    CONTRACTEN
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-copy fa-fw"></i>
+                    <span class="link-text">Contracts</span>
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a href="#" class="nav-link text-dark dashboard-link">
-                    <i class="fas fa-question-circle mr-3 text-primary fa-fw"></i>
-                    FAQ
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-question-circle fa-fw"></i>
+                    <span class="link-text">FAQ</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="link-text">Sign out</span>
                 </a>
             </li>
         </ul>
+    </nav>
 
-        <div class="buttons">
-            <a href="#" class="nav-link px-4 rounded-pill">
-                Notificaties
-                <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>
-            </a>
-            <a href="#" class="nav-link px-4 rounded-pill">
-                Afmelden
+    <main>
+        @RenderBody()
+    </main>
+    <!--End Vertical Navbar-->
 
-            </a>
-        </div>
-    </div>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+    @*@RenderSection("Scripts", required: false)*@
 
-    <!-- End vertical navbar -->
-
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    @*<footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2021 - _2021_dotnet_g_28 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>*@
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
 </body>
 </html>
