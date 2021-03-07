@@ -15,8 +15,6 @@ namespace _2021_dotnet_g_28.Models.Domain
             InProgress = 2,
             Ended = 3,
             Cancelled = 4,
-            [Display(Name = "Not Active")]
-            NotActive =5
         }
     }
 }

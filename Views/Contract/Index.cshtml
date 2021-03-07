@@ -7,81 +7,85 @@
 
 <h1 class="">@ViewData["Title"]</h1>
 <!-- showing filter in a form so you can post and filter on Duration and Status-->
-<span class=""></span>
-@using (Html.BeginForm())
-{
-    <div class="form-group border border-dark w-25">
-        @Html.DisplayNameFor(model => model.CheckBoxItems[0].Status)
-        @for (int i = 0; Model.CheckBoxItems.Count > i; i++)
+<div class="row">
+    <div class="col-lg-3 text-left">
+        @using (Html.BeginForm())
         {
-            <div class="form-check">
-                @Html.CheckBoxFor(model => model.CheckBoxItems[i].IsSelected, new { htmlAttributes = new { @class = "form-check-input" } })
-                @Html.DisplayFor(model => model.CheckBoxItems[i].Status, new { htmlAttributes = new { @class = "form-check-label" } })
-                @Html.HiddenFor(model => model.CheckBoxItems[i].Status, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="form-group border border-dark">
+                @Html.DisplayNameFor(model => model.CheckBoxItems[0].Status)
+                @for (int i = 0; Model.CheckBoxItems.Count > i; i++)
+                {
+                    <div class="form-check border ">
+                        @Html.CheckBoxFor(model => model.CheckBoxItems[i].IsSelected, new { htmlAttributes = new { @class = "form-check-input" } })
+                        @Html.DisplayFor(model => model.CheckBoxItems[i].Status, new { htmlAttributes = new { @class = "form-check-label" } })
+                        @Html.HiddenFor(model => model.CheckBoxItems[i].Status, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                }
             </div>
+            <div class="form-group border  border-dark">
+                @Html.DisplayNameFor(model => model.DuurCheckbox[0].Duration)
+                @for (int i = 0; Model.DuurCheckbox.Count > i; i++)
+                {
+                    <div class="form-check border">
+                        @Html.CheckBoxFor(model => model.DuurCheckbox[i].IsSelected, new { htmlAttributes = new { @class = "form-check-input" } })
+                        @Html.DisplayFor(model => model.DuurCheckbox[i].Duration, new { htmlAttributes = new { @class = "form-check-label" } })
+                        @Html.HiddenFor(model => model.DuurCheckbox[i].Duration, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                }
+            </div>
+            <button type="submit" class="btn btn-primary ml-1">Filter</button>
         }
     </div>
-    <div class="form-group border border-dark w-25">
-        @Html.DisplayNameFor(model => model.DuurCheckbox[0].Duration)
-        @for (int i = 0; Model.DuurCheckbox.Count > i; i++)
-        {
-            <div class="form-check">
-                @Html.CheckBoxFor(model => model.DuurCheckbox[i].IsSelected, new { htmlAttributes = new { @class = "form-check-input" } })
-                @Html.DisplayFor(model => model.DuurCheckbox[i].Duration, new { htmlAttributes = new { @class = "form-check-label" } })
-                @Html.HiddenFor(model => model.DuurCheckbox[i].Duration, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        }
+    <!--table that will showing all the items that accept the filter-->
+    <div class="col-lg-9">
+        <table class="table">
+            <thead class="thead-light">
+                <tr class="bg-primary">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contracts.ElementAt(1).ContractNr)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contracts.ElementAt(1).Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contracts.ElementAt(1).Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contracts.ElementAt(1).EndDate)
+                    </th>
+                    <th class="text-left">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="table-hover">
+                @foreach (var item in Model.Contracts)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContractNr)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                        <td>
+                            <button class="btn btn-warning btn-sm">
+                                @Html.ActionLink("Details", "Details", new { contractNr = @item.ContractNr })
+                            </button>
+                            <a class="btn btn-danger btn-sm" data-target="#confirm-delete" data-toggle="modal" data-item-id="@item.ContractNr">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-    <button type="submit" class="btn btn-primary ml-1">Filter</button>
-}
-<!--table that will showing all the items that accept the filter-->
-<table class="table">
-    <thead class="thead-light">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Contracts.ElementAt(1).ContractNr)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Contracts.ElementAt(1).Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Contracts.ElementAt(1).Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Contracts.ElementAt(1).EndDate)
-            </th>
-            <th class="text-left">
-                Actions
-            </th>
-        </tr>
-    </thead>
-    <tbody class="table-hover">
-        @foreach (var item in Model.Contracts)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ContractNr)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate.Date)
-                </td>
-                <td>
-                    <button class="btn btn-warning btn-sm">
-                        @Html.ActionLink("Details", "Details", new { contractNr = @item.ContractNr })
-                    </button>
-                    <a class="btn btn-danger btn-sm" data-target="#confirm-delete" data-toggle="modal" data-item-id="@item.ContractNr">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
+</div>
 <p>
     <a class="btn btn-success" asp-action="Create">Create New Contract</a>
 </p>

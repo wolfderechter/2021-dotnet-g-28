@@ -26,9 +26,10 @@ namespace _2021_dotnet_g_28.Models.Domain
         #region methods
         public void AddContract(Contract contract)
         {
+            
             if (contract.Status == ContractEnum.status.InProgress || contract.Status == ContractEnum.status.Running) 
             {
-                if (Contracts.Any(c => c.Status == ContractEnum.status.InProgress || c.Status == ContractEnum.status.Running))
+                if (Contracts.Where(c=>c.Type == contract.Type).Any(c => c.Status == ContractEnum.status.InProgress || c.Status == ContractEnum.status.Running))
                     throw new ArgumentException($"A company can only have one contract with status {contract.Status}.");
             }
             Contracts.Add(contract);

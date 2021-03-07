@@ -30,7 +30,7 @@ namespace _2021_dotnet_g_28.Data.Repositories
 
         public void Delete(Contract contract)
         {
-            contract.Status = ContractEnum.status.NotActive;
+            contract.Status = ContractEnum.status.Cancelled;
         }
 
         public IEnumerable<Contract> GetAll()

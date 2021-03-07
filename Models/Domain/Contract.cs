@@ -10,12 +10,15 @@ namespace _2021_dotnet_g_28.Models.Domain
     public class Contract
     {
         #region properties
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime EndDate { get; set; }
         public int ContractNr { get; set; }
         [Required]
         [DataType(DataType.Date)]
+        [Display(Name = "End date")]
+        public DateTime EndDate { get; set; }
+        
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Start date")]
         public DateTime StartDate { get; set; }
         public ContractEnum.status Status { get; set; }
         [Required]
