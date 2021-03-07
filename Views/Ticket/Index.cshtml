@@ -32,7 +32,7 @@
                     @item.Description
                 </div>
             </div>
-            <button class="edit-button">Wijzigen</button>
+            <a asp-controller="Ticket" asp-action="Edit" asp-route-id="@item.TicketNr" class="edit-button">Wijzigen</a>
         </div>
     }
 </div>
