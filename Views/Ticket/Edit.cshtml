@@ -5,7 +5,7 @@
 
 @{ ViewData["Title"] = (bool)ViewData["IsEdit"] ? "Edit ticket" : "Create a new ticket"; }
 
-<h1>Create a new ticket</h1>
+<h1>@ViewData["Title"]</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
