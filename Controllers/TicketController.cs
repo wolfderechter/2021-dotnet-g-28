@@ -35,7 +35,6 @@ namespace _2021_dotnet_g_28.Controllers
             {
                 Tickets = _ticketRepository.GetByContactPersonId(contactPerson.Id)
             };
-
             return View(model);
         }
 
@@ -43,8 +42,8 @@ namespace _2021_dotnet_g_28.Controllers
         {
             ViewData["IsEdit"] = false;
             ViewData["typeTickets"] = TypeTickets();
-            return View();
-            //return View(nameof(Edit), new TicektEditViewModel());
+            //return View();
+            return View(nameof(Edit), new TicketEditViewModel());
         }
         [HttpPost]
         public async Task<IActionResult> Create(TicketEditViewModel ticketEditViewModel)
@@ -69,8 +68,8 @@ namespace _2021_dotnet_g_28.Controllers
                 return RedirectToAction(nameof(Index));
             }
             else {
-                //return View(nameof(Edit), ticketEditViewModel);
-                return View(nameof(Index), ticketEditViewModel);
+                return View(nameof(Edit), ticketEditViewModel);
+                //return View(nameof(Index), ticketEditViewModel);
 
             }
 
