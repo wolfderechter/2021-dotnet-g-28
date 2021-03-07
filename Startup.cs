@@ -49,6 +49,7 @@ namespace _2021_dotnet_g_28
            
             services.AddScoped<ApplicationDbInitializer>();
             services.AddScoped<ITicketRepository, TicketRepository>();
+            services.AddScoped<IFaqRepository, FaqRepository>();
             services.AddScoped<IContactPersonRepository, ContactPersonRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();

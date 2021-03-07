@@ -57,6 +57,10 @@ namespace _2021_dotnet_g_28.Data
                 Ticket ticket4 = new Ticket() { Title = "server ontploft.", Status = TicketEnum.status.ResponseReceived, Type = TicketEnum.type.ProductionStopped, Description = "server is ontploft.", ContactPersonId = contactPerson2.Id };
                 Ticket ticket5 = new Ticket() { Title = "airco gestopt.", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.NoImpact, Description = "airco is gestopt met werken.", ContactPersonId = contactPerson2.Id };
                 Ticket ticket6 = new Ticket() { Title = "computer freeze.", Status = TicketEnum.status.Closed, Type = TicketEnum.type.NoImpact, Description = "computer bevriest heel de tijd.", ContactPersonId = contactPerson2.Id };
+
+                Faq faq1 = new Faq() { Problem = "Test", Solution = "hey" };
+                Faq faq2 = new Faq() { Problem = "Testtttt", Solution = "heyyyyy" };
+
                 
                 contactPerson1.AddTicket(ticket1);
                 
@@ -65,7 +69,8 @@ namespace _2021_dotnet_g_28.Data
                 contactPerson2.AddTicket(ticket4);
                 contactPerson2.AddTicket(ticket5);
                 contactPerson2.AddTicket(ticket6);
-                
+                _dbContext.Faq.AddRange(faq1, faq2);
+
                 _dbContext.contactPeople.AddRange(contactPerson2, contactPerson1);
                 _dbContext.SaveChanges();
             }

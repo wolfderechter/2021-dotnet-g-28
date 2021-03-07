@@ -14,7 +14,7 @@ namespace _2021_dotnet_g_28.Data
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<SupportManager> SupportManagers { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-
+        public DbSet<Faq> Faq { get; set;  }
         public DbSet<ContactPerson> contactPeople { get; set; }
 
 
@@ -35,6 +35,7 @@ namespace _2021_dotnet_g_28.Data
             modelBuilder.ApplyConfiguration(new ContractConfiguration());
             modelBuilder.ApplyConfiguration(new ContactPersonConfiguration());
             modelBuilder.ApplyConfiguration(new TicketConfiguration());
+            modelBuilder.ApplyConfiguration(new FaqConfiguration());
         }
 
     }
