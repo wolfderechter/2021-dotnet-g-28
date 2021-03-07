@@ -35,7 +35,6 @@ namespace _2021_dotnet_g_28.Controllers
             {
                 Tickets = _ticketRepository.GetByContactPersonId(contactPerson.Id)
             };
-
             return View(model);
         }
 
