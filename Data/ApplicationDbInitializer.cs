@@ -58,8 +58,8 @@ namespace _2021_dotnet_g_28.Data
                 Ticket ticket5 = new Ticket() { Title = "airco gestopt.", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.NoImpact, Description = "airco is gestopt met werken.", ContactPersonId = contactPerson2.Id };
                 Ticket ticket6 = new Ticket() { Title = "computer freeze.", Status = TicketEnum.status.Closed, Type = TicketEnum.type.NoImpact, Description = "computer bevriest heel de tijd.", ContactPersonId = contactPerson2.Id };
 
-                Faq faq1 = new Faq() { Problem = "Test", Solution = "hey" };
-                Faq faq2 = new Faq() { Problem = "Testtttt", Solution = "heyyyyy" };
+                Faq faq1 = new Faq() { Problem = "Netwerk storing", Solution = "Router opnieuw opstarten" };
+                Faq faq2 = new Faq() { Problem = "Computer vastegelopen", Solution = "Trek de stekker uit en start opnieuw op"};
 
                 
                 contactPerson1.AddTicket(ticket1);
