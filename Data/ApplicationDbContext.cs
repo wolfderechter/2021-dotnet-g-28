@@ -24,10 +24,6 @@ namespace _2021_dotnet_g_28.Data
           
         }
 
-        //public ApplicationDbContext()
-        //{
-        //}
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

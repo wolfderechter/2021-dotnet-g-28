@@ -6,6 +6,7 @@
 
 @{
     ViewData["Title"] = "Tickets";
+
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -13,18 +14,28 @@
 <div class="accordion-container">
     @foreach (var item in Model.Tickets)
     {
-    <button class="accordion">
-        <div class="accordion-title accordion-title-first">@item.TicketNr</div>
-        <div class="accordion-title accordion-title-second-third">@item.Title</div>
-        <div class="accordion-title accordion-title-second-third">@item.Status</div>
-    </button>
+        <button class="accordion">
+            <div class="accordion-title accordion-title-first">@item.TicketNr</div>
+            <div class="accordion-title accordion-title-second-third">@item.Title</div>
+            <div class="accordion-title accordion-title-second-third">@item.Status</div>
+        </button>
         <div class="panel">
             <div class="panel-half">
                 <p>Datum aanmaken: @item.DateCreation</p>
                 <p>Type: @item.Type</p>
                 <p>Toegewezen technieker: </p>
                 <p>Opmerkingen: @item.Remark</p>
-                <p>Bijlages: @item.Attachments</p>
+                @{
+                    if (item.PicturePath== null)
+                    {
+                        <p>Bijlage: Geen bijlage </p>
+                    }
+                    else
+                    {
+                        <p >Bijlage: </p><img class="img-thumbnail small" src="~/bijlagen/@item.PicturePath">
+                    }
+                }
+
             </div>
             <div class="panel-half">
                 <p class="omschrijving">Omschrijving: </p>
@@ -38,20 +49,20 @@
 </div>
 
 <script>
-var acc = document.getElementsByClassName("accordion");
-var i;
+    var acc = document.getElementsByClassName("accordion");
+    var i;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
     }
-  });
-}
 </script>
 
 

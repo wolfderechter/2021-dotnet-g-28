@@ -14,35 +14,37 @@ namespace _2021_dotnet_g_28.Models.Domain
         public String Description { get; set; }
         public TicketEnum.type Type { get; set; }
         public String Remark { get; set; }
-        public String Attachments { get; set; }
         public int ContactPersonId { get; set; }
+        public string PicturePath { get; set; }
 
 
-        public Ticket(DateTime dateCreation, string title, string description, TicketEnum.type type, string attatchements = "")
+        public Ticket(DateTime dateCreation, string title, string description, TicketEnum.type type,string filePath)
         {
-            //ticketNr nog onduidelijk
+           
             DateCreation = dateCreation;
             Title = title;
             Description = description;
             Type = type;
-            Attachments = attatchements;
+            PicturePath = filePath;
         }
         public Ticket(string title, string description, TicketEnum.type type)
         {
             Title = title;
             Description = description;
             Type = type;
+            
         }
         public Ticket()
         {
 
         }
 
-        public void EditTicket(string title, string description, TicketEnum.type type)
+        public void EditTicket(string title, string description, TicketEnum.type type,string filePath)
         {
             Title = title;
             Description = description;
             Type = type;
+            PicturePath = filePath;
         }
     }
 
