@@ -60,7 +60,16 @@ namespace _2021_dotnet_g_28.Controllers
                     var user = await _userManager.GetUserAsync(User);
                     ContactPerson contact = _contactPersonRepository.getById(user.Id);
                     //nog aanvullen
-                    var ticket = new Ticket(ticketEditViewModel.Title, ticketEditViewModel.Description, ticketEditViewModel.Type);
+                    //string uniqueFileName = null;
+                    //if (ticketEditViewModel.Picture != null)
+                    //{
+                    //    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "bijlagen");
+                    //    uniqueFileName = Guid.NewGuid().ToString() + "_" + ticketEditViewModel.Picture.FileName;
+                    //    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    //    ticketEditViewModel.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
+                    //}
+
+                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title, ticketEditViewModel.Remark, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.status.Created);
                     _ticketRepository.Add(ticket);
                     contact.AddTicket(ticket);
                     _ticketRepository.SaveChanges();
@@ -117,7 +126,7 @@ namespace _2021_dotnet_g_28.Controllers
                         ticketEditViewModel.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
                     }
                     Ticket ticket = _ticketRepository.GetBy(ticketNr);
-                    ticket.EditTicket(ticketEditViewModel.Title, ticketEditViewModel.Description, ticketEditViewModel.Type,uniqueFileName);
+                    ticket.EditTicket(ticketEditViewModel.Title, ticketEditViewModel.Remark, ticketEditViewModel.Description, ticketEditViewModel.Type, uniqueFileName);
                     _ticketRepository.SaveChanges();
                     TempData["message"] = $"You successfully updated the ticket.";
                 }

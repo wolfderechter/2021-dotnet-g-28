@@ -21,29 +21,29 @@
         </button>
         <div class="panel">
             <div class="panel-half">
-                <p>Datum aanmaken: @item.DateCreation</p>
+                <p>Date created: @item.DateCreation</p>
                 <p>Type: @item.Type</p>
-                <p>Toegewezen technieker: </p>
-                <p>Opmerkingen: @item.Remark</p>
+                <p>Assigned technician: </p>
+                <p>Remarks: @item.Remark</p>
                 @{
                     if (item.PicturePath== null)
                     {
-                        <p>Bijlage: Geen bijlage </p>
+                        <p>Attachment: No attachment </p>
                     }
                     else
                     {
-                        <p >Bijlage: </p><img class="img-thumbnail small" src="~/bijlagen/@item.PicturePath">
+                        <p >Attachment: </p><img class="img-thumbnail small" src="~/bijlagen/@item.PicturePath">
                     }
                 }
 
             </div>
             <div class="panel-half">
-                <p class="omschrijving">Omschrijving: </p>
+                <p class="omschrijving">Description: </p>
                 <div class="description">
                     @item.Description
                 </div>
             </div>
-            <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="edit-button">Wijzigen</a>
+            <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="edit-button">Edit</a>
         </div>
     }
 </div>
