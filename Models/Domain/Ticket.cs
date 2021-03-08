@@ -36,8 +36,7 @@ namespace _2021_dotnet_g_28.Models.Domain
             Remark = remark;
             Description = description;
             Type = type;
-            Status = status;
-            PicturePath = filePath;
+            
         }
         public Ticket()
         {
