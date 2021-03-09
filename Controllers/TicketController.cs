@@ -68,18 +68,7 @@ namespace _2021_dotnet_g_28.Controllers
                         string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                         ticketEditViewModel.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
                     }
-                    var ticket = new Ticket(ticketEditViewModel.Title, ticketEditViewModel.Description, ticketEditViewModel.Type,uniqueFileName);
-                    //nog aanvullen
-                    //string uniqueFileName = null;
-                    //if (ticketEditViewModel.Picture != null)
-                    //{
-                    //    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "bijlagen");
-                    //    uniqueFileName = Guid.NewGuid().ToString() + "_" + ticketEditViewModel.Picture.FileName;
-                    //    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    //    ticketEditViewModel.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
-                    //}
-
-                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title, ticketEditViewModel.Remark, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.status.Created);
+                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title, ticketEditViewModel.Remark, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.status.Created,uniqueFileName);
                     _ticketRepository.Add(ticket);
                     contact.AddTicket(ticket);
                     _ticketRepository.SaveChanges();

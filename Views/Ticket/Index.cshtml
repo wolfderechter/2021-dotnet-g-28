@@ -44,9 +44,14 @@
                 </div>
             </div>
             <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="edit-button">Edit</a>
+           
         </div>
     }
 </div>
+<div class="text-center">
+    <a asp-controller="Ticket" asp-action="Create" class="btn-primary btn-sm">Create</a>
+</div>
+
 
 <script>
     var acc = document.getElementsByClassName("accordion");
