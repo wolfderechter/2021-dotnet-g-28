@@ -16,12 +16,11 @@ namespace _2021_dotnet_g_28.Controllers
         {
             this.signInManager = signInm;
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account");
-            
+            return RedirectToAction("Login", "Account"); 
         }
 
         [HttpGet]
