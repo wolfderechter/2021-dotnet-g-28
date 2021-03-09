@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,35 +15,41 @@ namespace _2021_dotnet_g_28.Models.Domain
         public String Description { get; set; }
         public TicketEnum.type Type { get; set; }
         public String Remark { get; set; }
-        public String Attachments { get; set; }
         public int ContactPersonId { get; set; }
+        public string PicturePath { get; set; }
 
-
-        public Ticket(DateTime dateCreation, string title, string description, TicketEnum.type type, string attatchements = "")
+        public Ticket(DateTime dateCreation, string title, string remark, string description, TicketEnum.type type, TicketEnum.status status, string filePath)
         {
-            //ticketNr nog onduidelijk
             DateCreation = dateCreation;
             Title = title;
+            Remark = remark;
             Description = description;
             Type = type;
-            Attachments = attatchements;
+            PicturePath = filePath;
         }
-        public Ticket(string title, string description, TicketEnum.type type)
+            public Ticket(DateTime dateCreation, string title, string remark, string description, TicketEnum.type type, TicketEnum.status status)
         {
+            DateCreation = dateCreation;
             Title = title;
+            Remark = remark;
             Description = description;
             Type = type;
+            Status = status;
         }
+        
+        
         public Ticket()
         {
 
         }
 
-        public void EditTicket(string title, string description, TicketEnum.type type)
+        public void EditTicket(string title, string remark, string description, TicketEnum.type type,string filePath)
         {
             Title = title;
+            Remark = remark;
             Description = description;
             Type = type;
+            PicturePath = filePath;
         }
     }
 

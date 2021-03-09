@@ -49,9 +49,11 @@ namespace _2021_dotnet_g_28
            
             services.AddScoped<ApplicationDbInitializer>();
             services.AddScoped<ITicketRepository, TicketRepository>();
+            services.AddScoped<IFaqRepository, FaqRepository>();
             services.AddScoped<IContactPersonRepository, ContactPersonRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,7 +77,7 @@ namespace _2021_dotnet_g_28
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
