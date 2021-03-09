@@ -20,7 +20,7 @@ namespace _2021_dotnet_g_28.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return Login();
+            return RedirectToAction("Login", "Account");
             
         }
 
@@ -36,8 +36,8 @@ namespace _2021_dotnet_g_28.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(
-                    model.Username, model.Password, model.RememberMe,true);
+                 var result = await signInManager.PasswordSignInAsync(
+                 model.Username, model.Password, model.RememberMe,true);
 
                 if (result.Succeeded)
                 {

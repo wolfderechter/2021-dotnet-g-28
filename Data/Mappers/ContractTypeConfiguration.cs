@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 
 namespace _2021_dotnet_g_28.Data.Mappers
 {
-    public class SupportManagerConfiguration : IEntityTypeConfiguration<SupportManager>
+    public class ContractTypeConfiguration : IEntityTypeConfiguration<ContractType>
     {
-        public void Configure(EntityTypeBuilder<SupportManager> builder)
+        public void Configure(EntityTypeBuilder<ContractType> builder)
         {
-            builder.ToTable("SupportManagers");
-            builder.HasKey(t => t.Id);
-
-            
+            builder.ToTable("ContactTypes");
+            builder.HasKey(c => c.Name);
         }
     }
+
 }

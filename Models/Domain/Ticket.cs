@@ -18,6 +18,7 @@ namespace _2021_dotnet_g_28.Models.Domain
         public int ContactPersonId { get; set; }
         public string PicturePath { get; set; }
 
+
         public Ticket(DateTime dateCreation, string title, string remark, string description, TicketEnum.type type, TicketEnum.status status, string filePath)
         {
             DateCreation = dateCreation;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace _2021_dotnet_g_28.Models.Domain
 {
+
     public class ContactPerson 
     {
         #region properties
@@ -16,6 +17,7 @@ namespace _2021_dotnet_g_28.Models.Domain
         public ICollection<Ticket> Tickets { get; set; }
         public IdentityUser User { get; set; }
         public ICollection<Faq> Faqs { get; set; }
+
         #endregion
 
         public ContactPerson()

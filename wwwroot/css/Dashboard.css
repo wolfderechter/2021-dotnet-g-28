@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     font-size: 16px;
     font-family: 'Arial';
     --text-primary: black;
@@ -8,27 +8,27 @@
     --transition-speed: 600ms;
 }
 
-body{
+body {
     color: black;
     background-color: white;
     margin: 0;
     padding: 0;
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
     width: 0.25rem;
 }
 
-body::-webkit-scrollbar-track{
+body::-webkit-scrollbar-track {
     background-color: white;
 }
 
-body::-webkit-scrollbar-thumb{
+body::-webkit-scrollbar-thumb {
     background-color: blue;
     border-radius: 5px;
 }
 
-main{
+main {
     margin-left: 5rem;
     padding: 1rem;
 }
@@ -44,11 +44,11 @@ main{
     z-index: 2;
 }
 
-.navbar::-webkit-scrollbar{
+.navbar::-webkit-scrollbar {
     display: none;
 }
 
-.navbar-nav{
+.navbar-nav {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -58,12 +58,12 @@ main{
     height: 100%;
 }
 
-.nav-item{
+.nav-item {
     width: 100%;
     cursor: pointer;
 }
 
-.nav-item:last-child{
+.nav-item:last-child {
     margin-top: auto;
 }
 
@@ -74,15 +74,16 @@ main{
     text-decoration: none;
     filter: grayscale(100%) opacity(0.7);
     transition: var(--transition-speed);
+    
 }
 
-.nav-link:hover{
+.nav-link:hover {
     filter: grayscale(0%) opacity(1);
     background: var(--bg-secondary);
     color: var(--text-secondary);
 }
 
-.link-text{
+.link-text {
     display: none;
     margin-left: 1rem;
 }
@@ -121,7 +122,7 @@ main{
         height: 5rem;
     }
 
-    .navbar-nav{
+    .navbar-nav {
         flex-direction: row;
     }
 
@@ -130,15 +131,15 @@ main{
         min-width: 1.5rem;
     }
 
-    .nav-link{
+    .nav-link {
         justify-content: center;
     }
 
-    main{
+    main {
         margin: 0;
     }
 
-    .logo{
+    .logo {
         display: none;
     }
 }
@@ -155,7 +156,7 @@ main{
         width: 16rem;
     }
 
-    .navbar:hover .link-text {
+     .navbar:hover .link-text {
         display: inline;
-    }
+     }
 }

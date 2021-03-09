@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <!-- Vertical navbar --> 
+    <!-- Vertical navbar -->
     <nav class="navbar" id="navbar">
         <ul class="navbar-nav">
             <li class="logo">
@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a class="nav-link"  asp-controller="Contract" asp-action="Index">
                     <i class="fas fa-copy fa-fw"></i>
                     <span class="link-text">Contracts</span>
                 </a>
@@ -63,7 +63,6 @@
         @RenderBody()
     </main>
     <!--End Vertical Navbar-->
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @*<script src="~/js/site.js" asp-append-version="true"></script>*@

@@ -14,8 +14,10 @@ namespace _2021_dotnet_g_28.Models.Domain
         public DateTime DateInService { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
+
         public IdentityUser user { get; set; }
         // public ICollection<String> TelNr { get; set; }
+
         #endregion
     }
 }

@@ -23,20 +23,27 @@ namespace _2021_dotnet_g_28.Data
         {
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
-            {
+            { 
                 //makes company
-                Company company = new Company() { CompanyName = "HansAnders", CompanyAdress = "grove Street", CustomerInitDate = DateTime.Now };
+                Company company = new Company() { CompanyName = "HansAnders", CompanyAdress = "grove Street", CustomerInitDate =DateTime.Now};
+                //makes ContractType
+                ContractType contractType = new ContractType() { Name = "StandaardContract" ,IsActive = true};
+                ContractType contractType2 = new ContractType() { Name = "contract1", IsActive = true };
+                ContractType contractType3 = new ContractType() { Name = "contract2", IsActive = true };
+                ContractType contractType4 = new ContractType() { Name = "contract3", IsActive = true };
+                ContractType contractType5 = new ContractType() { Name = "contract4", IsActive = true };
                 //makes contracts
-                //Contract contractRunning1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Running, Type = ContractEnum.type.Weekend };
-                //Contract contractRunning2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Running, Type = ContractEnum.type.Weekdays };
-                //Contract contractInProgress1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.InProgress, Type = ContractEnum.type.Weekend };
-                //Contract contractInProgress2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.InProgress, Type = ContractEnum.type.Weekdays };
-                //Contract contractEnded1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Ended, Type = ContractEnum.type.Weekdays };
-                //Contract contractEnded2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = ContractEnum.type.Weekend };
+                Contract contractRunning1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Running, Type= contractType };
+                Contract contractRunning2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType2 };
+                Contract contractInProgress1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Cancelled, Type = contractType3 };
+                Contract contractInProgress2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Cancelled, Type = contractType4 };
+                Contract contractEnded1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Ended, Type = contractType5 };
+                Contract contractEnded2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType };
 
                 //adds contracts to company
-                //Contract[] contracts = new Contract[] { contractRunning1, contractRunning2, contractInProgress1, contractInProgress2, contractEnded1, contractEnded2 };
-                //company.Contracts = contracts;
+                List<Contract> contracts = new List<Contract> { contractRunning1, contractRunning2, contractInProgress1, contractInProgress2, contractEnded1, contractEnded2 };
+                company.Contracts = contracts;
+
                 //makes contactpeople
                 _dbContext.Company.Add(company);
                 //makes contactpersons and adds to company
@@ -51,6 +58,7 @@ namespace _2021_dotnet_g_28.Data
                 ContactPerson contactPerson2 = new ContactPerson { User = user2, Company = company };
                 await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "Customer"));
                 //makes tickets
+
                 Ticket ticket1 = new Ticket() { DateCreation = DateTime.Now, Title = "printer werkt niet.", Status = TicketEnum.status.Created, Type = TicketEnum.type.NoImpact, Description = "ik probeerde iets af te drukken maar het lukte niet kreeg foutmelding x15dc..... ", ContactPersonId = contactPerson1.Id };
                 Ticket ticket2 = new Ticket() { DateCreation = DateTime.Now, Title = "computer kapot.", Status = TicketEnum.status.Created, Type = TicketEnum.type.NoImpact, Description = "computer wil niet meer opstarten.", ContactPersonId = contactPerson2.Id };
                 Ticket ticket3 = new Ticket() { DateCreation = DateTime.Now, Title = "printer staat in BRAND!", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.ProductionWillStop, Description = "printer staat in brand achter dat ik op afdrukken klikte ontstond er een vlam ", ContactPersonId = contactPerson2.Id };
@@ -71,7 +79,8 @@ namespace _2021_dotnet_g_28.Data
                 contactPerson2.AddTicket(ticket6);
                 _dbContext.Faq.AddRange(faq1, faq2);
 
-                _dbContext.contactPeople.AddRange(contactPerson2, contactPerson1);
+                _dbContext.ContactPeople.AddRange(contactPerson2, contactPerson1);
+
                 _dbContext.SaveChanges();
             }
         }

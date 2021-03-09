@@ -1,6 +1,7 @@
 using _2021_dotnet_g_28.Data;
 using _2021_dotnet_g_28.Data.Repositories;
 using _2021_dotnet_g_28.Models.Domain;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace _2021_dotnet_g_28
@@ -46,11 +48,30 @@ namespace _2021_dotnet_g_28
 
 
             });
-           
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "ActeimCookie";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                // Requires `using Microsoft.AspNetCore.Authentication.Cookies;`
+                options.ReturnUrlParameter =
+                CookieAuthenticationDefaults.ReturnUrlParameter;
+            });
+            services.AddAuthorization(options => {
+                options.AddPolicy("SupportManager", policy => policy.RequireClaim(ClaimTypes.Role, "SupportManager"));
+                options.AddPolicy("Customer", policy => policy.RequireClaim(ClaimTypes.Role, "Customer"));
+            });
+
             services.AddScoped<ApplicationDbInitializer>();
+            services.AddScoped<IContractRepository, ContractRepository>();
+            services.AddScoped<IContactPersonRepository, ContactPersonRepository>();
+            services.AddScoped<IContractTypeRepository, ContractTypeRepository>();
             services.AddScoped<ITicketRepository, TicketRepository>();
             services.AddScoped<IFaqRepository, FaqRepository>();
-            services.AddScoped<IContactPersonRepository, ContactPersonRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSession();

@@ -9,19 +9,30 @@ namespace _2021_dotnet_g_28.Models.Domain
     public class Company 
     {
         #region properties
-        public ICollection<ContactPerson> ContactPersons { get; set; }
-        public ICollection<Contract> Contracts { get; set; }
+
         public String CompanyAdress { get; set; }
         public String CompanyName { get; set; }
         public int CompanyNr { get; set; }
         public DateTime CustomerInitDate { get; set; }
+        public ICollection<Contract> Contracts { get; set; }
+        public ICollection<ContactPerson> ContactPersons { get; set; }
         //public ICollection<String> TelNrs { get; set; }
         #endregion
 
-        #region methods
-        public void CreateContract()
+        public Company()
         {
-            throw new NotImplementedException();
+            Contracts = new List<Contract>();
+        }
+        #region methods
+        public void AddContract(Contract contract)
+        {
+            
+            if (contract.Status == ContractEnum.status.InProgress || contract.Status == ContractEnum.status.Running) 
+            {
+                if (Contracts.Where(c=>c.Type == contract.Type).Any(c => c.Status == ContractEnum.status.InProgress || c.Status == ContractEnum.status.Running))
+                    throw new ArgumentException($"A company can only have one contract with status {contract.Status}.");
+            }
+            Contracts.Add(contract);
         }
 
         public void ConsultContract()
