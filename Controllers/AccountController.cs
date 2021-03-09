@@ -21,6 +21,7 @@ namespace _2021_dotnet_g_28.Controllers
         {
             await signInManager.SignOutAsync();
             return Login();
+            
         }
 
         [HttpGet]

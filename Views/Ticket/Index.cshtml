@@ -5,71 +5,10 @@
 }
 
 @{
-    ViewData["Title"] = "Tickets";
-
+    ViewData["Title"] = "Tickets"
 }
 
 <h1>@ViewData["Title"]</h1>
-
-
-@*<div class="accordion-container">
-        @foreach (var item in Model.Tickets)
-        {
-            <button class="accordion">
-                <div class="accordion-title accordion-title-first">@item.TicketNr</div>
-                <div class="accordion-title accordion-title-second-third">@item.Title</div>
-                <div class="accordion-title accordion-title-second-third">@item.Status</div>
-            </button>
-            <div class="panel">
-                <div class="panel-half">
-                    <p>Date created: @item.DateCreation</p>
-                    <p>Type: @item.Type</p>
-                    <p>Assigned technician: </p>
-                    <p>Remarks: @item.Remark</p>
-                    @{
-                        if (item.PicturePath == null)
-                        {
-                            <p>Attachment: No attachment </p>
-                        }
-                        else
-                        {
-                            <p>Attachment: </p><img class="img-thumbnail small" src="~/bijlagen/@item.PicturePath">
-                        }
-                    }
-
-                </div>
-                <div class="panel-half">
-                    <p class="omschrijving">Description: </p>
-                    <div class="description">
-                        @item.Description
-                    </div>
-                </div>
-                <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="edit-button">Edit</a>
-
-            </div>
-        }
-    </div>
-    <div class="text-center">
-        <a asp-controller="Ticket" asp-action="Create" class="btn-primary btn-sm">Create</a>
-    </div>
-
-
-    <script>
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                }
-            });
-        }
-    </script>*@
 
 <div class="text-right w-75">
     <a asp-controller="Ticket" asp-action="Create" class="btn-primary btn-sm">Create</a>
@@ -91,6 +30,7 @@
                             </div>
                             <div class="col">
                                 @item.Status
+                                
                             </div>
                         </div>
                     </button>
