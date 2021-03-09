@@ -71,6 +71,9 @@
         }
     </script>*@
 
+<div class="text-right w-75">
+    <a asp-controller="Ticket" asp-action="Create" class="btn-primary btn-sm">Create</a>
+</div>
 
 <div id="accordion" class="w-75 mx-auto">
     @foreach (var item in Model.Tickets)
@@ -116,6 +119,9 @@
                         <div class="col">
                             <p>Description: </p>@item.Description
                         </div>
+                    </div>
+                    <div class="row">
+                        <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="btn btn-primary">Edit</a>
                     </div>
                 </div>
             </div>
