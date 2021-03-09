@@ -90,7 +90,7 @@
                                 @item.Title
                             </div>
                             <div class="col">
-                                @item.Status
+                                @Html.DisplayFor(model => item.Status)
                             </div>
                         </div>
                     </button>
@@ -102,7 +102,7 @@
                     <div class="row">
                         <div class="col">
                             <p>Date created: @item.DateCreation</p>
-                            <p>Type: @item.Type</p>
+                            <p>Type:@Html.DisplayFor(model=>item.Type)</p>
                             <p>Assigned technician: </p>
                             <p>Remarks: @item.Remark</p>
                             @{
@@ -120,8 +120,10 @@
                             <p>Description: </p>@item.Description
                         </div>
                     </div>
-                    <div class="row">
-                        <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="btn btn-primary">Edit</a>
+                    <div class="row m-5">
+                        
+                            <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="btn btn-primary">Edit</a>
+                       
                     </div>
                 </div>
             </div>
