@@ -74,7 +74,7 @@
 </div>
 
 <div id="accordion" class="w-75 mx-auto">
-    @foreach (var item in Model.Tickets.Where(t => t.Status != TicketEnum.status.Closed && t.Status != TicketEnum.status.Cancelled))
+    @foreach (var item in Model.Tickets)
     {
 <div class="card">
     <div class="card-header" id="heading@(item.TicketNr)">

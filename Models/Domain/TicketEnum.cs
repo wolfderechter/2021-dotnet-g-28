@@ -15,13 +15,14 @@ namespace _2021_dotnet_g_28.Models.Domain
             [Display(Name = "In progress")]
             InProgress = 2,
             Closed = 3,
-            Cancelled = 4,
+            Discontinued = 4,
+            Cancelled = 5,
             [Display(Name = "Waiting for response customer")]
-            WaitingCustomerResponse = 5,
+            WaitingCustomerResponse = 6,
             [Display(Name = "Received response")]
-            ResponseReceived = 6,
+            ResponseReceived = 7,
             [Display(Name = "In development")]
-            InDevelopment = 7
+            InDevelopment = 8
 
 
         }
