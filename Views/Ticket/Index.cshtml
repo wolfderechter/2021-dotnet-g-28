@@ -1,13 +1,11 @@
 ﻿@using _2021_dotnet_g_28.Models.Viewmodels;
+@using _2021_dotnet_g_28.Models.Domain;
 @model TicketIndexViewModel
 @section Styles {
     <link href="~/css/TicketIndex.css" rel="stylesheet" />
 }
 
-@{
-    ViewData["Title"] = "Tickets";
-
-}
+@{ ViewData["Title"] = "Tickets"; }
 
 <h1>@ViewData["Title"]</h1>
 
@@ -76,59 +74,53 @@
 </div>
 
 <div id="accordion" class="w-75 mx-auto">
-    @foreach (var item in Model.Tickets)
+    @foreach (var item in Model.Tickets.Where(t => t.Status != TicketEnum.status.Closed && t.Status != TicketEnum.status.Cancelled))
     {
-        <div class="card">
-            <div class="card-header" id="heading@(item.TicketNr)">
-                <h5 class="mb-0">
-                    <button class="btn btn-link w-100 text-decoration-none text-dark" data-toggle="collapse" data-target="#collapse@(item.TicketNr)" aria-expanded="true" aria-controls="collapse@(item.TicketNr)">
-                        <div class="row">
-                            <div class="col">
-                                @item.TicketNr
-                            </div>
-                            <div class="col">
-                                @item.Title
-                            </div>
-                            <div class="col">
-                                @Html.DisplayFor(model => item.Status)
-                            </div>
-                        </div>
-                    </button>
-                </h5>
-            </div>
-
-            <div id="collapse@(item.TicketNr)" class="collapse" aria-labelledby="heading@(item.TicketNr)" data-parent="#accordion">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <p>Date created: @item.DateCreation</p>
-                            <p>Type: @Html.DisplayFor(model=>item.Type)</p>
-                            <p>Assigned technician: </p>
-                            <p>Remarks: @item.Remark</p>
-                            @{
-                                if (item.PicturePath == null)
-                                {
-                                    <p>Attachment: No attachment </p>
-                                }
-                                else
-                                {
-                                    <p>Attachment: </p><img class="img-thumbnail small" src="~/bijlagen/@item.PicturePath">
-                                }
-                            }
-                        </div>
-                        <div class="col">
-                            <p>Description: </p>@item.Description
-                        </div>
+<div class="card">
+    <div class="card-header" id="heading@(item.TicketNr)">
+        <h5 class="mb-0">
+            <button class="btn btn-link w-100 text-decoration-none text-dark" data-toggle="collapse" data-target="#collapse@(item.TicketNr)" aria-expanded="true" aria-controls="collapse@(item.TicketNr)">
+                <div class="row">
+                    <div class="col">
+                        @item.TicketNr
                     </div>
-                    <div class="row m-5">
-                        
-                            <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="btn btn-primary">Edit</a>
-                       
+                    <div class="col">
+                        @item.Title
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(model => item.Status)
                     </div>
                 </div>
+            </button>
+        </h5>
+    </div>
+
+    <div id="collapse@(item.TicketNr)" class="collapse" aria-labelledby="heading@(item.TicketNr)" data-parent="#accordion">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <p>Date created: @item.DateCreation</p>
+                    <p>Type: @Html.DisplayFor(model => item.Type)</p>
+                    <p>Assigned technician: </p>
+                    <p>Remarks: @item.Remark</p>
+                    @{ if (item.PicturePath == null)
+                        {
+        <p>Attachment: No attachment </p> }
+    else
+    {
+<p>Attachment: </p><img class="img-thumbnail small" src="~/bijlagen/@item.PicturePath"> } }
+                </div>
+                <div class="col">
+                    <p>Description: </p>@item.Description
+                </div>
+            </div>
+            <div class="row m-5">
+
+                <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="btn btn-primary">Edit</a> <a asp-controller="Ticket" asp-action="Stop" asp-route-ticketnr="@item.TicketNr" class="btn btn-danger">Stop</a>
             </div>
         </div>
-    }
+    </div>
+</div>}
 </div>
 
 
