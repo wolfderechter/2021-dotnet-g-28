@@ -26,7 +26,7 @@ namespace _2021_dotnet_g_28.Controllers
             _contactPersonRepository = contactPersonRepository;
             _hostingEnvironment = hostingEnvironment;
         }
-
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             //get signed in user
@@ -40,7 +40,37 @@ namespace _2021_dotnet_g_28.Controllers
             {
                 Tickets = _ticketRepository.GetByContactPersonId(contactPerson.Id)
             };
+
+            model.CheckBoxItems = new List<StatusModelTicket>();
+            foreach (TicketEnum.status ticketStatus in Enum.GetValues(typeof(TicketEnum.status)))
+            {
+                model.CheckBoxItems.Add(new StatusModelTicket() { Status = ticketStatus, IsSelected = false });
+            }
+            model.CheckBoxItems.SingleOrDefault(c => c.Status == TicketEnum.status.Created).IsSelected = true;
+            model.CheckBoxItems.SingleOrDefault(c => c.Status == TicketEnum.status.InProgress).IsSelected = true;
+            //insert list of duurcheckbox items into model
+            model.Tickets = _ticketRepository.GetByStatus(new List<TicketEnum.status> { TicketEnum.status.Created, TicketEnum.status.InProgress });
+
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Index(TicketIndexViewModel model)
+        {
+            //getting contactperson from the signedin user
+            ContactPerson contactPerson = await GetLoggedInContactPerson();
+            //getting the selected statusses/
+            List<TicketEnum.status> selectedStatusses = model.CheckBoxItems.Where(c => c.IsSelected).Select(c => c.Status).ToList();
+           
+            //getting contracts connected to statusses
+            model.Tickets = _ticketRepository.GetByStatus(selectedStatusses);
+            return View(model);
+        }
+
+        private async Task<ContactPerson> GetLoggedInContactPerson()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            return _contactPersonRepository.getById(user.Id);
         }
 
         public IActionResult Create()

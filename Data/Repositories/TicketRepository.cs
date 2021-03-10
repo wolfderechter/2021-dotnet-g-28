@@ -48,5 +48,10 @@ namespace _2021_dotnet_g_28.Data.Repositories
         {
             return _tickets.Where(t => t.ContactPersonId == contactPersonId).ToList();
         }
+
+        public IEnumerable<Ticket> GetByStatus(IEnumerable<TicketEnum.status> statusses)
+        {
+            return _tickets.Where(c => statusses.Contains(c.Status)).ToList();
+        }
     }
 }
