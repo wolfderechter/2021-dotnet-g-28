@@ -51,7 +51,7 @@ namespace _2021_dotnet_g_28
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.Cookie.Name = "ActeimCookie";
+                options.Cookie.Name = "ActemuimCookie";
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
                 options.LoginPath = "/Account/Login";
