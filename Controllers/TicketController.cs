@@ -141,5 +141,17 @@ namespace _2021_dotnet_g_28.Controllers
             }
 
         }
+
+
+        public IActionResult Stop(int ticketNr)
+        {
+            Ticket ticket = _ticketRepository.GetBy(ticketNr);
+            if (ticket == null)
+                return NotFound();
+            ticket.Status = TicketEnum.status.Cancelled;
+            _ticketRepository.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

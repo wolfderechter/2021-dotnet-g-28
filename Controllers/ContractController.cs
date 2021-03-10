@@ -62,9 +62,10 @@ namespace _2021_dotnet_g_28.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public IActionResult Delete(int contractNr)
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
+            var contractNr = id;
             try
             {
                 Contract contract = _contractRepository.GetById(contractNr);
@@ -80,7 +81,7 @@ namespace _2021_dotnet_g_28.Controllers
             {
                 TempData["error"] = $"Sorry, something went wrong, Contract {contractNr} was not deleted…";
             }
-            return RedirectToAction(nameof(Index));
+            return Ok();
         }
 
         public IActionResult Details(int contractNr)

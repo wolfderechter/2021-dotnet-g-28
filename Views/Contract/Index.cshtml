@@ -103,7 +103,7 @@
             <div class="modal-body"></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
-                <input type="submit" value="Delete" class="btn btn-danger" />
+                <input type="submit" value="Delete" class="btn btn-danger btn-ok" />
             </div>
         </div>
     </div>
@@ -111,11 +111,16 @@
 
 @section scripts {
     <script>
+        
         $('#confirm-delete').on('click', '.btn-ok', function (event) {
             var $modalDiv = $(event.delegateTarget);
             var id = $(this).data('itemId');
-            $.post('/Contract/Delete/' + id).then(function () {
-                $modalDiv.modal('hide');
+            $.ajax({
+                url: '/Contract/Delete/' + id,
+                type: 'DELETE',
+                success: function (result) {
+                    window.location.reload();
+                }
             });
         });
 
@@ -127,6 +132,7 @@
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
             modal.find('.modal-body').text("Are you sure you wanna delete the contract with contractNr " + contractid)
+            $('.btn-ok', this).data('itemId', contractid);
         })
 
     </script>
