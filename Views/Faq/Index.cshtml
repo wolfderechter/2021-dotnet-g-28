@@ -9,25 +9,34 @@
 <h1>FAQ</h1>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Probleem</th>
-            <th>Oplossing</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Faqs)
-        {
-            <tr>
-                <td>
-                    @item.Problem
-                </td>
-                <td>
-                    @item.Solution
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div id="accordion" class="w-75 mx-auto">
+    @foreach (var item in Model.Faqs)
+    {
+        <div class="card">
+            <div class="card-header" id="heading@(item.Id)">
+                <h5 class="mb-0">
+                    <button class="btn btn-link w-100 text-decoration-none text-dark" data-toggle="collapse" data-target="#collapse@(item.Id)" aria-expanded="true" aria-controls="collapse@(item.Id)">
+                        <div class="row">
+                            <div class="col">
+                                @item.Problem
+                            </div>
+                        </div>
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapse@(item.Id)" class="collapse" aria-labelledby="heading@(item.Id)" data-parent="#accordion">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <p>  @Html.Raw(@item.Solution)</p>
+                          
+
+
+                        </div>
+                        
+                    </div>
+                   
+                </div>
+            </div>
+        </div>}

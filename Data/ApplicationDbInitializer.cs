@@ -66,10 +66,12 @@ namespace _2021_dotnet_g_28.Data
                 Ticket ticket5 = new Ticket() { DateCreation = DateTime.Now, Title = "airco gestopt.", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.NoImpact, Description = "airco is gestopt met werken.", ContactPersonId = contactPerson2.Id };
                 Ticket ticket6 = new Ticket() { DateCreation = DateTime.Now, Title = "computer freeze.", Status = TicketEnum.status.Closed, Type = TicketEnum.type.NoImpact, Description = "computer bevriest heel de tijd.", ContactPersonId = contactPerson2.Id };
 
-                Faq faq1 = new Faq() { Problem = "Netwerk storing", Solution = "Router opnieuw opstarten" };
-                Faq faq2 = new Faq() { Problem = "Computer vastegelopen", Solution = "Trek de stekker uit en start opnieuw op"};
+                Faq faq1 = new Faq() { Problem = "HTTP ERROR 401 (UNAUTHORIZED)", Solution = "1. Check the URL for errors. <br>  2. If the URL is correct,  go to the site’s homepage and look for a login link.Enter your username and password, and then try the page again. <br>  3. If the page you’re trying to access isn’t supposed to need authorization, contact the webmaster and let them know." };
+                Faq faq2 = new Faq() { Problem = "HTTP ERROR 400 (BAD REQUEST)", Solution = "1. Check for errors in the URL. This is the most common reason for a 400 Bad Request error. Make sure to check for syntax errors! <br>  2. Clear your browser’s cookies. Sites can sometimes report a 400 error if the cookie it’s reading is corrupt. <br>  3. Clear your DNS cache. If you don’t know how to do this, read these instructions! <br>  4. Clear your browser’s cache, here’s how!" };
+                Faq faq3 = new Faq() { Problem = "HTTP ERROR 403 (FORBIDDEN)", Solution = "1. Check for an error in the URL. <br> 2. Clear your browser’s cache and cookies.If you don’t know how to do this, read these instructions! <br> 3. Contact your service provider if the issue is still not resolved." };
+                Faq faq4 = new Faq() { Problem = "HTTP ERROR 404 (NOT FOUND)", Solution = "1. Refresh page. <br> 2. Check the URL for errors. <br> 3. Clear your browser’s cache and cookies. If you don’t know how to do this, read these instructions! <br> 4. Scan your computer for malware, here’s how. <br> 5. Contact the Webmaster and let them know about the issue." };
+                Faq faq5 = new Faq() { Problem = "SMART Hard Disk Error 301", Solution = "this error indicates that the hard disk or solid-state drive has already experienced a failure, or will soon. This error message will appear when you turn on the device and can cause serious damage if not treated immediately. It could be the result of a broken controller chip, failed installation of an application, a power surge,  or malware. Sometimes, a user can change the BIOS sequence or attempt a reboot, but if the drive has a physical error, then it is best not to run the computer to avoid further damage." };
 
-                
                 contactPerson1.AddTicket(ticket1);
                 
                 contactPerson2.AddTicket(ticket2);
@@ -77,7 +79,7 @@ namespace _2021_dotnet_g_28.Data
                 contactPerson2.AddTicket(ticket4);
                 contactPerson2.AddTicket(ticket5);
                 contactPerson2.AddTicket(ticket6);
-                _dbContext.Faq.AddRange(faq1, faq2);
+                _dbContext.Faq.AddRange(faq1, faq2, faq3, faq4, faq5);
 
                 _dbContext.ContactPeople.AddRange(contactPerson2, contactPerson1);
 
