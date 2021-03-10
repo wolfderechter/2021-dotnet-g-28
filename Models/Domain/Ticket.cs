@@ -17,6 +17,7 @@ namespace _2021_dotnet_g_28.Models.Domain
         public String Remark { get; set; }
         public int ContactPersonId { get; set; }
         public string PicturePath { get; set; }
+        public ICollection<Reaction> Reactions { get; set; }
 
 
         public Ticket(DateTime dateCreation, string title, string remark, string description, TicketEnum.type type, TicketEnum.status status, string filePath)
@@ -29,7 +30,7 @@ namespace _2021_dotnet_g_28.Models.Domain
             Status = status;
             PicturePath = filePath;
         }
-            public Ticket(DateTime dateCreation, string title, string remark, string description, TicketEnum.type type, TicketEnum.status status)
+        public Ticket(DateTime dateCreation, string title, string remark, string description, TicketEnum.type type, TicketEnum.status status)
         {
             DateCreation = dateCreation;
             Title = title;
@@ -38,14 +39,14 @@ namespace _2021_dotnet_g_28.Models.Domain
             Type = type;
             Status = status;
         }
-        
-        
+
+
         public Ticket()
         {
-
+            Reactions = new List<Reaction>();
         }
 
-        public void EditTicket(string title, string remark, string description, TicketEnum.type type,string filePath)
+        public void EditTicket(string title, string remark, string description, TicketEnum.type type, string filePath)
         {
             Title = title;
             Remark = remark;
@@ -53,6 +54,11 @@ namespace _2021_dotnet_g_28.Models.Domain
             Type = type;
             PicturePath = filePath;
         }
+
+        public void AddReaction(Reaction reaction)
+            {
+            Reactions.Add(reaction);
+}
     }
 
     

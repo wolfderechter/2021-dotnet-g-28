@@ -14,7 +14,8 @@ namespace _2021_dotnet_g_28.Data.Mappers
         {
             builder.ToTable("Tickets");
             builder.HasKey(t => t.TicketNr);
-            //builder.HasMany(t => t.Contracts).WithOne(t => t.company).IsRequired().OnDelete(DeleteBehavior.Restrict);
+            
+            //builder.HasMany(t => t.Reactions).WithOne(t => t.TicketId).IsRequired().OnDelete(DeleteBehavior.Restrict);
             //builder.HasMany(t => t.ContactPersons).WithOne(t => t.Company).IsRequired().OnDelete(DeleteBehavior.Restrict);
         }
     }

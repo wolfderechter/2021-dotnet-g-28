@@ -18,6 +18,7 @@ namespace _2021_dotnet_g_28.Data
         public DbSet<Faq> Faq { get; set; }
         public DbSet<ContactPerson> ContactPeople { get; set; }
         public DbSet<ContractType> ContractType { get; set; }
+        public DbSet<Reaction> Reactions { get; set; }
 
 
 
@@ -37,7 +38,7 @@ namespace _2021_dotnet_g_28.Data
             modelBuilder.ApplyConfiguration(new FaqConfiguration());
             modelBuilder.ApplyConfiguration(new SupportManagerConfiguration());
             modelBuilder.ApplyConfiguration(new ContractTypeConfiguration());
-
+            modelBuilder.ApplyConfiguration(new ReactionConfiguration());
         }
 
     }

@@ -183,5 +183,18 @@ namespace _2021_dotnet_g_28.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> AddReaction(int ticketNr, string reaction) 
+        {
+            var user = await _userManager.GetUserAsync(User);
+            ContactPerson contact = _contactPersonRepository.getById(user.Id);
+            Ticket ticket = _ticketRepository.GetBy(ticketNr);
+            if (ticket == null)
+                return NotFound();
+            
+            ticket.AddReaction(new Reaction(reaction, contact.FirstName + " " + contact.LastName,false, ticketNr));
+            _ticketRepository.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
