@@ -122,8 +122,13 @@ main {
         height: 5rem;
     }
 
+    .nav-item {
+        width: 20%;
+    }
+
     .navbar-nav {
         flex-direction: row;
+        width: 100%;
     }
 
     .nav-link i {
@@ -137,6 +142,7 @@ main {
 
     main {
         margin: 0;
+        margin-bottom: 5rem;
     }
 
     .logo {
