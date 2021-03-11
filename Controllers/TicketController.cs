@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using _2021_dotnet_g_28.Models.Domain;
 using _2021_dotnet_g_28.Models.Viewmodels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace _2021_dotnet_g_28.Controllers
 {
+    [Authorize(Policy = "Customer")]
     public class TicketController : Controller
     {
         private readonly ITicketRepository _ticketRepository;
@@ -182,18 +184,17 @@ namespace _2021_dotnet_g_28.Controllers
             _ticketRepository.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-
-        public async Task<IActionResult> AddReaction(int ticketNr, string reaction) 
+        public async Task<IActionResult> AddReaction(int ticketNr, string reaction,TicketIndexViewModel model) 
         {
             var user = await _userManager.GetUserAsync(User);
             ContactPerson contact = _contactPersonRepository.getById(user.Id);
             Ticket ticket = _ticketRepository.GetBy(ticketNr);
             if (ticket == null)
                 return NotFound();
-            
             ticket.AddReaction(new Reaction(reaction, contact.FirstName + " " + contact.LastName,false, ticketNr));
             _ticketRepository.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            TempData["message"] = $"Your reaction has been succesfully added";
+            return RedirectToAction(nameof(Index),model);
         }
 
     }

@@ -18,7 +18,7 @@
 }
 
 .active, .accordion:hover {
-  background-color: #ccc;
+    background-color: #ccc;
 }
 
 .omschrijving {
@@ -31,7 +31,7 @@
     height: 100%;
 }
 
-.accordion-title{
+.accordion-title {
     display: inline;
     margin: auto;
 }
@@ -52,22 +52,33 @@
     margin-left: 5px;
 }
 
-button:focus{
+button:focus {
     outline: none;
 }
 
 .active:after {
-  content: "\2212";
+    content: "\2212";
 }
 
 .panel {
-  padding: 0 18px;
-  background-color: white;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
 }
 
 .panel-half {
+}
 
+.border-production-stopped {
+    border-left: 4px solid red;
+}
+
+.border-no-impact {
+    border-left: 4px solid green;
+}
+
+.border-production-will-stop {
+    border-left: 4px solid orange;
 }

@@ -22,8 +22,10 @@ namespace _2021_dotnet_g_28.Models.Domain
         public DateTime StartDate { get; set; }
         public ContractEnum.status Status { get; set; }
         [Required]
+        [Display(Name ="Contract Type")]
         public ContractType Type { get; set; }
         [Required]
+        [Display(Name = "Company Info")]
         public Company Company { get; set; }
         [NotMapped]
         public int Duration { get { return EndDate.Year - StartDate.Year; } }

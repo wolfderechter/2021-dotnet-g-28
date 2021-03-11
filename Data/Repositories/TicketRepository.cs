@@ -9,7 +9,6 @@ namespace _2021_dotnet_g_28.Data.Repositories
 {
     public class TicketRepository : ITicketRepository
     {
-
         private readonly ApplicationDbContext _dbContext;
         private readonly DbSet<Ticket> _tickets;
 

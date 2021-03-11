@@ -5,7 +5,11 @@
     ViewData["Title"] = "Contracts";
 }
 
-<h1 class="">@ViewData["Title"]</h1>
+
+    <h1>@ViewData["Title"]</h1>
+    
+
+
 <!-- showing filter in a form so you can post and filter on Duration and Status-->
 <div class="row">
     <div class="col-lg-3 text-left">
@@ -33,7 +37,9 @@
                     </div>
                 }
             </div>
+
             <button type="submit" class="btn btn-primary ml-1">Filter</button>
+            <a class="btn btn-primary" asp-action="Create">Create New Contract</a>
         }
     </div>
     <!--table that will showing all the items that accept the filter-->
@@ -76,9 +82,9 @@
                         </td>
                         <td>
                             <button class="btn btn-warning btn-sm">
-                                @Html.ActionLink("Details", "Details", new { contractNr = @item.ContractNr })
+                                @Html.ActionLink("Details", "Details", new { contractNr = @item.ContractNr },new {@class="text-white text-decoration-none"})
                             </button>
-                            <a class="btn btn-danger btn-sm" data-target="#confirm-delete" data-toggle="modal" data-item-id="@item.ContractNr">Delete</a>
+                            <a class="btn btn-danger btn-sm text-white" data-target="#confirm-delete" data-toggle="modal" data-item-id="@item.ContractNr">Cancel</a>
                         </td>
                     </tr>
                 }
@@ -86,9 +92,6 @@
         </table>
     </div>
 </div>
-<p>
-    <a class="btn btn-success" asp-action="Create">Create New Contract</a>
-</p>
 
 <!--modal that's gonna show the delete confirmation-->
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
