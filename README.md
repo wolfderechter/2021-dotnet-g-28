@@ -22,4 +22,4 @@ The project is about a help desk application where the customer can log-in, view
 ## Trello
 > - [Information about sprint 1 on Trello](https://trello.com/b/xlBlOm6H/projectendotnetsprint1)
 > - [Information about sprint 2 on Trello](https://trello.com/b/greJiV0y/projectendotnetsprint2)
-
+> - [Information about sprint 3 on Trello](https://trello.com/b/svtLigG4/projectendotnetsprint3)
