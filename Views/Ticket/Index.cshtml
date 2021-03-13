@@ -66,7 +66,7 @@
                                 <p>Date created: @item.DateCreation</p>
                                 <p>Type: @Html.DisplayFor(model => item.Type)</p>
                                 <p>Assigned technician: </p>
-                                <p>Remarks: @item.Remark</p>
+                                @*<p>Remarks: @item.Remark</p>*@
                                 @{ if (item.PicturePath == null)
                                     {
                                         <p>Attachment: No attachment </p> }

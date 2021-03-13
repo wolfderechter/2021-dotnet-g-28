@@ -14,7 +14,7 @@
 
     <!-- Vertical navbar -->
     <nav class="navbar" id="navbar">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav"> 
             <li class="logo">
                 <img src="~/img/logo-actemuim.png" id="img1" />
             </li>
@@ -43,6 +43,11 @@
                 </a>
             </li>
             <li class="nav-item">
+             
+                @Html.Partial("_LanguagePartial")
+            </li>
+            <li class="nav-item">
+            
                 <a class="nav-link" asp-controller="Account" asp-action="Logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <span class="link-text">Sign out</span>

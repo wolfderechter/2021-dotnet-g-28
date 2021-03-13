@@ -61,7 +61,7 @@ namespace _2021_dotnet_g_28.Data
                 //makes tickets
                 
                 
-                Ticket ticket1 = new Ticket() { DateCreation = DateTime.Now, Title = "Malfunction in main line ", Status = TicketEnum.status.Created, Type = TicketEnum.type.ProductionStopped, Description = "The factory stopped producing because of a fault in the main line ", ContactPersonId = contactPerson1.Id ,Remark="Very Urgent"};
+                Ticket ticket1 = new Ticket() { DateCreation = DateTime.Now, Title = "Malfunction in main line ", Status = TicketEnum.status.Created, Type = TicketEnum.type.ProductionStopped, Description = "The factory stopped producing because of a fault in the main line ", ContactPersonId = contactPerson1.Id /*,Remark="Very Urgent"*/};
                 Ticket ticket2 = new Ticket() { DateCreation = DateTime.Now, Title = "Water damage ", Status = TicketEnum.status.Created, Type = TicketEnum.type.ProductionWillStop, Description = "We had an water leak and everything is soaked", ContactPersonId = contactPerson2.Id };
                 Ticket ticket3 = new Ticket() { DateCreation = DateTime.Now, Title = "Ip error shown on tablet", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.ProductionWillStop, Description = "The scanners show an Ip error when trying to scan merchandise ", ContactPersonId = contactPerson2.Id };
                 Ticket ticket4 = new Ticket() { DateCreation = DateTime.Now, Title = "Server shutdown", Status = TicketEnum.status.ResponseReceived, Type = TicketEnum.type.ProductionStopped, Description = "Unable to connect to server message shown every time we try and access the company network", ContactPersonId = contactPerson2.Id };

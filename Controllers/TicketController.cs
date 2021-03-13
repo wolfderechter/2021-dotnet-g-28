@@ -100,7 +100,7 @@ namespace _2021_dotnet_g_28.Controllers
                         string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                         ticketEditViewModel.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
                     }
-                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title, ticketEditViewModel.Remark, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.status.Created,uniqueFileName);
+                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title/*, ticketEditViewModel.Remark*/, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.status.Created,uniqueFileName);
                     _ticketRepository.Add(ticket);
                     contact.AddTicket(ticket);
                     _ticketRepository.SaveChanges();
@@ -157,7 +157,7 @@ namespace _2021_dotnet_g_28.Controllers
                         ticketEditViewModel.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
                     }
                     Ticket ticket = _ticketRepository.GetBy(ticketNr);
-                    ticket.EditTicket(ticketEditViewModel.Title, ticketEditViewModel.Remark, ticketEditViewModel.Description, ticketEditViewModel.Type, uniqueFileName);
+                    ticket.EditTicket(ticketEditViewModel.Title, /*ticketEditViewModel.Remark,*/ ticketEditViewModel.Description, ticketEditViewModel.Type, uniqueFileName);
                     _ticketRepository.SaveChanges();
                     TempData["message"] = $"You successfully updated the ticket.";
                 }
