@@ -75,11 +75,11 @@ namespace _2021_dotnet_g_28.Controllers
                 }
                 _contractRepository.Delete(contract);
                 _contractRepository.SaveChanges();
-                TempData["message"] = $"Contract {contractNr} was sucessfully deleted…";
+                TempData["message"] = $"Contract {contractNr} was sucessfully cancelled…";
             }
             catch
             {
-                TempData["error"] = $"Sorry, something went wrong, Contract {contractNr} was not deleted…";
+                TempData["error"] = $"Sorry, something went wrong, Contract {contractNr} was not cancelled…";
             }
             return Ok();
         }

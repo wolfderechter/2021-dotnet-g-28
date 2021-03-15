@@ -20,7 +20,7 @@ namespace _2021_dotnet_g_28.Data.Repositories
 
         public Ticket GetBy(int ticketNr)
         {
-            return _tickets.SingleOrDefault(t => t.TicketNr == ticketNr);
+            return _tickets.FirstOrDefault(t => t.TicketNr == ticketNr);
         }
 
         public IEnumerable<Ticket> GetAll()
@@ -35,7 +35,7 @@ namespace _2021_dotnet_g_28.Data.Repositories
 
         public void Delete(Ticket ticket)
         {
-            _tickets.Remove(ticket);
+            ticket.Status = TicketEnum.status.Cancelled;
         }
 
         public void SaveChanges()

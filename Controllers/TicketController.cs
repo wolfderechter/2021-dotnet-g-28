@@ -174,15 +174,25 @@ namespace _2021_dotnet_g_28.Controllers
 
         }
 
-
-        public IActionResult Stop(int ticketNr)
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
-            Ticket ticket = _ticketRepository.GetBy(ticketNr);
-            if (ticket == null)
-                return NotFound();
-            ticket.Status = TicketEnum.status.Cancelled;
-            _ticketRepository.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                Ticket ticket = _ticketRepository.GetBy(id);
+                if (ticket == null)
+                    return NotFound();
+
+                _ticketRepository.Delete(ticket);
+                _ticketRepository.SaveChanges();
+                TempData["message"] = $"Ticket {id} was sucessfully cancelled…";
+                //return RedirectToAction(nameof(Index));
+            }
+            catch 
+            {
+                TempData["error"] = $"Sorry, something went wrong, Ticket {id} was not cancelled…";
+            }
+            return Ok();
         }
         public async Task<IActionResult> AddReaction(int ticketNr, string reaction,TicketIndexViewModel model) 
         {
