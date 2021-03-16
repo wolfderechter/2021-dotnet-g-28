@@ -21,7 +21,7 @@ namespace _2021_dotnet_g_28.Controllers
         private readonly IContactPersonRepository _contactPersonRepository;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public TicketController(ITicketRepository ticketRepository, UserManager<IdentityUser> userManager, IContactPersonRepository contactPersonRepository,IWebHostEnvironment hostingEnvironment)
+        public TicketController(ITicketRepository ticketRepository, UserManager<IdentityUser> userManager, IContactPersonRepository contactPersonRepository, IWebHostEnvironment hostingEnvironment)
         {
             _ticketRepository = ticketRepository;
             _userManager = userManager;
@@ -43,15 +43,26 @@ namespace _2021_dotnet_g_28.Controllers
                 Tickets = _ticketRepository.GetByContactPersonId(contactPerson.Id)
             };
 
-            model.CheckBoxItems = new List<StatusModelTicket>();
+            //Status filteren
+            model.CheckBoxItemsStatus = new List<StatusModelTicket>();
             foreach (TicketEnum.status ticketStatus in Enum.GetValues(typeof(TicketEnum.status)))
             {
-                model.CheckBoxItems.Add(new StatusModelTicket() { Status = ticketStatus, IsSelected = false });
+                model.CheckBoxItemsStatus.Add(new StatusModelTicket() { Status = ticketStatus, IsSelected = false });
             }
-            model.CheckBoxItems.SingleOrDefault(c => c.Status == TicketEnum.status.Created).IsSelected = true;
-            model.CheckBoxItems.SingleOrDefault(c => c.Status == TicketEnum.status.InProgress).IsSelected = true;
+            model.CheckBoxItemsStatus.SingleOrDefault(c => c.Status == TicketEnum.status.Created).IsSelected = true;
+            model.CheckBoxItemsStatus.SingleOrDefault(c => c.Status == TicketEnum.status.InProgress).IsSelected = true;
+
+            //Type filteren
+            model.CheckBoxItemsType = new List<TypeModelTicket>();
+            foreach (TicketEnum.type ticketType in Enum.GetValues(typeof(TicketEnum.type)))
+            {
+                model.CheckBoxItemsType.Add(new TypeModelTicket() { Type = ticketType, IsSelected = false });
+            }
+            model.CheckBoxItemsType.SingleOrDefault(c => c.Type == TicketEnum.type.ProductionStopped).IsSelected = true;
+            model.CheckBoxItemsType.SingleOrDefault(c => c.Type == TicketEnum.type.ProductionWillStop).IsSelected = true;
+
             //insert list of duurcheckbox items into model
-            model.Tickets = _ticketRepository.GetByStatus(new List<TicketEnum.status> { TicketEnum.status.Created, TicketEnum.status.InProgress });
+            model.Tickets = _ticketRepository.GetByStatusAndType(new List<TicketEnum.status> { TicketEnum.status.Created, TicketEnum.status.InProgress }, new List<TicketEnum.type> { TicketEnum.type.ProductionStopped, TicketEnum.type.ProductionWillStop });
 
             return View(model);
         }
@@ -62,10 +73,10 @@ namespace _2021_dotnet_g_28.Controllers
             //getting contactperson from the signedin user
             ContactPerson contactPerson = await GetLoggedInContactPerson();
             //getting the selected statusses/
-            List<TicketEnum.status> selectedStatusses = model.CheckBoxItems.Where(c => c.IsSelected).Select(c => c.Status).ToList();
-           
+            List<TicketEnum.status> selectedStatusses = model.CheckBoxItemsStatus.Where(c => c.IsSelected).Select(c => c.Status).ToList();
+            List<TicketEnum.type> selectedTypes = model.CheckBoxItemsType.Where(c => c.IsSelected).Select(c => c.Type).ToList();
             //getting contracts connected to statusses
-            model.Tickets = _ticketRepository.GetByStatus(selectedStatusses);
+            model.Tickets = _ticketRepository.GetByStatusAndType(selectedStatusses, selectedTypes);
             return View(model);
         }
 
@@ -91,7 +102,7 @@ namespace _2021_dotnet_g_28.Controllers
                 {
                     var user = await _userManager.GetUserAsync(User);
                     ContactPerson contact = _contactPersonRepository.getById(user.Id);
-                    
+
                     string uniqueFileName = null;
                     if (ticketEditViewModel.Attachment != null)
                     {
@@ -100,7 +111,7 @@ namespace _2021_dotnet_g_28.Controllers
                         string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                         ticketEditViewModel.Attachment.CopyTo(new FileStream(filePath, FileMode.Create));
                     }
-                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title/*, ticketEditViewModel.Remark*/, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.status.Created,uniqueFileName);
+                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title/*, ticketEditViewModel.Remark*/, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.status.Created, uniqueFileName);
                     _ticketRepository.Add(ticket);
                     contact.AddTicket(ticket);
                     _ticketRepository.SaveChanges();
@@ -188,23 +199,23 @@ namespace _2021_dotnet_g_28.Controllers
                 TempData["message"] = $"Ticket {id} was sucessfully cancelled…";
                 //return RedirectToAction(nameof(Index));
             }
-            catch 
+            catch
             {
                 TempData["error"] = $"Sorry, something went wrong, Ticket {id} was not cancelled…";
             }
             return Ok();
         }
-        public async Task<IActionResult> AddReaction(int ticketNr, string reaction,TicketIndexViewModel model) 
+        public async Task<IActionResult> AddReaction(int ticketNr, string reaction, TicketIndexViewModel model)
         {
             var user = await _userManager.GetUserAsync(User);
             ContactPerson contact = _contactPersonRepository.getById(user.Id);
             Ticket ticket = _ticketRepository.GetBy(ticketNr);
             if (ticket == null)
                 return NotFound();
-            ticket.AddReaction(new Reaction(reaction, contact.FirstName + " " + contact.LastName,false, ticketNr));
+            ticket.AddReaction(new Reaction(reaction, contact.FirstName + " " + contact.LastName, false, ticketNr));
             _ticketRepository.SaveChanges();
             TempData["message"] = $"Your reaction has been succesfully added";
-            return RedirectToAction(nameof(Index),model);
+            return RedirectToAction(nameof(Index), model);
         }
 
     }

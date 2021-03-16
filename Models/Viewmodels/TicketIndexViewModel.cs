@@ -9,6 +9,7 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
     public class TicketIndexViewModel
     {
         public IEnumerable<Ticket> Tickets;
-        public List<StatusModelTicket> CheckBoxItems { get; set; }
+        public List<StatusModelTicket> CheckBoxItemsStatus { get; set; }
+        public List<TypeModelTicket> CheckBoxItemsType { get; set; }
     }
 }

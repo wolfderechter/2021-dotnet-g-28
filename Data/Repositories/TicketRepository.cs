@@ -45,12 +45,12 @@ namespace _2021_dotnet_g_28.Data.Repositories
 
         public IEnumerable<Ticket> GetByContactPersonId(int contactPersonId)
         {
-            return _tickets.Include(t=>t.Reactions).Where(t => t.ContactPersonId == contactPersonId).ToList();
+            return _tickets.Include(t => t.Reactions).Where(t => t.ContactPersonId == contactPersonId).ToList();
         }
 
-        public IEnumerable<Ticket> GetByStatus(IEnumerable<TicketEnum.status> statusses)
+        public IEnumerable<Ticket> GetByStatusAndType(IEnumerable<TicketEnum.status> statusses, IEnumerable<TicketEnum.type> types)
         {
-            return _tickets.Include(t=>t.Reactions).Where(c => statusses.Contains(c.Status)).ToList();
+            return _tickets.Include(t => t.Reactions).Where(c => statusses.Contains(c.Status) && types.Contains(c.Type)).ToList();
         }
     }
 }
