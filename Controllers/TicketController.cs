@@ -93,12 +93,12 @@ namespace _2021_dotnet_g_28.Controllers
                     ContactPerson contact = _contactPersonRepository.getById(user.Id);
                     
                     string uniqueFileName = null;
-                    if (ticketEditViewModel.Picture != null)
+                    if (ticketEditViewModel.Attachment != null)
                     {
                         string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "bijlagen");
-                        uniqueFileName = Guid.NewGuid().ToString() + "_" + ticketEditViewModel.Picture.FileName;
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + ticketEditViewModel.Attachment.FileName;
                         string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                        ticketEditViewModel.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
+                        ticketEditViewModel.Attachment.CopyTo(new FileStream(filePath, FileMode.Create));
                     }
                     var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title/*, ticketEditViewModel.Remark*/, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.status.Created,uniqueFileName);
                     _ticketRepository.Add(ticket);
@@ -149,12 +149,12 @@ namespace _2021_dotnet_g_28.Controllers
                 try
                 {
                     string uniqueFileName = null;
-                    if (ticketEditViewModel.Picture != null)
+                    if (ticketEditViewModel.Attachment != null)
                     {
                         string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "bijlagen");
-                        uniqueFileName = Guid.NewGuid().ToString() + "_" + ticketEditViewModel.Picture.FileName;
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + ticketEditViewModel.Attachment.FileName;
                         string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                        ticketEditViewModel.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
+                        ticketEditViewModel.Attachment.CopyTo(new FileStream(filePath, FileMode.Create));
                     }
                     Ticket ticket = _ticketRepository.GetBy(ticketNr);
                     ticket.EditTicket(ticketEditViewModel.Title, /*ticketEditViewModel.Remark,*/ ticketEditViewModel.Description, ticketEditViewModel.Type, uniqueFileName);

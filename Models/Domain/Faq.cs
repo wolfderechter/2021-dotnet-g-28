@@ -9,14 +9,15 @@ namespace _2021_dotnet_g_28.Models.Domain
     {
         public int Id { get; set; }
         public string Problem { get; set; }
-        public String Solution { get; set; }
+
+        public List<string> Solution { get; set; }
 
         public Faq()
         {
 
         }
 
-        public Faq(string probleem, string oplossing)
+        public Faq(string probleem, List<string> oplossing)
         {
             Problem = probleem;
             Solution = oplossing;

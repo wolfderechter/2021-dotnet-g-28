@@ -72,11 +72,20 @@ namespace _2021_dotnet_g_28.Data
                 Reaction reaction3 = new Reaction() { IsSolution = true, ReactionSup = true, NameUserReaction = "Rajish Abdul", Text = "We will send the technician over." };
                 ticket1.Reactions = new List<Reaction>() { reaction1, reaction2, reaction3 };
 
-                Faq faq1 = new Faq() { Problem = "HTTP ERROR 401 (UNAUTHORIZED)", Solution = "1. Check the URL for errors. <br>  2. If the URL is correct,  go to the site’s homepage and look for a login link.Enter your username and password, and then try the page again. <br>  3. If the page you’re trying to access isn’t supposed to need authorization, contact the webmaster and let them know." };
-                Faq faq2 = new Faq() { Problem = "HTTP ERROR 400 (BAD REQUEST)", Solution = "1. Check for errors in the URL. This is the most common reason for a 400 Bad Request error. Make sure to check for syntax errors! <br>  2. Clear your browser’s cookies. Sites can sometimes report a 400 error if the cookie it’s reading is corrupt. <br>  3. Clear your DNS cache. If you don’t know how to do this, read these instructions! <br>  4. Clear your browser’s cache, here’s how!" };
-                Faq faq3 = new Faq() { Problem = "HTTP ERROR 403 (FORBIDDEN)", Solution = "1. Check for an error in the URL. <br> 2. Clear your browser’s cache and cookies.If you don’t know how to do this, read these instructions! <br> 3. Contact your service provider if the issue is still not resolved." };
-                Faq faq4 = new Faq() { Problem = "HTTP ERROR 404 (NOT FOUND)", Solution = "1. Refresh page. <br> 2. Check the URL for errors. <br> 3. Clear your browser’s cache and cookies. If you don’t know how to do this, read these instructions! <br> 4. Scan your computer for malware, here’s how. <br> 5. Contact the Webmaster and let them know about the issue." };
-                Faq faq5 = new Faq() { Problem = "SMART Hard Disk Error 301", Solution = "this error indicates that the hard disk or solid-state drive has already experienced a failure, or will soon. This error message will appear when you turn on the device and can cause serious damage if not treated immediately. It could be the result of a broken controller chip, failed installation of an application, a power surge,  or malware. Sometimes, a user can change the BIOS sequence or attempt a reboot, but if the drive has a physical error, then it is best not to run the computer to avoid further damage." };
+                List<string> solution1 = new List<string>() { "1. Check the URL for errors.", "2. If the URL is correct,  go to the site’s homepage and look for a login link.Enter your username and password, and then try the page again.", "3. If the page you’re trying to access isn’t supposed to need authorization, contact the webmaster and let them know." };
+                List<string> solution2 = new List<string>() { "1. Check for errors in the URL. This is the most common reason for a 400 Bad Request error. Make sure to check for syntax errors!", "2. Clear your browser’s cookies. Sites can sometimes report a 400 error if the cookie it’s reading is corrupt.", "3. Clear your DNS cache. If you don’t know how to do this, read these instructions! <br>  4. Clear your browser’s cache, here’s how!" };
+                List<string> solution3 = new List<string>() { "1. Check for an error in the URL.", "2. Clear your browser’s cache and cookies.If you don’t know how to do this, read these instructions!", "3. Contact your service provider if the issue is still not resolved." };
+                List<string> solution4 = new List<string>() { "1. Refresh page.", "2. Check the URL for errors.", "3. Clear your browser’s cache and cookies. If you don’t know how to do this, read these instructions!", "4. Scan your computer for malware, here’s how.", "5. Contact the Webmaster and let them know about the issue." };
+
+
+
+                Faq faq1 = new Faq() { Problem = "HTTP ERROR 401 (UNAUTHORIZED)", Solution =  solution1};
+                Faq faq2 = new Faq() { Problem = "HTTP ERROR 400 (BAD REQUEST)", Solution =  solution2};
+                Faq faq3 = new Faq() { Problem = "HTTP ERROR 403 (FORBIDDEN)", Solution = solution3};
+                Faq faq4 = new Faq() { Problem = "HTTP ERROR 404 (NOT FOUND)", Solution =  solution4};
+               
+          
+
 
                 contactPerson1.AddTicket(ticket1);
                 
@@ -84,7 +93,7 @@ namespace _2021_dotnet_g_28.Data
                 contactPerson2.AddTicket(ticket3);
                 contactPerson2.AddTicket(ticket4);
                 contactPerson2.AddTicket(ticket6);
-                _dbContext.Faq.AddRange(faq1, faq2, faq3, faq4, faq5);
+                _dbContext.Faq.AddRange(faq1, faq2, faq3, faq4);
 
                 _dbContext.ContactPeople.AddRange(contactPerson2, contactPerson1);
 

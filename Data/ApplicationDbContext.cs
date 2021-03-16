@@ -2,6 +2,7 @@
 using _2021_dotnet_g_28.Models.Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,7 +21,7 @@ namespace _2021_dotnet_g_28.Data
         public DbSet<ContractType> ContractType { get; set; }
         public DbSet<Reaction> Reactions { get; set; }
 
-
+       
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -39,6 +40,7 @@ namespace _2021_dotnet_g_28.Data
             modelBuilder.ApplyConfiguration(new SupportManagerConfiguration());
             modelBuilder.ApplyConfiguration(new ContractTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ReactionConfiguration());
+            
         }
 
     }
