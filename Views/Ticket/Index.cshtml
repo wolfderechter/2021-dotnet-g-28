@@ -15,9 +15,9 @@
         @using (Html.BeginForm())
         {
             <div class="form-group border border-dark">
-                @Html.DisplayNameFor(model => model.CheckBoxItems[0].Status)
+                <p class="text-center mb-1">Status</p>
                 @for (int i = 0; Model.CheckBoxItems.Count > i; i++)
-                {
+                { 
                     <div class="form-check border ">
                         @Html.CheckBoxFor(model => model.CheckBoxItems[i].IsSelected, new { htmlAttributes = new { @class = "form-check-input" } })
                         @Html.DisplayFor(model => model.CheckBoxItems[i].Status, new { htmlAttributes = new { @class = "form-check-label" } })

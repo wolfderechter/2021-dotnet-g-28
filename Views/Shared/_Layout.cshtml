@@ -42,7 +42,12 @@
                     <span class="link-text">FAQ</span>
                 </a>
             </li>
-            <li><p>@ViewData["GebruikersNaam"]</p></li>
+            <li class="nav-item">
+                <p>@ViewData["GebruikersNaam"]</p>
+            </li>
+            <button type="button" class="btn btn-primary">
+                Notifications <span class="badge badge-light">@ViewData["Notifications"]</span>
+            </button>
             <li class="nav-item">
                 <a class="nav-link" asp-controller="Account" asp-action="Logout">
                     <i class="fas fa-sign-out-alt"></i>
