@@ -15,7 +15,7 @@ namespace _2021_dotnet_g_28.Controllers
         {
             _faqRepository = faqRepository;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string searchstring)
         {
         FaqIndexViewModel model = new FaqIndexViewModel
             {
