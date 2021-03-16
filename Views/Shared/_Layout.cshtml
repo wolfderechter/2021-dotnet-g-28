@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using _2021_dotnet_g_28.Models.viewmodels
+@using _2021_dotnet_g_28.Data.Repositories
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,10 +13,12 @@
     @RenderSection("Styles", false)
 </head>
 <body>
-
+    <div>
+        <p class="text-right">@User.Identity.Name</p>
+    </div>
     <!-- Vertical navbar -->
     <nav class="navbar" id="navbar">
-        <ul class="navbar-nav"> 
+        <ul class="navbar-nav">
             <li class="logo">
                 <img src="~/img/logo-actemuim.png" id="img1" />
             </li>
@@ -31,7 +35,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"  asp-controller="Contract" asp-action="Index">
+                <a class="nav-link" asp-controller="Contract" asp-action="Index">
                     <i class="fas fa-copy fa-fw"></i>
                     <span class="link-text">Contracts</span>
                 </a>
@@ -42,10 +46,17 @@
                     <span class="link-text">FAQ</span>
                 </a>
             </li>
+            <li class="nav-item">   
+            </li>
+
             <li class="nav-item">
+                <a class="nav-link">
+             
+                    <span class="link-text">@User.Identity.Name</span>
+                </a>
             </li>
             <li class="nav-item">
-            
+
                 <a class="nav-link" asp-controller="Account" asp-action="Logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <span class="link-text">Sign out</span>

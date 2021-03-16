@@ -63,9 +63,12 @@ main {
     cursor: pointer;
 }
 
-.nav-item:last-child {
+.nav-item:nth-child(6) {
     margin-top: auto;
+    font-size: 12px;
 }
+
+
 
 .nav-link {
     display: flex;

@@ -9,13 +9,14 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
     {
         //attributes of ticket
         public DateTime DateCreated { get; set; }
-        [Required]
-        [StringLength(100, ErrorMessage = "The title has to be filled")]
+        [Required(ErrorMessage = "The title is required")]
+        
         public string Title { get; set; }
         // public string Remark { get; set; }
         [Required]
         public string Description { get; set; }
-        [Required]
+        
+        [Required(ErrorMessage = "The type is required")]
         public TicketEnum.type Type { get; set; }
         public string PicturePath { get; set; }
         public IFormFile Attachment { get; set; }
