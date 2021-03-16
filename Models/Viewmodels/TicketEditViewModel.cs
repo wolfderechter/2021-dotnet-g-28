@@ -15,6 +15,7 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
         public TicketEnum.type Type { get; set; }
         public string PicturePath { get; set; }
         public IFormFile Picture { get; set; }
+        public int CompanyNr { get; set; }
 
 
         public TicketEditViewModel()

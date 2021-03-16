@@ -13,36 +13,50 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace _2021_dotnet_g_28.Controllers
 {
-    [Authorize(Policy = "Customer")]
+    [Authorize]
     public class TicketController : Controller
     {
         private readonly ITicketRepository _ticketRepository;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IContactPersonRepository _contactPersonRepository;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly ISupportManagerRepository _supportManagerRepository;
+        private readonly ICompanyRepository _companyRepository;
 
-        public TicketController(ITicketRepository ticketRepository, UserManager<IdentityUser> userManager, IContactPersonRepository contactPersonRepository,IWebHostEnvironment hostingEnvironment)
+        public TicketController(ITicketRepository ticketRepository, UserManager<IdentityUser> userManager, IContactPersonRepository contactPersonRepository,IWebHostEnvironment hostingEnvironment,ISupportManagerRepository supportManagerRepository,ICompanyRepository companyRepository)
         {
             _ticketRepository = ticketRepository;
             _userManager = userManager;
             _contactPersonRepository = contactPersonRepository;
             _hostingEnvironment = hostingEnvironment;
+            _supportManagerRepository = supportManagerRepository;
+            _companyRepository = companyRepository;
         }
-        [HttpGet]
+  
         public async Task<IActionResult> Index()
         {
+            TicketIndexViewModel model = new TicketIndexViewModel();
             //get signed in user
             var user = await _userManager.GetUserAsync(User);
 
-            //get contactperson matching with signed in user
-            ContactPerson contactPerson = _contactPersonRepository.getById(user.Id);
+            
+            
 
-            //model initialiseren
-            TicketIndexViewModel model = new TicketIndexViewModel
+            if (User.IsInRole("SupportManager"))
             {
-                Tickets = _ticketRepository.GetByContactPersonId(contactPerson.Id)
-            };
-
+                //get support manager connected 
+                var supManager = _supportManagerRepository.GetById(user.Id);
+                ViewData["GebruikersNaam"] = supManager.FirstName + " " + supManager.LastName;
+                model.Tickets = _ticketRepository.GetAll();
+            }
+            else 
+            {
+                //get contactperson matching with signed in user
+                ContactPerson contactPerson = _contactPersonRepository.getById(user.Id);
+                ViewData["GebruikersNaam"] = contactPerson.FirstName + " " + contactPerson.LastName;
+                model.Tickets = _ticketRepository.GetByContactPersonId(contactPerson.Id);
+            }
+           
             model.CheckBoxItems = new List<StatusModelTicket>();
             foreach (TicketEnum.status ticketStatus in Enum.GetValues(typeof(TicketEnum.status)))
             {
@@ -69,17 +83,19 @@ namespace _2021_dotnet_g_28.Controllers
             return View(model);
         }
 
-        private async Task<ContactPerson> GetLoggedInContactPerson()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            return _contactPersonRepository.getById(user.Id);
-        }
+        
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             ViewData["IsEdit"] = false;
             ViewData["typeTickets"] = TypeTickets();
-            //return View();
+            if (User.IsInRole("SupportManager"))
+            {
+                //get support manager connected 
+                var user = await _userManager.GetUserAsync(User);
+                var supManager = _supportManagerRepository.GetById(user.Id);
+                ViewData["Customers"] = GetSelectListCompanies();
+            }
             return View(nameof(Edit), new TicketEditViewModel());
         }
         [HttpPost]
@@ -89,9 +105,18 @@ namespace _2021_dotnet_g_28.Controllers
             {
                 try
                 {
-                    var user = await _userManager.GetUserAsync(User);
-                    ContactPerson contact = _contactPersonRepository.getById(user.Id);
-                    
+                    //getting company from contactperson or from 
+                    Company company;
+                    if (!User.IsInRole("SupportManager"))
+                    {
+                        var user = await _userManager.GetUserAsync(User);
+                        ContactPerson contact = _contactPersonRepository.getById(user.Id);
+                        company = contact.Company;
+                    }
+                    else 
+                    {
+                        company = _companyRepository.GetByNr(ticketEditViewModel.CompanyNr);
+                    }
                     string uniqueFileName = null;
                     if (ticketEditViewModel.Picture != null)
                     {
@@ -102,7 +127,7 @@ namespace _2021_dotnet_g_28.Controllers
                     }
                     var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title, ticketEditViewModel.Remark, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.status.Created,uniqueFileName);
                     _ticketRepository.Add(ticket);
-                    contact.AddTicket(ticket);
+                    company.AddTicket(ticket);
                     _ticketRepository.SaveChanges();
                     TempData["message"] = $"You successfully created a ticket.";
                 }
@@ -115,32 +140,11 @@ namespace _2021_dotnet_g_28.Controllers
             else
             {
                 return View(nameof(Edit), ticketEditViewModel);
-                //return View(nameof(Index), ticketEditViewModel);
-
             }
 
 
         }
-        private SelectList TypeTickets()
-        {
-            var typeTickets = new List<TicketEnum.type>();
-            foreach (TicketEnum.type typeTicket in Enum.GetValues(typeof(TicketEnum.type)))
-            {
-                typeTickets.Add(typeTicket);
-            }
-            return new SelectList(typeTickets);
-        }
-
-        public IActionResult Edit(int ticketNr)
-        {
-            Ticket ticket = _ticketRepository.GetBy(ticketNr);
-            if (ticket == null)
-                return NotFound();
-            ViewData["IsEdit"] = true;
-            ViewData["typeTickets"] = TypeTickets();
-            return View(new TicketEditViewModel(ticket));
-        }
-
+        
         [HttpPost]
         public IActionResult Edit(int ticketNr, TicketEditViewModel ticketEditViewModel)
         {
@@ -174,7 +178,6 @@ namespace _2021_dotnet_g_28.Controllers
 
         }
 
-
         public IActionResult Stop(int ticketNr)
         {
             Ticket ticket = _ticketRepository.GetBy(ticketNr);
@@ -184,6 +187,7 @@ namespace _2021_dotnet_g_28.Controllers
             _ticketRepository.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
         public async Task<IActionResult> AddReaction(int ticketNr, string reaction,TicketIndexViewModel model) 
         {
             var user = await _userManager.GetUserAsync(User);
@@ -197,5 +201,28 @@ namespace _2021_dotnet_g_28.Controllers
             return RedirectToAction(nameof(Index),model);
         }
 
+        private SelectList TypeTickets()
+        {
+            var typeTickets = new List<TicketEnum.type>();
+            foreach (TicketEnum.type typeTicket in Enum.GetValues(typeof(TicketEnum.type)))
+            {
+                typeTickets.Add(typeTicket);
+            }
+            return new SelectList(typeTickets);
+        }
+        private SelectList GetSelectListCompanies()
+        {
+            return new SelectList(
+                            _companyRepository.GetAll().OrderBy(c=>c.CompanyName),
+                            nameof(Company.CompanyNr),
+                            nameof(Company.CompanyName));
+        }
+
+        private async Task<ContactPerson> GetLoggedInContactPerson()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            return _contactPersonRepository.getById(user.Id);
+        }
     }
+
 }

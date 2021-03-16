@@ -15,7 +15,7 @@ namespace _2021_dotnet_g_28.Models.Domain
         public String Description { get; set; }
         public TicketEnum.type Type { get; set; }
         public String Remark { get; set; }
-        public int ContactPersonId { get; set; }
+        public int CompanyNr { get; set; }
         public string PicturePath { get; set; }
         public ICollection<Reaction> Reactions { get; set; }
 
@@ -56,9 +56,9 @@ namespace _2021_dotnet_g_28.Models.Domain
         }
 
         public void AddReaction(Reaction reaction)
-            {
+        {
             Reactions.Add(reaction);
-}
+        }
     }
 
     

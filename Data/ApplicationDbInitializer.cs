@@ -46,7 +46,7 @@ namespace _2021_dotnet_g_28.Data
                 company.Contracts = contracts;
 
                 //makes contactpeople
-                _dbContext.Company.Add(company);
+                _dbContext.Companies.Add(company);
                 //makes contactpersons and adds to company
                 string Username = "NathanT";
                 IdentityUser user = new IdentityUser { UserName = Username };
@@ -56,16 +56,16 @@ namespace _2021_dotnet_g_28.Data
                 Username = "StefB";
                 IdentityUser user2 = new IdentityUser { UserName = Username };
                 await _userManager.CreateAsync(user2, "Paswoord_1");
-                ContactPerson contactPerson2 = new ContactPerson { User = user2, Company = company, FirstName = "Stef", LastName = "Boerjan" };
-                await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "Customer"));
+                SupportManager supportManager = new SupportManager { User = user2, FirstName = "Stef", LastName = "Boerjan"};
+                await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "SupportManager"));
                 //makes tickets
                 
                 
-                Ticket ticket1 = new Ticket() { DateCreation = DateTime.Now, Title = "Malfunction in main line ", Status = TicketEnum.status.Created, Type = TicketEnum.type.ProductionStopped, Description = "The factory stopped producing because of a fault in the main line ", ContactPersonId = contactPerson1.Id ,Remark="Very Urgent"};
-                Ticket ticket2 = new Ticket() { DateCreation = DateTime.Now, Title = "Water damage ", Status = TicketEnum.status.Created, Type = TicketEnum.type.ProductionWillStop, Description = "We had an water leak and everything is soaked", ContactPersonId = contactPerson2.Id };
-                Ticket ticket3 = new Ticket() { DateCreation = DateTime.Now, Title = "Ip error shown on tablet", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.ProductionWillStop, Description = "The scanners show an Ip error when trying to scan merchandise ", ContactPersonId = contactPerson2.Id };
-                Ticket ticket4 = new Ticket() { DateCreation = DateTime.Now, Title = "Server shutdown", Status = TicketEnum.status.ResponseReceived, Type = TicketEnum.type.ProductionStopped, Description = "Unable to connect to server message shown every time we try and access the company network", ContactPersonId = contactPerson2.Id };
-                Ticket ticket6 = new Ticket() { DateCreation = DateTime.Now, Title = "Computer freeze.", Status = TicketEnum.status.Closed, Type = TicketEnum.type.NoImpact, Description = "Every time I try to play flappy bird on the company computer the pc freezes and stops working for a few seconds", ContactPersonId = contactPerson2.Id };
+                Ticket ticket1 = new Ticket() { DateCreation = DateTime.Now, Title = "Malfunction in main line ", Status = TicketEnum.status.Created, Type = TicketEnum.type.ProductionStopped, Description = "The factory stopped producing because of a fault in the main line ",Remark="Very Urgent"};
+                Ticket ticket2 = new Ticket() { DateCreation = DateTime.Now, Title = "Water damage ", Status = TicketEnum.status.Created, Type = TicketEnum.type.ProductionWillStop, Description = "We had an water leak and everything is soaked" };
+                Ticket ticket3 = new Ticket() { DateCreation = DateTime.Now, Title = "Ip error shown on tablet", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.ProductionWillStop, Description = "The scanners show an Ip error when trying to scan merchandise " };
+                Ticket ticket4 = new Ticket() { DateCreation = DateTime.Now, Title = "Server shutdown", Status = TicketEnum.status.ResponseReceived, Type = TicketEnum.type.ProductionStopped, Description = "Unable to connect to server message shown every time we try and access the company network" };
+                Ticket ticket6 = new Ticket() { DateCreation = DateTime.Now, Title = "Computer freeze.", Status = TicketEnum.status.Closed, Type = TicketEnum.type.NoImpact, Description = "Every time I try to play flappy bird on the company computer the pc freezes and stops working for a few seconds" };
                 
                 Reaction reaction1 = new Reaction() { IsSolution = false, ReactionSup = true, NameUserReaction = "Rajish Abdul", Text = "is there any sign of malfunction , like a specific area." };
                 Reaction reaction2 = new Reaction() { IsSolution = false, ReactionSup = false, NameUserReaction = "Nathan Tersago", Text = "it get's stuck around the compression machine" };
@@ -78,15 +78,16 @@ namespace _2021_dotnet_g_28.Data
                 Faq faq4 = new Faq() { Problem = "HTTP ERROR 404 (NOT FOUND)", Solution = "1. Refresh page. <br> 2. Check the URL for errors. <br> 3. Clear your browser’s cache and cookies. If you don’t know how to do this, read these instructions! <br> 4. Scan your computer for malware, here’s how. <br> 5. Contact the Webmaster and let them know about the issue." };
                 Faq faq5 = new Faq() { Problem = "SMART Hard Disk Error 301", Solution = "this error indicates that the hard disk or solid-state drive has already experienced a failure, or will soon. This error message will appear when you turn on the device and can cause serious damage if not treated immediately. It could be the result of a broken controller chip, failed installation of an application, a power surge,  or malware. Sometimes, a user can change the BIOS sequence or attempt a reboot, but if the drive has a physical error, then it is best not to run the computer to avoid further damage." };
 
-                contactPerson1.AddTicket(ticket1);
-                
-                contactPerson2.AddTicket(ticket2);
-                contactPerson2.AddTicket(ticket3);
-                contactPerson2.AddTicket(ticket4);
-                contactPerson2.AddTicket(ticket6);
-                _dbContext.Faq.AddRange(faq1, faq2, faq3, faq4, faq5);
+                company.AddTicket(ticket1);
 
-                _dbContext.ContactPeople.AddRange(contactPerson2, contactPerson1);
+                company.AddTicket(ticket2);
+                company.AddTicket(ticket3);
+                company.AddTicket(ticket4);
+                company.AddTicket(ticket6);
+                _dbContext.Faqs.AddRange(faq1, faq2, faq3, faq4, faq5);
+
+                _dbContext.ContactPeople.Add(contactPerson1);
+                _dbContext.SupportManagers.Add(supportManager);
 
                 _dbContext.SaveChanges();
             }

@@ -9,19 +9,21 @@ namespace _2021_dotnet_g_28.Models.Domain
     public class Company 
     {
         #region properties
-
+        public int CompanyNr { get; set; }
         public String CompanyAdress { get; set; }
         public String CompanyName { get; set; }
-        public int CompanyNr { get; set; }
         public DateTime CustomerInitDate { get; set; }
         public ICollection<Contract> Contracts { get; set; }
         public ICollection<ContactPerson> ContactPersons { get; set; }
+
+        public ICollection<Ticket> Tickets { get; set; }
         //public ICollection<String> TelNrs { get; set; }
         #endregion
 
         public Company()
         {
             Contracts = new List<Contract>();
+            Tickets = new List<Ticket>();
         }
         #region methods
         public void AddContract(Contract contract)
@@ -45,9 +47,9 @@ namespace _2021_dotnet_g_28.Models.Domain
             throw new NotImplementedException();
         }
 
-        public void CreateTicket()
+        public void AddTicket(Ticket ticket)
         {
-            throw new NotImplementedException();
+            Tickets.Add(ticket);
         }
 
         public void EndTicket()
