@@ -8,6 +8,7 @@ namespace _2021_dotnet_g_28.Models.Domain
    public interface IFaqRepository
     {
         IEnumerable<Faq> GetAll();
+        IEnumerable<Faq> GetBySearchstring(string searchstring);
     }
 
    

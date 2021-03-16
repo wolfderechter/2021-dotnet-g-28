@@ -14,13 +14,22 @@ namespace _2021_dotnet_g_28.Controllers
         public FaqController(IFaqRepository faqRepository)
         {
             _faqRepository = faqRepository;
+
         }
         public async Task<IActionResult> Index(string searchstring)
         {
-        FaqIndexViewModel model = new FaqIndexViewModel
+            ViewData["CurrentFilter"] = searchstring;
+            var faqs = _faqRepository.GetAll();
+            FaqIndexViewModel model = new FaqIndexViewModel();
+        
+            if(!String.IsNullOrEmpty(searchstring))
             {
-                Faqs = _faqRepository.GetAll()
-            };
+                model.Faqs = _faqRepository.GetBySearchstring(searchstring);
+            } else
+            {
+                model.Faqs = _faqRepository.GetAll();
+            }
+
             return View(model);
         }
     }

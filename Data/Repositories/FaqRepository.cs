@@ -23,6 +23,9 @@ namespace _2021_dotnet_g_28.Data.Repositories
             return _faqs.OrderBy(c => c.Id).ToList();
         }
 
-      
+        public IEnumerable<Faq> GetBySearchstring(string searchstring)
+        {
+            return _faqs.Where(f => f.Problem.Contains(searchstring));
+        }
     }
 }
