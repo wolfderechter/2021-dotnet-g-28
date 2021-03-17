@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2021-dotnet-g-28", "2021-dotnet-g-28.csproj", "{8A72018F-A783-449E-B338-D91FC08D483A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2021-dotnet-g-28.Tests", "..\2021-dotnet-g-28.test\2021-dotnet-g-28.Tests.csproj", "{80FDDC3B-58FD-42AB-97E1-0314E1366A67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2021-dotnet-g-28.Tests", "2021-dotnet-g-28.Tests\2021-dotnet-g-28.Tests.csproj", "{2745496B-358C-4348-A85B-D89145126087}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{8A72018F-A783-449E-B338-D91FC08D483A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A72018F-A783-449E-B338-D91FC08D483A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A72018F-A783-449E-B338-D91FC08D483A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80FDDC3B-58FD-42AB-97E1-0314E1366A67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80FDDC3B-58FD-42AB-97E1-0314E1366A67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80FDDC3B-58FD-42AB-97E1-0314E1366A67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80FDDC3B-58FD-42AB-97E1-0314E1366A67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2745496B-358C-4348-A85B-D89145126087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2745496B-358C-4348-A85B-D89145126087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2745496B-358C-4348-A85B-D89145126087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2745496B-358C-4348-A85B-D89145126087}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
