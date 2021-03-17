@@ -83,8 +83,11 @@ namespace _2021_dotnet_g_28.Data
                 Faq faq4 = new Faq() { Problem = "HTTP ERROR 404 (NOT FOUND)", Solution = "1. Refresh page. <br> 2. Check the URL for errors. <br> 3. Clear your browser’s cache and cookies. If you don’t know how to do this, read these instructions! <br> 4. Scan your computer for malware, here’s how. <br> 5. Contact the Webmaster and let them know about the issue." };
                 Faq faq5 = new Faq() { Problem = "SMART Hard Disk Error 301", Solution = "this error indicates that the hard disk or solid-state drive has already experienced a failure, or will soon. This error message will appear when you turn on the device and can cause serious damage if not treated immediately. It could be the result of a broken controller chip, failed installation of an application, a power surge,  or malware. Sometimes, a user can change the BIOS sequence or attempt a reboot, but if the drive has a physical error, then it is best not to run the computer to avoid further damage." };
 
-                HansAnders.AddTicket(ticket1);
+                //make notification
+                Notification notification = new Notification() { Action = "Reaction", TicketName = "Water Damage" };
+                contactPerson1.Notifications = new List<Notification>() { notification };
 
+                HansAnders.AddTicket(ticket1);
                 HansAnders.AddTicket(ticket2);
                 HansAnders.AddTicket(ticket3);
                 DovyKeukens.AddTicket(ticket4);
