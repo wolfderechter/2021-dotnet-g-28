@@ -15,11 +15,12 @@ namespace _2021_dotnet_g_28.Models.Domain
         public String LastName { get; set; }
         public Company Company { get; set; }
         public IdentityUser User { get; set; }
+        public IEnumerable<Notification> Notifications { get; set; }
         #endregion
 
         public ContactPerson()
         {
-           
+            Notifications = new List<Notification>();
         }
 
     }
