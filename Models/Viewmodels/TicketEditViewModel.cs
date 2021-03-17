@@ -19,7 +19,7 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
         [Required(ErrorMessage = "The type is required")]
         public TicketEnum.type Type { get; set; }
         public string PicturePath { get; set; }
-        public IFormFile Attachment { get; set; }
+        public IFormFile[] Attachments { get; set; }
 
 
         public TicketEditViewModel()

@@ -7,6 +7,7 @@ using _2021_dotnet_g_28.Models.Domain;
 using _2021_dotnet_g_28.Models.Viewmodels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -102,16 +103,21 @@ namespace _2021_dotnet_g_28.Controllers
                 {
                     var user = await _userManager.GetUserAsync(User);
                     ContactPerson contact = _contactPersonRepository.getById(user.Id);
+                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.status.Created);
 
-                    string uniqueFileName = null;
-                    if (ticketEditViewModel.Attachment != null)
+                    if (ticketEditViewModel.Attachments != null)
                     {
-                        string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "bijlagen");
-                        uniqueFileName = Guid.NewGuid().ToString() + "_" + ticketEditViewModel.Attachment.FileName;
-                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                        ticketEditViewModel.Attachment.CopyTo(new FileStream(filePath, FileMode.Create));
+                        ticket.Attachments = new List<string>();
+                        foreach(IFormFile attachm in ticketEditViewModel.Attachments)
+                        {
+                            string uniqueFileName = Guid.NewGuid().ToString() + "_" + attachm.FileName;
+                            var path = Path.Combine(_hostingEnvironment.WebRootPath, "attachments", uniqueFileName);
+                            var stream = new FileStream(path, FileMode.Create);
+                            attachm.CopyTo(stream);
+                            ticket.Attachments.Add(uniqueFileName);
+                        }
                     }
-                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title/*, ticketEditViewModel.Remark*/, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.status.Created, uniqueFileName);
+
                     _ticketRepository.Add(ticket);
                     contact.AddTicket(ticket);
                     _ticketRepository.SaveChanges();
@@ -159,16 +165,22 @@ namespace _2021_dotnet_g_28.Controllers
             {
                 try
                 {
-                    string uniqueFileName = null;
-                    if (ticketEditViewModel.Attachment != null)
-                    {
-                        string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "bijlagen");
-                        uniqueFileName = Guid.NewGuid().ToString() + "_" + ticketEditViewModel.Attachment.FileName;
-                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                        ticketEditViewModel.Attachment.CopyTo(new FileStream(filePath, FileMode.Create));
-                    }
                     Ticket ticket = _ticketRepository.GetBy(ticketNr);
-                    ticket.EditTicket(ticketEditViewModel.Title, /*ticketEditViewModel.Remark,*/ ticketEditViewModel.Description, ticketEditViewModel.Type, uniqueFileName);
+
+                    if (ticketEditViewModel.Attachments != null)
+                    {
+                        ticket.Attachments = new List<string>();
+                        foreach (IFormFile attachm in ticketEditViewModel.Attachments)
+                        {
+                            string uniqueFileName = Guid.NewGuid().ToString() + "_" + attachm.FileName;
+                            var path = Path.Combine(_hostingEnvironment.WebRootPath, "attachments", uniqueFileName);
+                            var stream = new FileStream(path, FileMode.Create);
+                            attachm.CopyTo(stream);
+                            ticket.Attachments.Add(uniqueFileName);
+                        }
+                    }
+
+                    ticket.EditTicket(ticketEditViewModel.Title, ticketEditViewModel.Description, ticketEditViewModel.Type);
                     _ticketRepository.SaveChanges();
                     TempData["message"] = $"You successfully updated the ticket.";
                 }

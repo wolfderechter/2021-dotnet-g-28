@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\bijlagen\" />
+    <Folder Include="wwwroot\attachments\" />
   </ItemGroup>
 
 
