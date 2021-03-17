@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"  asp-controller="Contract" asp-action="Index">
+                <a class="nav-link" asp-controller="Contract" asp-action="Index">
                     <i class="fas fa-copy fa-fw"></i>
                     <span class="link-text">Contracts</span>
                 </a>
@@ -42,6 +42,7 @@
                     <span class="link-text">FAQ</span>
                 </a>
             </li>
+            <li><p>@ViewData["GebruikersNaam"]</p></li>
             <li class="nav-item">
                 <a class="nav-link" asp-controller="Account" asp-action="Logout">
                     <i class="fas fa-sign-out-alt"></i>

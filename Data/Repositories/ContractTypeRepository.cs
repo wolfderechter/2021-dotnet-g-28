@@ -15,7 +15,7 @@ namespace _2021_dotnet_g_28.Data.Repositories
         public ContractTypeRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _contractTypes = dbContext.ContractType;
+            _contractTypes = dbContext.ContractTypes;
         }
 
         public IEnumerable<ContractType> GetAllActive()

@@ -15,7 +15,7 @@ namespace _2021_dotnet_g_28.Data.Repositories
         public FaqRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _faqs = _dbContext.Faq;
+            _faqs = _dbContext.Faqs;
         }
 
         public IEnumerable<Faq> GetAll()

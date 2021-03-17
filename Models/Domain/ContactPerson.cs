@@ -14,22 +14,13 @@ namespace _2021_dotnet_g_28.Models.Domain
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public Company Company { get; set; }
-        public ICollection<Ticket> Tickets { get; set; }
         public IdentityUser User { get; set; }
         #endregion
 
         public ContactPerson()
         {
-            Tickets = new HashSet<Ticket>();
            
         }
-
-        public void AddTicket(Ticket ticket)
-        {
-            Tickets.Add(ticket);
-        }
-        
-     
 
     }
 }
