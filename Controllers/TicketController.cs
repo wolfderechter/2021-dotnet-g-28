@@ -55,6 +55,7 @@ namespace _2021_dotnet_g_28.Controllers
                 ContactPerson contactPerson = _contactPersonRepository.getById(user.Id);
                 ViewData["GebruikersNaam"] = contactPerson.FirstName + " " + contactPerson.LastName;
                 model.Tickets = _ticketRepository.GetByContactPersonId(contactPerson.Id);
+                ViewData["NotificationCount"] = contactPerson.Notifications.Where(n=>!n.IsRead).Count();
             }
            
             model.CheckBoxItems = new List<StatusModelTicket>();
