@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container-fluid">
+    <div class="text-center">
+        <iframe id="iframe" width="1140" height="541" src="" frameborder="0" allowFullScreen="true"></iframe>
+    </div>
+</div>
+
+
+<script>
+    window.onload = function () {
+        var url = "https://app.powerbi.com/reportEmbed?reportId=43768677-279b-4094-acdc-cf6a7cef8dd1&autoAuth=true&ctid=5cf7310e-091a-4bc5-acd7-26c721d4cccd&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLW5vcnRoLWV1cm9wZS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D";
+        var newUrl = url + "&$filter=Tickets/CompanyNr1 eq @ViewData["CompanyNr"]";
+        var iframe = document.getElementById("iframe");
+        iframe.src = newUrl;
+    };
+</script>

@@ -9,7 +9,7 @@ namespace _2021_dotnet_g_28.Models.Domain
     public class TicketEnum
     {
 
-        public enum status
+        public enum Status
         {
             Created = 1,
             [Display(Name = "In progress")]
@@ -27,7 +27,7 @@ namespace _2021_dotnet_g_28.Models.Domain
 
         }
 
-        public enum type
+        public enum Type
         {
 
             [Display(Name = "Production impacted, within 2h a solution")]

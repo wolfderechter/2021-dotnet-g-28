@@ -58,14 +58,14 @@ namespace _2021_dotnet_g_28.Controllers
             }
            
             model.CheckBoxItems = new List<StatusModelTicket>();
-            foreach (TicketEnum.status ticketStatus in Enum.GetValues(typeof(TicketEnum.status)))
+            foreach (TicketEnum.Status ticketStatus in Enum.GetValues(typeof(TicketEnum.Status)))
             {
                 model.CheckBoxItems.Add(new StatusModelTicket() { Status = ticketStatus, IsSelected = false });
             }
-            model.CheckBoxItems.SingleOrDefault(c => c.Status == TicketEnum.status.Created).IsSelected = true;
-            model.CheckBoxItems.SingleOrDefault(c => c.Status == TicketEnum.status.InProgress).IsSelected = true;
+            model.CheckBoxItems.SingleOrDefault(c => c.Status == TicketEnum.Status.Created).IsSelected = true;
+            model.CheckBoxItems.SingleOrDefault(c => c.Status == TicketEnum.Status.InProgress).IsSelected = true;
             //insert list of duurcheckbox items into model
-            model.Tickets = _ticketRepository.GetByStatus(new List<TicketEnum.status> { TicketEnum.status.Created, TicketEnum.status.InProgress });
+            model.Tickets = _ticketRepository.GetByStatus(new List<TicketEnum.Status> { TicketEnum.Status.Created, TicketEnum.Status.InProgress });
 
             return View(model);
         }
@@ -76,7 +76,7 @@ namespace _2021_dotnet_g_28.Controllers
             //getting contactperson from the signedin user
             ContactPerson contactPerson = await GetLoggedInContactPerson();
             //getting the selected statusses/
-            List<TicketEnum.status> selectedStatusses = model.CheckBoxItems.Where(c => c.IsSelected).Select(c => c.Status).ToList();
+            List<TicketEnum.Status> selectedStatusses = model.CheckBoxItems.Where(c => c.IsSelected).Select(c => c.Status).ToList();
            
             //getting contracts connected to statusses
             model.Tickets = _ticketRepository.GetByStatus(selectedStatusses);
@@ -125,7 +125,7 @@ namespace _2021_dotnet_g_28.Controllers
                         string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                         ticketEditViewModel.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
                     }
-                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title, ticketEditViewModel.Remark, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.status.Created,uniqueFileName);
+                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title, ticketEditViewModel.Remark, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.Status.Created,uniqueFileName);
                     _ticketRepository.Add(ticket);
                     company.AddTicket(ticket);
                     _ticketRepository.SaveChanges();
@@ -183,7 +183,7 @@ namespace _2021_dotnet_g_28.Controllers
             Ticket ticket = _ticketRepository.GetBy(ticketNr);
             if (ticket == null)
                 return NotFound();
-            ticket.Status = TicketEnum.status.Cancelled;
+            ticket.Status = TicketEnum.Status.Cancelled;
             _ticketRepository.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
@@ -203,8 +203,8 @@ namespace _2021_dotnet_g_28.Controllers
 
         private SelectList TypeTickets()
         {
-            var typeTickets = new List<TicketEnum.type>();
-            foreach (TicketEnum.type typeTicket in Enum.GetValues(typeof(TicketEnum.type)))
+            var typeTickets = new List<TicketEnum.Type>();
+            foreach (TicketEnum.Type typeTicket in Enum.GetValues(typeof(TicketEnum.Type)))
             {
                 typeTickets.Add(typeTicket);
             }

@@ -48,7 +48,7 @@ namespace _2021_dotnet_g_28.Data.Repositories
             return _tickets.Include(t=>t.Reactions).Where(t => t.CompanyNr == companyNr).ToList();
         }
 
-        public IEnumerable<Ticket> GetByStatus(IEnumerable<TicketEnum.status> statusses)
+        public IEnumerable<Ticket> GetByStatus(IEnumerable<TicketEnum.Status> statusses)
         {
             return _tickets.Include(t=>t.Reactions).Where(c => statusses.Contains(c.Status)).ToList();
         }

@@ -7,7 +7,7 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
 {
     public class StatusModelTicket
     {
-        public Domain.TicketEnum.status Status { get; set; }
+        public Domain.TicketEnum.Status Status { get; set; }
         public bool IsSelected { get; set; }
     }
 }

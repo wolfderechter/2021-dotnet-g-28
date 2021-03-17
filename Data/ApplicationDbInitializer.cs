@@ -25,7 +25,8 @@ namespace _2021_dotnet_g_28.Data
             if (_dbContext.Database.EnsureCreated())
             { 
                 //makes company
-                Company company = new Company() { CompanyName = "HansAnders", CompanyAdress = "grove Street", CustomerInitDate =DateTime.Now};
+                Company HansAnders = new Company() { CompanyName = "HansAnders", CompanyAdress = "grove Street", CustomerInitDate =DateTime.Now};
+                Company DovyKeukens = new Company() { CompanyName = "DovyKeukens", CompanyAdress = "Ballstreet", CustomerInitDate = DateTime.Now };
                 //makes ContractType
                 ContractType contractType = new ContractType() { Name = "BusinessHours E-Mail" ,IsActive = true, CreationMethod = ContractTypeEnum.CreationMethod.Email,MaxResponseTime=24,IsOutsideBusinessHours=false,Price=150, MinDuration = 1 };
                 ContractType contractType2 = new ContractType() { Name = "Weekend E-Mail", IsActive = true, CreationMethod = ContractTypeEnum.CreationMethod.Email, MaxResponseTime = 48,IsOutsideBusinessHours=true, Price = 2000, MinDuration = 2 };
@@ -34,24 +35,26 @@ namespace _2021_dotnet_g_28.Data
                 ContractType contractType5 = new ContractType() { Name = "BusinessHours App", IsActive = true,CreationMethod=ContractTypeEnum.CreationMethod.app, MaxResponseTime = 12, IsOutsideBusinessHours = false, Price = 2800, MinDuration = 1};
                 ContractType contractType6 = new ContractType() { Name = "Weekend App", IsActive = true, CreationMethod = ContractTypeEnum.CreationMethod.app, MaxResponseTime = 6, IsOutsideBusinessHours = true, Price = 3000,MinDuration=2 };
                 //makes contracts
-                Contract contractRunning1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Running, Type= contractType};
-                Contract contractRunning2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType2 };
-                Contract contractInProgress1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Cancelled, Type = contractType3 };
-                Contract contractInProgress2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Cancelled, Type = contractType4 };
-                Contract contractEnded1 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Ended, Type = contractType5 };
-                Contract contractEnded2 = new Contract() { Company = company, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType6 };
+                Contract contractRunning1 = new Contract() { Company = HansAnders, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Running, Type= contractType};
+                Contract contractRunning2 = new Contract() { Company = HansAnders, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType2 };
+                Contract contractInProgress1 = new Contract() { Company = HansAnders, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Cancelled, Type = contractType3 };
+                Contract contractInProgress2 = new Contract() { Company = HansAnders, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Cancelled, Type = contractType4 };
+                Contract contractEnded1 = new Contract() { Company = HansAnders, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Ended, Type = contractType5 };
+                Contract contractEnded2 = new Contract() { Company = HansAnders, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType6 };
 
                 //adds contracts to company
                 List<Contract> contracts = new List<Contract> { contractRunning1, contractRunning2, contractInProgress1, contractInProgress2, contractEnded1, contractEnded2 };
-                company.Contracts = contracts;
+                HansAnders.Contracts = contracts;
+                DovyKeukens.Contracts = contracts;
 
                 //makes contactpeople
-                _dbContext.Companies.Add(company);
+                _dbContext.Companies.AddRange(HansAnders, DovyKeukens);
+
                 //makes contactpersons and adds to company
                 string Username = "NathanT";
                 IdentityUser user = new IdentityUser { UserName = Username };
                 await _userManager.CreateAsync(user, "Paswoord_1");
-                ContactPerson contactPerson1 = new ContactPerson { User = user, Company = company,FirstName="Nathan",LastName="Tersago"};
+                ContactPerson contactPerson1 = new ContactPerson { User = user, Company = HansAnders, FirstName="Nathan",LastName="Tersago"};
                 await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Customer"));
                 Username = "StefB";
                 IdentityUser user2 = new IdentityUser { UserName = Username };
@@ -61,12 +64,14 @@ namespace _2021_dotnet_g_28.Data
                 //makes tickets
                 
                 
-                Ticket ticket1 = new Ticket() { DateCreation = DateTime.Now, Title = "Malfunction in main line ", Status = TicketEnum.status.Created, Type = TicketEnum.type.ProductionStopped, Description = "The factory stopped producing because of a fault in the main line ",Remark="Very Urgent"};
-                Ticket ticket2 = new Ticket() { DateCreation = DateTime.Now, Title = "Water damage ", Status = TicketEnum.status.Created, Type = TicketEnum.type.ProductionWillStop, Description = "We had an water leak and everything is soaked" };
-                Ticket ticket3 = new Ticket() { DateCreation = DateTime.Now, Title = "Ip error shown on tablet", Status = TicketEnum.status.InProgress, Type = TicketEnum.type.ProductionWillStop, Description = "The scanners show an Ip error when trying to scan merchandise " };
-                Ticket ticket4 = new Ticket() { DateCreation = DateTime.Now, Title = "Server shutdown", Status = TicketEnum.status.ResponseReceived, Type = TicketEnum.type.ProductionStopped, Description = "Unable to connect to server message shown every time we try and access the company network" };
-                Ticket ticket6 = new Ticket() { DateCreation = DateTime.Now, Title = "Computer freeze.", Status = TicketEnum.status.Closed, Type = TicketEnum.type.NoImpact, Description = "Every time I try to play flappy bird on the company computer the pc freezes and stops working for a few seconds" };
-                
+                Ticket ticket1 = new Ticket() { DateCreation = DateTime.Now.AddDays(-2), Title = "Malfunction in main line ", Status = TicketEnum.Status.Created, Type = TicketEnum.Type.ProductionStopped, Description = "The factory stopped producing because of a fault in the main line ",Remark="Very Urgent"};
+                Ticket ticket2 = new Ticket() { DateCreation = DateTime.Now.AddDays(-1), Title = "Water damage ", Status = TicketEnum.Status.Created, Type = TicketEnum.Type.ProductionWillStop, Description = "We had an water leak and everything is soaked" };
+                Ticket ticket3 = new Ticket() { DateCreation = DateTime.Now.AddDays(0), Title = "Ip error shown on tablet", Status = TicketEnum.Status.InProgress, Type = TicketEnum.Type.ProductionWillStop, Description = "The scanners show an Ip error when trying to scan merchandise " };
+                Ticket ticket4 = new Ticket() { DateCreation = DateTime.Now.AddDays(+1), Title = "Server shutdown", Status = TicketEnum.Status.ResponseReceived, Type = TicketEnum.Type.ProductionStopped, Description = "Unable to connect to server message shown every time we try and access the company network" };
+                Ticket ticket6 = new Ticket() { DateCreation = DateTime.Now.AddDays(+2), Title = "Computer freeze.", Status = TicketEnum.Status.Closed, Type = TicketEnum.Type.NoImpact, Description = "Every time I try to play flappy bird on the company computer the pc freezes and stops working for a few seconds" };
+                Ticket ticket7 = new Ticket() { DateCreation = DateTime.Now.AddDays(0), Title = "Computer freeze.", Status = TicketEnum.Status.Closed, Type = TicketEnum.Type.NoImpact, Description = "Every time I try to play flappy bird on the company computer the pc freezes and stops working for a few seconds" };
+
+
                 Reaction reaction1 = new Reaction() { IsSolution = false, ReactionSup = true, NameUserReaction = "Rajish Abdul", Text = "is there any sign of malfunction , like a specific area." };
                 Reaction reaction2 = new Reaction() { IsSolution = false, ReactionSup = false, NameUserReaction = "Nathan Tersago", Text = "it get's stuck around the compression machine" };
                 Reaction reaction3 = new Reaction() { IsSolution = true, ReactionSup = true, NameUserReaction = "Rajish Abdul", Text = "We will send the technician over." };
@@ -78,12 +83,13 @@ namespace _2021_dotnet_g_28.Data
                 Faq faq4 = new Faq() { Problem = "HTTP ERROR 404 (NOT FOUND)", Solution = "1. Refresh page. <br> 2. Check the URL for errors. <br> 3. Clear your browser’s cache and cookies. If you don’t know how to do this, read these instructions! <br> 4. Scan your computer for malware, here’s how. <br> 5. Contact the Webmaster and let them know about the issue." };
                 Faq faq5 = new Faq() { Problem = "SMART Hard Disk Error 301", Solution = "this error indicates that the hard disk or solid-state drive has already experienced a failure, or will soon. This error message will appear when you turn on the device and can cause serious damage if not treated immediately. It could be the result of a broken controller chip, failed installation of an application, a power surge,  or malware. Sometimes, a user can change the BIOS sequence or attempt a reboot, but if the drive has a physical error, then it is best not to run the computer to avoid further damage." };
 
-                company.AddTicket(ticket1);
+                HansAnders.AddTicket(ticket1);
 
-                company.AddTicket(ticket2);
-                company.AddTicket(ticket3);
-                company.AddTicket(ticket4);
-                company.AddTicket(ticket6);
+                HansAnders.AddTicket(ticket2);
+                HansAnders.AddTicket(ticket3);
+                DovyKeukens.AddTicket(ticket4);
+                DovyKeukens.AddTicket(ticket6);
+                DovyKeukens.AddTicket(ticket7);
                 _dbContext.Faqs.AddRange(faq1, faq2, faq3, faq4, faq5);
 
                 _dbContext.ContactPeople.Add(contactPerson1);

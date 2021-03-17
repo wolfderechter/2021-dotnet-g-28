@@ -12,7 +12,7 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
         public string Title { get; set; }
         public string Remark { get; set; }
         public string Description { get; set; }
-        public TicketEnum.type Type { get; set; }
+        public TicketEnum.Type Type { get; set; }
         public string PicturePath { get; set; }
         public IFormFile Picture { get; set; }
         public int CompanyNr { get; set; }

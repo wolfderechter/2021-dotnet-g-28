@@ -40,7 +40,7 @@
         <div id="accordion" class="col-xl-9 pr-0">
             @foreach (var item in Model.Tickets)
             {
-                <div class="card @(item.Type == TicketEnum.type.NoImpact ? "border-no-impact" : item.Type == TicketEnum.type.ProductionStopped ? "border-production-stopped" : item.Type == TicketEnum.type.ProductionWillStop ? "border-production-will-stop" : "") mr-3">
+                <div class="card @(item.Type == TicketEnum.Type.NoImpact ? "border-no-impact" : item.Type == TicketEnum.Type.ProductionStopped ? "border-production-stopped" : item.Type == TicketEnum.Type.ProductionWillStop ? "border-production-will-stop" : "") mr-3">
                     <div class="card-header" id="heading@(item.TicketNr)">
                         <h5 class="mb-0">
                             <button class="btn btn-link w-100 text-decoration-none text-dark" data-toggle="collapse" data-target="#collapse@(item.TicketNr)" aria-expanded="true" aria-controls="collapse@(item.TicketNr)">
