@@ -35,17 +35,18 @@ namespace _2021_dotnet_g_28.Data
                 ContractType contractType5 = new ContractType() { Name = "BusinessHours App", IsActive = true,CreationMethod=ContractTypeEnum.CreationMethod.app, MaxResponseTime = 12, IsOutsideBusinessHours = false, Price = 2800, MinDuration = 1};
                 ContractType contractType6 = new ContractType() { Name = "Weekend App", IsActive = true, CreationMethod = ContractTypeEnum.CreationMethod.app, MaxResponseTime = 6, IsOutsideBusinessHours = true, Price = 3000,MinDuration=2 };
                 //makes contracts
-                Contract contractRunning1 = new Contract() { Company = HansAnders, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Running, Type= contractType};
-                Contract contractRunning2 = new Contract() { Company = HansAnders, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType2 };
-                Contract contractInProgress1 = new Contract() { Company = HansAnders, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Cancelled, Type = contractType3 };
-                Contract contractInProgress2 = new Contract() { Company = HansAnders, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Cancelled, Type = contractType4 };
-                Contract contractEnded1 = new Contract() { Company = HansAnders, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Ended, Type = contractType5 };
-                Contract contractEnded2 = new Contract() { Company = HansAnders, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType6 };
-
+                Contract contractRunning1 = new Contract() {  StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Running, Type= contractType};
+                Contract contractRunning2 = new Contract() { StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType2 };
+                Contract contractInProgress1 = new Contract() {  StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Cancelled, Type = contractType3 };
+                Contract contractInProgress2 = new Contract() {  StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Cancelled, Type = contractType4 };
+                Contract contractEnded1 = new Contract() {  StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(3), Status = ContractEnum.status.Ended, Type = contractType5 };
+                Contract contractEnded2 = new Contract() {  StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType6 };
+                Contract contractDovy = new Contract() { StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(2), Status = ContractEnum.status.Ended, Type = contractType6 };
                 //adds contracts to company
                 List<Contract> contracts = new List<Contract> { contractRunning1, contractRunning2, contractInProgress1, contractInProgress2, contractEnded1, contractEnded2 };
                 HansAnders.Contracts = contracts;
-                DovyKeukens.Contracts = contracts;
+                
+                DovyKeukens.Contracts.Add(contractDovy);
 
                 //makes contactpeople
                 _dbContext.Companies.AddRange(HansAnders, DovyKeukens);

@@ -14,7 +14,7 @@
 
     <!-- Vertical navbar -->
     <nav class="navbar" id="navbar">
-        
+
         <ul class="navbar-nav">
             <li class="logo">
                 <img src="~/img/logo-actemuim.png" id="img1" />
@@ -59,13 +59,13 @@
                 </li>
 
 
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Account" asp-action="Logout">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span class="link-text">Sign out</span>
-                    </a>
-                </li>
-            </ul>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Account" asp-action="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="link-text">Sign out</span>
+                </a>
+            </li>
+        </ul>
     </nav>
 
     <main>
@@ -82,8 +82,28 @@
     <!--End Vertical Navbar-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 
 </body>
 </html>
+
+<script>
+    $(document).ready(function () {
+        var down = false;
+        $('#bell').click(function (e) {
+            var color = $(this).text();
+            if (down) {
+                $('#box').css('height', '0px');
+                $('#box').css('opacity', '0');
+                down = false;
+            } else {
+                $('#box').css('height', 'auto');
+                $('#box').css('opacity', '1');
+                down = true;
+                console.log("dropped");
+
+            }
+        });
+    });
+</script>
