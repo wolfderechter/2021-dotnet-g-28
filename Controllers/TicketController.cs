@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MimeKit;
 
 namespace _2021_dotnet_g_28.Controllers
 {
@@ -113,8 +114,34 @@ namespace _2021_dotnet_g_28.Controllers
                             string uniqueFileName = Guid.NewGuid().ToString() + "_" + attachm.FileName;
                             var path = Path.Combine(_hostingEnvironment.WebRootPath, "attachments", uniqueFileName);
                             var stream = new FileStream(path, FileMode.Create);
+                            var supportedTypes = new[] { "txt", "doc", "docx", "pdf", "jpg", "jpeg", "png" };
+                            //filetypes controle
+                            if (!supportedTypes.Contains(attachm.FileName.Substring(attachm.FileName.LastIndexOf(".") + 1)))
+                            {
+                                TempData["errorMessageType"] = "Acceptable filetypes is pdf/png/jpg/jpeg/";
+                                ViewData["IsEdit"] = false;
+                                return View(nameof(Edit), ticketEditViewModel);
+
+                            }
+                            //amount of files controle
+                            if (ticketEditViewModel.Attachments.Count() > 5)
+                            {
+                                TempData["errorMessageAmount"] = "Max amount of attachments is 5!";
+                                ViewData["IsEdit"] = false;
+                                return View(nameof(Edit), ticketEditViewModel);
+
+                            }
+                            //file size controleren
+                            if (attachm.Length > 5242880)
+                            {
+                                TempData["errorMessageSize"] = "Max filesize is 5MB!";
+                                ViewData["IsEdit"] = false;
+                                return View(nameof(Edit), ticketEditViewModel);
+
+                            }
                             attachm.CopyTo(stream);
                             ticket.Attachments.Add(uniqueFileName);
+                            
                         }
                     }
 
@@ -175,6 +202,31 @@ namespace _2021_dotnet_g_28.Controllers
                             string uniqueFileName = Guid.NewGuid().ToString() + "_" + attachm.FileName;
                             var path = Path.Combine(_hostingEnvironment.WebRootPath, "attachments", uniqueFileName);
                             var stream = new FileStream(path, FileMode.Create);
+                            var supportedTypes = new[] { "txt", "doc", "docx", "pdf", "jpg", "jpeg", "png" };
+                            //filetypes controle
+                            if (!supportedTypes.Contains(attachm.FileName.Substring(attachm.FileName.LastIndexOf(".") + 1)))
+                            {
+                                TempData["errorMessageType"] = "Acceptable filetypes is pdf/png/jpg/jpeg/";
+                                ViewData["IsEdit"] = false;
+                                return View(nameof(Edit), ticketEditViewModel);
+
+                            }
+                            //amount of files controle
+                            if (ticketEditViewModel.Attachments.Count() > 5)
+                            {
+                                TempData["errorMessageAmount"] = "Max amount of attachments is 5!";
+                                ViewData["IsEdit"] = false;
+                                return View(nameof(Edit), ticketEditViewModel);
+
+                            }
+                            //file size controleren
+                            if (attachm.Length > 5242880)
+                            {
+                                TempData["errorMessageSize"] = "Max filesize is 5MB!";
+                                ViewData["IsEdit"] = false;
+                                return View(nameof(Edit), ticketEditViewModel);
+
+                            }
                             attachm.CopyTo(stream);
                             ticket.Attachments.Add(uniqueFileName);
                         }
@@ -230,5 +282,14 @@ namespace _2021_dotnet_g_28.Controllers
             return RedirectToAction(nameof(Index), model);
         }
 
+        public IActionResult Download(TicketEditViewModel ticketEditViewModel, string filename) {
+            //byte[] fileBytes = System.IO.File.ReadAllBytes(Path.Combine(_hostingEnvironment.WebRootPath, "attachments", filename));
+            var filepath = Path.Combine(_hostingEnvironment.WebRootPath, "attachments", filename);
+            //var vpath = filepath.Replace(filepath, "~/attachments").Replace(@"\", "/");
+            //return File(vpath, "image/jpg", filename);
+
+            return PhysicalFile(filepath, MimeTypes.GetMimeType(filepath), filename);
+
+        }
     }
 }

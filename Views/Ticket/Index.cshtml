@@ -83,15 +83,16 @@
                 <p>Attachment: </p>
                                     @foreach (var attachm in @item.Attachments)
                                     {
-                                        @if (attachm.Substring(attachm.LastIndexOf('.') + 1).ToLower() == "pdf")
-                                        {
+                                        @*@if (attachm.Substring(attachm.LastIndexOf('.') + 1).ToLower() == "pdf")
+                                        {-->
                                             <iframe src="~/attachments/@attachm" width="600" height="800"></iframe>
 
-                                        } else if(attachm.Substring(attachm.LastIndexOf('.') + 1).ToLower() == "jpg" || attachm.Substring(attachm.LastIndexOf('.') + 1).ToLower() == "png")
+                                        <!--} else if(attachm.Substring(attachm.LastIndexOf('.') + 1).ToLower() == "jpg" || attachm.Substring(attachm.LastIndexOf('.') + 1).ToLower() == "png")
                                         {
                                             <img src="~/attachments/@attachm" width="600"/>
-                                        }
-                                            <p>@attachm.Substring(attachm.IndexOf("_") + 1)</p>
+                                        }*@
+                                             <a asp-controller="Ticket" asp-action="Download" asp-route-filename="@attachm" >@attachm.Substring(attachm.IndexOf("_") + 1)</a> <br>
+                                            
                                     } 
                         } }
                 </div>
