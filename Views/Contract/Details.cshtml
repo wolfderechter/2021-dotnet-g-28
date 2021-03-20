@@ -1,7 +1,8 @@
 ﻿@model _2021_dotnet_g_28.Models.Domain.Contract
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Details Contract";
+    ViewData["Title"] = @Localizer["DetailsContract"];
 }
 
 
@@ -11,37 +12,38 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ContractNr)
+            @Localizer["ContractNr"]
+            
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ContractNr)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Duration)
+            @Localizer["Duration"]
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Duration)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDate)
+            @Localizer["EndDate"]
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model =>  model.EndDate)
+            @Html.DisplayFor(model => model.EndDate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Localizer["StartDate"]
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.StartDate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
+            @Localizer["Status"]
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Status)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Type.Name)
+            @Localizer["NameOfContract"]
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Type)
@@ -49,5 +51,5 @@
     </dl>
 </div>
 <div>
-    <a class="btn btn-primary" asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-action="Index">@Localizer["BackToList"]</a>
 </div>

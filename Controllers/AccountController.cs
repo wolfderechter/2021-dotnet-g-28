@@ -1,6 +1,7 @@
 ﻿using _2021_dotnet_g_28.Models.viewmodels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace _2021_dotnet_g_28.Controllers
     public class AccountController : Controller
     {
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly IHtmlLocalizer<AccountController> _localizor;
 
-        public AccountController(SignInManager<IdentityUser> signInm)
+        public AccountController(SignInManager<IdentityUser> signInm, IHtmlLocalizer<AccountController> localizor)
         {
             this.signInManager = signInm;
+            _localizor = localizor;
         }
         [HttpGet]
         public async Task<IActionResult> Logout()

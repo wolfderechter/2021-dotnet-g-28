@@ -12,11 +12,11 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
         [Required(ErrorMessage = "The title is required")]
         
         public string Title { get; set; }
-        // public string Remark { get; set; }
+       
         [Required]
         public string Description { get; set; }
         
-        [Required(ErrorMessage = "The type is required")]
+       // [Required(ErrorMessageResourceName = "rememberMe", ErrorMessageResourceType = typeof(Rec))]
         public TicketEnum.type Type { get; set; }
         public string PicturePath { get; set; }
         
@@ -32,7 +32,6 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
         {
             //attributes of ticket from ticket
             Title = ticket.Title;
-            //Remark = ticket.Remark;
             Description = ticket.Description;
             Type = ticket.Type;
         }

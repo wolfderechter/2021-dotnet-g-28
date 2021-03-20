@@ -4,18 +4,14 @@ using _2021_dotnet_g_28.Models.Domain;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace _2021_dotnet_g_28
 {
@@ -49,6 +45,23 @@ namespace _2021_dotnet_g_28
 
             });
 
+
+            #region snippet1
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+            #endregion
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[] { "en-US", "fr-Fr", "nl-NL" };
+                options.SetDefaultCulture(supportedCultures[0])
+                    .AddSupportedCultures(supportedCultures)
+                    .AddSupportedUICultures(supportedCultures);
+            });
+
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.Name = "ActemuimCookie";
@@ -61,7 +74,8 @@ namespace _2021_dotnet_g_28
                 options.ReturnUrlParameter =
                 CookieAuthenticationDefaults.ReturnUrlParameter;
             });
-            services.AddAuthorization(options => {
+            services.AddAuthorization(options =>
+            {
                 options.AddPolicy("SupportManager", policy => policy.RequireClaim(ClaimTypes.Role, "SupportManager"));
                 options.AddPolicy("Customer", policy => policy.RequireClaim(ClaimTypes.Role, "Customer"));
             });
@@ -78,7 +92,7 @@ namespace _2021_dotnet_g_28
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,ApplicationDbInitializer applicationDbInitializer)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbInitializer applicationDbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -94,11 +108,18 @@ namespace _2021_dotnet_g_28
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            var supportedCultures = new[] { "en-US", "fr-FR", "nl-NL" };
+            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+
+            app.UseRequestLocalization(localizationOptions);
+
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

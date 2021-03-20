@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MimeKit;
+using Microsoft.AspNetCore.Mvc.Localization;
 
 namespace _2021_dotnet_g_28.Controllers
 {
@@ -22,6 +23,7 @@ namespace _2021_dotnet_g_28.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IContactPersonRepository _contactPersonRepository;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly IHtmlLocalizer<TicketController> _localizor;
 
         public TicketController(ITicketRepository ticketRepository, UserManager<IdentityUser> userManager, IContactPersonRepository contactPersonRepository, IWebHostEnvironment hostingEnvironment)
         {

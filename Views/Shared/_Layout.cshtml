@@ -1,5 +1,7 @@
 ﻿@using _2021_dotnet_g_28.Models.viewmodels
 @using _2021_dotnet_g_28.Data.Repositories
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,33 +26,33 @@
             <li class="nav-item">
                 <a class="nav-link" asp-controller="Ticket" asp-action="Index">
                     <i class="fas fa-ticket-alt fa-fw"></i>
-                    <span class="link-text">Tickets</span>
+                    <span class="link-text">@Localizer["Tickers"]</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fas fa-chart-line fa-fw"></i>
-                    <span class="link-text">Statistics</span>
+                    <span class="link-text">@Localizer["Statistics"]</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" asp-controller="Contract" asp-action="Index">
                     <i class="fas fa-copy fa-fw"></i>
-                    <span class="link-text">Contracts</span>
-                </a>
+                    <span class="link-text">@Localizer["Contracts"]</span>
+</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" asp-controller="Faq" asp-action="Index">
                     <i class="fas fa-question-circle fa-fw"></i>
-                    <span class="link-text">FAQ</span>
+                    <span class="link-text">@Localizer["Faq"]</span>
                 </a>
             </li>
-            <li class="nav-item">   
+            <li class="nav-item">
             </li>
 
             <li class="nav-item">
                 <a class="nav-link">
-             
+
                     <span class="link-text">@User.Identity.Name</span>
                 </a>
             </li>
@@ -58,7 +60,7 @@
 
                 <a class="nav-link" asp-controller="Account" asp-action="Logout">
                     <i class="fas fa-sign-out-alt"></i>
-                    <span class="link-text">Sign out</span>
+                    <span class="link-text">@Localizer["SignOut"]</span>
                 </a>
             </li>
         </ul>

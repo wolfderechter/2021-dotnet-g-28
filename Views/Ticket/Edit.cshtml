@@ -1,7 +1,8 @@
 ﻿@using _2021_dotnet_g_28.Models.Viewmodels
 @using _2021_dotnet_g_28.Models.Domain
 @model TicketEditViewModel
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{ ViewData["Title"] = (bool)ViewData["IsEdit"] ? "Edit ticket" : "Create a new ticket"; }
 
@@ -20,7 +21,7 @@
                 <label asp-for="Type" class="control-label"></label>
                 <select asp-for="Type" class="form-control"
                         asp-items="Html.GetEnumSelectList<TicketEnum.type>()">
-                    <option value=""> Select type of ticket </option>
+                    <option value=""> @Localizer["SelectTypeOfTicket"] </option>
                 </select>
 
                 <span asp-validation-for="Type" class="text-danger"></span>
@@ -36,26 +37,26 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label>Attachments:</label>
+                <label>@Localizer["Attachment"]</label>
                 <div>
                     <input type="file" class="" name="Attachments" value="upload" asp-for="Attachments" multiple="multiple" accept=".pdf,.gif,.jpg,.jpeg,.png,.doc,.docx" />
                     @if (TempData["errorMessageSize"] != null)
                     {
-                    <script type="text/javascript">
-                        alert("Max filesize is 5MB!");
-                    </script>
+                <script type="text/javascript">
+                            alert(@Localizer["MaxFilesize"]);
+                </script>
                     }
                     @if (TempData["errorMessageType"] != null)
                     {
-                    <script type="text/javascript">
-                        alert("Acceptable filetypes is pdf/png/jpg/jpeg/");
-                    </script>
+                <script type="text/javascript">
+                            alert(@Localizer["Acceptable"]);
+                </script>
                     }
                     @if (TempData["errorMessageAmount"] != null)
                     {
-                    <script type="text/javascript">
-                        alert("Max amount of attachments is 5!");
-                    </script>
+                <script type="text/javascript">
+                            alert(@Localizer["MaxAmount"]);
+                </script>
                     }
                 </div>
 
@@ -66,11 +67,11 @@
             <div class="form-group">
                 @if ((bool)ViewData["IsEdit"])
                 {
-    <input type="submit" value="Edit ticket" class="btn btn-primary" /> }
-else
-{
-<input type="submit" value="Create ticket" class="btn btn-primary" />}
-                <a asp-action="Index">Cancel</a>
+                    <input type="submit" value="Edit ticket" class="btn btn-primary" /> }
+                else
+                {
+                    <input type="submit" value="Create ticket" class="btn btn-primary" />}
+            <a asp-action="Index">@Localizer["Cancel"]</a>
             </div>
             @*<script>
                     $(document).ready(function () {
