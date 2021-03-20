@@ -112,7 +112,7 @@
                                         <input type="hidden" name="model" value="@Model">
                                         <input type="hidden" name="ticketNr" value="@item.TicketNr">
                                         <button class="btn btn-primary col-md-2 col-sm-3" type="submit">React</button>
-
+                                        @Html.HiddenFor(m => m.CheckBoxItems)
                                     </div>
                                 </div>
 
