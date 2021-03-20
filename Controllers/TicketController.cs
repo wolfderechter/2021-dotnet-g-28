@@ -33,14 +33,11 @@ namespace _2021_dotnet_g_28.Controllers
             _companyRepository = companyRepository;
         }
   
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(TicketIndexViewModel model)
         {
-            TicketIndexViewModel model = new TicketIndexViewModel();
+            //TicketIndexViewModel model = new TicketIndexViewModel();
             //get signed in user
             var user = await _userManager.GetUserAsync(User);
-
-            
-            
 
             if (User.IsInRole("SupportManager"))
             {
@@ -58,33 +55,36 @@ namespace _2021_dotnet_g_28.Controllers
                 ViewData["Notifications"] = contactPerson.Notifications.Where(n=>!n.IsRead).ToList();
             }
            
-            model.CheckBoxItems = new List<StatusModelTicket>();
-            foreach (TicketEnum.Status ticketStatus in Enum.GetValues(typeof(TicketEnum.Status)))
+            //only do this when index gets called for first time
+            if(model.CheckBoxItems == null)
             {
-                model.CheckBoxItems.Add(new StatusModelTicket() { Status = ticketStatus, IsSelected = false });
+                //populate filter with checkbox options and setting 2 selected
+                model.CheckBoxItems = new List<StatusModelTicket>();
+                foreach (TicketEnum.Status ticketStatus in Enum.GetValues(typeof(TicketEnum.Status)))
+                {
+                    model.CheckBoxItems.Add(new StatusModelTicket() { Status = ticketStatus, IsSelected = false });
+                }
+                model.CheckBoxItems.SingleOrDefault(c => c.Status == TicketEnum.Status.Created).IsSelected = true;
+                model.CheckBoxItems.SingleOrDefault(c => c.Status == TicketEnum.Status.InProgress).IsSelected = true;
+
+                //insert tickets with status created and in progress
+                model.Tickets = _ticketRepository.GetByStatus(new List<TicketEnum.Status> { TicketEnum.Status.Created, TicketEnum.Status.InProgress });
+            } else
+            {          
+                //reload tickets with new selected status
+                List<TicketEnum.Status> statusList = new List<TicketEnum.Status>();
+                foreach (var item in model.CheckBoxItems)
+                {
+                    if (item.IsSelected)
+                    {
+                        statusList.Add(item.Status);
+                    }
+                }
+                model.Tickets = _ticketRepository.GetByStatus(statusList);
             }
-            model.CheckBoxItems.SingleOrDefault(c => c.Status == TicketEnum.Status.Created).IsSelected = true;
-            model.CheckBoxItems.SingleOrDefault(c => c.Status == TicketEnum.Status.InProgress).IsSelected = true;
-            //insert list of duurcheckbox items into model
-            model.Tickets = _ticketRepository.GetByStatus(new List<TicketEnum.Status> { TicketEnum.Status.Created, TicketEnum.Status.InProgress });
 
             return View(model);
         }
-
-        [HttpPost]
-        public async Task<ActionResult> Index(TicketIndexViewModel model)
-        {
-            //getting contactperson from the signedin user
-            ContactPerson contactPerson = await GetLoggedInContactPerson();
-            //getting the selected statusses/
-            List<TicketEnum.Status> selectedStatusses = model.CheckBoxItems.Where(c => c.IsSelected).Select(c => c.Status).ToList();
-           
-            //getting contracts connected to statusses
-            model.Tickets = _ticketRepository.GetByStatus(selectedStatusses);
-            return View(model);
-        }
-
-        
 
         public async Task<IActionResult> Create()
         {
