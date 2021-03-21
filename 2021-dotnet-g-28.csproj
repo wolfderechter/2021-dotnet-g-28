@@ -24,11 +24,7 @@
     <Folder Include="wwwroot\attachments\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\Models\Viewmodels\LoginViewModel.en-US.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
+ 
 
   
 

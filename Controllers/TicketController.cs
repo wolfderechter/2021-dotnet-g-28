@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MimeKit;
 using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.AspNetCore.Localization;
+using System.Threading;
+using System.Globalization;
 
 namespace _2021_dotnet_g_28.Controllers
 {
@@ -292,6 +295,18 @@ namespace _2021_dotnet_g_28.Controllers
 
             return PhysicalFile(filepath, MimeTypes.GetMimeType(filepath), filename);
 
+        }
+      
+
+        [HttpPost]
+        public IAction SetLanguage2(string culture)
+        {
+           //string language = (string)filterContext.RouteData.Values["language"] ?? "nl";
+          //  string culture = (string)filterContext.RouteData.Values["culture"] ?? "NL";
+
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(string.Format("{0}-{1}",  "nl","NL"));
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(string.Format("{0}-{1}", "nl", "NL"));
+            return RedirectToAction(nameof(Index));
         }
     }
 }
