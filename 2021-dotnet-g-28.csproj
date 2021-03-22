@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-_2021_dotnet_g_28-C3212EEE-E751-4779-BA3E-5A21B2215E4B</UserSecretsId>
     <RootNamespace>_2021_dotnet_g_28</RootNamespace>
+	<LangVersion>latest</LangVersion>
+
   </PropertyGroup>
 
   <ItemGroup>

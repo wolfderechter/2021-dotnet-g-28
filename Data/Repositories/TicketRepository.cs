@@ -35,7 +35,7 @@ namespace _2021_dotnet_g_28.Data.Repositories
 
         public void Delete(Ticket ticket)
         {
-            ticket.Status = TicketEnum.status.Cancelled;
+            ticket.Status = TicketEnum.Status.Cancelled;
         }
 
         public void SaveChanges()
@@ -49,7 +49,7 @@ namespace _2021_dotnet_g_28.Data.Repositories
             //return _tickets.Include(t => t.Reactions).Where(t => t.ContactPersonId == contactPersonId).ToList();
         }
 
-        public IEnumerable<Ticket> GetByStatusAndType(IEnumerable<TicketEnum.status> statusses, IEnumerable<TicketEnum.type> types)
+        public IEnumerable<Ticket> GetByStatusAndType(IEnumerable<TicketEnum.Status> statusses, IEnumerable<TicketEnum.Type> types)
         {
             return _tickets.Include(t => t.Reactions).Where(c => statusses.Contains(c.Status) && types.Contains(c.Type)).ToList();
         }

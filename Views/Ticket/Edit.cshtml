@@ -50,23 +50,18 @@
                 <label>@Localizer["Attachment"]</label>
                 <div>
                     <input type="file" class="" name="Attachments" value="upload" asp-for="Attachments" multiple="multiple" accept=".pdf,.gif,.jpg,.jpeg,.png,.doc,.docx" />
-                    @if (TempData["errorMessageSize"] != null)
+                    @if (ViewData["errorMessageSize"] != null)
                     {
-                <script type="text/javascript">
-                            alert(@Localizer["MaxFilesize"]);
-                </script>
+                        <p class="alert-danger">@ViewData["errorMessageSize"]</p>
                     }
-                    @if (TempData["errorMessageType"] != null)
+                    @if (ViewData["errorMessageType"] != null)
                     {
-                <script type="text/javascript">
-                            alert(@Localizer["Acceptable"]);
-                </script>
+                         <p class="alert-danger">@ViewData["errorMessageType"]</p>
                     }
-                    @if (TempData["errorMessageAmount"] != null)
+                    @if (ViewData["errorMessageAmount"] != null)
                     {
-                <script type="text/javascript">
-                            alert(@Localizer["MaxAmount"]);
-                </script>
+                        <p class="alert-danger">@ViewData["errorMessageAmount"]</p>
+
                     }
                 </div>
 
@@ -94,3 +89,4 @@
 @section scripts {
     <script asp-src-include="lib/jquery-validation/dist/jquery.validate.js"></script>
     <script asp-src-include="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
