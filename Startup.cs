@@ -86,6 +86,8 @@ namespace _2021_dotnet_g_28
             services.AddScoped<IContractTypeRepository, ContractTypeRepository>();
             services.AddScoped<ITicketRepository, TicketRepository>();
             services.AddScoped<IFaqRepository, FaqRepository>();
+            services.AddScoped<ISupportManagerRepository, SupportManagerRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSession();

@@ -15,12 +15,10 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
        
         [Required]
         public string Description { get; set; }
-        
-       // [Required(ErrorMessageResourceName = "rememberMe", ErrorMessageResourceType = typeof(Rec))]
-        public TicketEnum.type Type { get; set; }
+        public TicketEnum.Type Type { get; set; }
         public string PicturePath { get; set; }
-        
         public IFormFile[] Attachments { get; set; }
+        public int CompanyNr { get; set; }
 
 
         public TicketEditViewModel()

@@ -15,7 +15,7 @@ namespace _2021_dotnet_g_28.Models.Domain
         public String FirstName { get; set; }
         public String LastName { get; set; }
 
-        public IdentityUser user { get; set; }
+        public IdentityUser User { get; set; }
         // public ICollection<String> TelNr { get; set; }
 
         #endregion

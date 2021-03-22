@@ -5,10 +5,16 @@
     ViewData["Title"] = @Localizer["DetailsContract"];
 }
 
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@ViewData["Title"]</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Contract info</h6>
+        <p class="card-text">@Model.Company</p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+    </div>
 
-
-<div>
-    <h1>@ViewData["Title"]</h1>
+    <h1></h1>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -50,6 +56,6 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["BackToList"]</a>
-</div>
+    <div>
+        <a class="btn btn-primary" asp-action="Index">Back to List</a>
+    </div>

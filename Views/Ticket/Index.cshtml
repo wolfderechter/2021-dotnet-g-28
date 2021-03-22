@@ -15,59 +15,69 @@
 
 
 
+<div class="container-fluid mt-4">
 
-<div class="row">
-    <div class="col-lg-3 text-left">
-        @using (Html.BeginForm())
-        {
-            <div class="form-group border border-dark">
-                @Html.DisplayNameFor(model => model.CheckBoxItemsStatus[0].Status)
-                @for (int i = 0; Model.CheckBoxItemsStatus.Count > i; i++)
-                {
-                    <div class="form-check border ">
-                        @Html.CheckBoxFor(model => model.CheckBoxItemsStatus[i].IsSelected, new { htmlAttributes = new { @class = "form-check-input" } })
-                        @Html.DisplayFor(model => model.CheckBoxItemsStatus[i].Status, new { htmlAttributes = new { @class = "form-check-label" } })
-                        @Html.HiddenFor(model => model.CheckBoxItemsStatus[i].Status, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>          }
-            </div>
-            <div class="form-group border border-dark">
-                @Html.DisplayNameFor(model => model.CheckBoxItemsType[0].Type)
-                @for (int i = 0; Model.CheckBoxItemsType.Count > i; i++)
-                {
-                    <div class="form-check border">
-                        @Html.CheckBoxFor(model => model.CheckBoxItemsType[i].IsSelected, new { htmlAttributes = new { @class = "form-check-input" } })
-                        @Html.DisplayFor(model => model.CheckBoxItemsType[i].Type, new { htmlAttributes = new { @class = "form-check-label" } })
-                        @Html.HiddenFor(model => model.CheckBoxItemsType[i].Type, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>}
+    <div class="row">
+        <div class="col-xl-3 text-left mb-3 w-50">
+            @using (Html.BeginForm(FormMethod.Get))
+            {
+                <div class="form-group border border-dark">
+                    @Html.DisplayNameFor(model => model.CheckBoxItems[0].Status)
+                    @for (int i = 0; Model.CheckBoxItems.Count > i; i++)
+                    {
+                        <div class="form-check border ">
+                            @Html.CheckBoxFor(model => model.CheckBoxItems[i].IsSelected, new { htmlAttributes = new { @class = "form-check-input" }, onChange = "this.form.submit()" })
+                            @Html.DisplayFor(model => model.CheckBoxItems[i].Status, new { htmlAttributes = new { @class = "form-check-label" } })
+                            @Html.HiddenFor(model => model.CheckBoxItems[i].Status, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    }
+                </div>
 
-            </div>
-            <button type="submit" class="btn btn-primary ml-1">@Localizer["Filter"]</button>
-            <a asp-controller="Ticket" asp-action="Create" class="btn btn-primary text-decoration-none">@Localizer["CreateNewTicket"]</a>}
+                <a asp-controller="Ticket" asp-action="Create" class="btn btn-primary text-decoration-none">Create New Ticket</a>
+            }
+        </div>
 
+        <div id="accordion" class="col-xl-9 pr-0">
+            @foreach (var item in Model.Tickets)
+            {
+                <div class="card @(item.Type == TicketEnum.Type.NoImpact ? "border-no-impact" : item.Type == TicketEnum.Type.ProductionStopped ? "border-production-stopped" : item.Type == TicketEnum.Type.ProductionWillStop ? "border-production-will-stop" : "") mr-3">
+                    <div class="card-header" id="heading@(item.TicketNr)">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link w-100 text-decoration-none text-dark" data-toggle="collapse" data-target="#collapse@(item.TicketNr)" aria-expanded="true" aria-controls="collapse@(item.TicketNr)">
+                                <div class="row">
+                                    <div class="col">
+                                        @item.TicketNr
+                                    </div>
+                                    <div class="col">
+                                        @item.Title
+                                    </div>
+                                    <div class="col">
+                                        @Html.DisplayFor(model => item.Status)
+                                    </div>
+                                </div>
+                            </button>
+                        </h5>
+                    </div>
 
-    </div>
-
-    <div id="accordion" class="col-lg-9 pr-lg-4">
-        @foreach (var item in Model.Tickets)
-        {
-            <div class="card @(item.Type == TicketEnum.type.NoImpact ? "border-no-impact" : item.Type == TicketEnum.type.ProductionStopped ? "border-production-stopped" : item.Type == TicketEnum.type.ProductionWillStop ? "border-production-will-stop" : "") mr-3">
-                <div class="card-header" id="heading@(item.TicketNr)">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link w-100 text-decoration-none text-dark" data-toggle="collapse" data-target="#collapse@(item.TicketNr)" aria-expanded="true" aria-controls="collapse@(item.TicketNr)">
+                    <div id="collapse@(item.TicketNr)" class="collapse" aria-labelledby="heading@(item.TicketNr)" data-parent="#accordion">
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    @item.TicketNr
+                                    <p>Date created: @item.DateCreation</p>
+                                    <p>Type: @Html.DisplayFor(model => item.Type)</p>
+                                    <p>Assigned technician: </p>
+                                    <p>Remarks: @item.Remark</p>
+                                    @{ if (item.PicturePath == null)
+                                        {
+                                            <p>Attachment: No attachment </p> }
+                                        else
+                                        {
+                                            <p>Attachment: </p><img class="img-thumbnail small" src="~/bijlagen/@item.PicturePath"> } }
                                 </div>
                                 <div class="col">
-                                    @item.Title
-                                </div>
-                                <div class="col">
-                                    @Html.DisplayFor(model => item.Status)
+                                    <p>Description: </p>@item.Description
                                 </div>
                             </div>
-                        </button>
-                    </h5>
-                </div>
 
                 <div id="collapse@(item.TicketNr)" class="collapse" aria-labelledby="heading@(item.TicketNr)" data-parent="#accordion">
                     <div class="card-body">
@@ -106,9 +116,13 @@
                         {
                             if (reaction.ReactionSup)
                             {
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text bg-primary rounded-pill text-white mr-2" id="">@reaction.NameUserReaction</span>
+                                if (reaction.ReactionSup)
+                                {
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-primary rounded-pill text-white mr-2" id="">@reaction.NameUserReaction</span>
+                                        </div>
+                                        <input type="text" class="form-control rounded-pill " disabled value="@reaction.Text">
                                     </div>
                                     <input type="text" class="form-control rounded-pill " disabled value="@reaction.Text">
                                 </div> }
@@ -137,13 +151,18 @@
                                     <input type="hidden" name="ticketNr" value="@item.TicketNr">
                                     <button class="btn btn-primary col-md-2 col-sm-3" type="submit">@Localizer["React"]</button>
 
+                                    </div>
                                 </div>
-                            </div>}
+
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>}
+            </div>
+        }
     </div>
 
+    </div>
 </div>
 
 

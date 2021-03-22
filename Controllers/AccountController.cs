@@ -1,4 +1,5 @@
 ﻿using _2021_dotnet_g_28.Models.viewmodels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace _2021_dotnet_g_28.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         private readonly SignInManager<IdentityUser> signInManager;

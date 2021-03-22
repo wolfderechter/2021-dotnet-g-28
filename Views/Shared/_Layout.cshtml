@@ -19,45 +19,52 @@
     </div>
     <!-- Vertical navbar -->
     <nav class="navbar" id="navbar">
+
         <ul class="navbar-nav">
             <li class="logo">
                 <img src="~/img/logo-actemuim.png" id="img1" />
             </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Ticket" asp-action="Index">
-                    <i class="fas fa-ticket-alt fa-fw"></i>
-                    <span class="link-text">@Localizer["Tickets"]</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-chart-line fa-fw"></i>
-                    <span class="link-text">@Localizer["Statistics"]</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Contract" asp-action="Index">
-                    <i class="fas fa-copy fa-fw"></i>
-                    <span class="link-text">@Localizer["Contracts"]</span>
-</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Faq" asp-action="Index">
-                    <i class="fas fa-question-circle fa-fw"></i>
-                    <span class="link-text">@Localizer["Faq"]</span>
-                </a>
-            </li>
-            <li class="nav-item">
-            </li>
+
+            @if (User.IsInRole("Customer"))
+            {
+        <li>
+            <button type="button" class="btn btn-primary">
+                Notifications
+                <span class="badge badge-light">@ViewData["NotificationCount"]</span>
+            </button>
+        </li>
+                    }
+                
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Ticket" asp-action="Index">
+                        <i class="fas fa-ticket-alt fa-fw"></i>
+                        <span class="link-text">Tickets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Statistic" asp-action="Index">
+                        <i class="fas fa-chart-line fa-fw"></i>
+                        <span class="link-text">Statistics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Contract" asp-action="Index">
+                        <i class="fas fa-copy fa-fw"></i>
+                        <span class="link-text">Contracts</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Faq" asp-action="Index">
+                        <i class="fas fa-question-circle fa-fw"></i>
+                        <span class="link-text">FAQ</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <p>@ViewData["GebruikersNaam"]</p>
+                </li>
+
 
             <li class="nav-item">
-                <a class="nav-link">
-
-                    <span class="link-text">@User.Identity.Name</span>
-                </a>
-            </li>
-            <li class="nav-item">
-
                 <a class="nav-link" asp-controller="Account" asp-action="Logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <span class="link-text">@Localizer["SignOut"]</span>
@@ -81,8 +88,28 @@
     <!--End Vertical Navbar-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 
 </body>
 </html>
+
+<script>
+    $(document).ready(function () {
+        var down = false;
+        $('#bell').click(function (e) {
+            var color = $(this).text();
+            if (down) {
+                $('#box').css('height', '0px');
+                $('#box').css('opacity', '0');
+                down = false;
+            } else {
+                $('#box').css('height', 'auto');
+                $('#box').css('opacity', '1');
+                down = true;
+                console.log("dropped");
+
+            }
+        });
+    });
+</script>

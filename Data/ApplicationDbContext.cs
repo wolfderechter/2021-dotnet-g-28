@@ -11,14 +11,14 @@ namespace _2021_dotnet_g_28.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public DbSet<Company> Company { get; set; }
+        public DbSet<Company> Companies { get; set; }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<SupportManager> SupportManagers { get; set; }
 
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<Faq> Faq { get; set; }
+        public DbSet<Faq> Faqs { get; set; }
         public DbSet<ContactPerson> ContactPeople { get; set; }
-        public DbSet<ContractType> ContractType { get; set; }
+        public DbSet<ContractType> ContractTypes { get; set; }
         public DbSet<Reaction> Reactions { get; set; }
 
        

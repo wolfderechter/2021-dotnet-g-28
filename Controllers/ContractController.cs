@@ -46,6 +46,7 @@ namespace _2021_dotnet_g_28.Controllers
                 model.DuurCheckbox.Add(new DuurModel() { Duration = teller, IsSelected = true });
             }
             model.Contracts = _contractRepository.GetByIdAndStatusAndDuration(new List<ContractEnum.status> { ContractEnum.status.InProgress, ContractEnum.status.Running }, new List<int> { 1, 2, 3 }, contactPerson.Company.CompanyNr);
+            ViewData["Notifications"] = contactPerson.Notifications;
             return View(model);
         }
 
