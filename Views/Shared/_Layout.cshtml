@@ -20,43 +20,60 @@
                 <img src="~/img/logo-actemuim.png" id="img1" />
             </li>
 
-            @if (User.IsInRole("Customer"))
+            @if (User.IsInRole("Customer") && ViewData["Notifications"] != null)
             {
-        <li>
-            <button type="button" class="btn btn-primary">
-                Notifications
-                <span class="badge badge-light">@ViewData["NotificationCount"]</span>
-            </button>
-        </li>
-                    }
-                
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Ticket" asp-action="Index">
-                        <i class="fas fa-ticket-alt fa-fw"></i>
-                        <span class="link-text">Tickets</span>
-                    </a>
+                var notifications = ViewData["Notifications"] as List<_2021_dotnet_g_28.Models.Domain.Notification>;
+                <li>
+                    <button type="button" class="btn btn-primary " id="notif">
+                        Notifications
+                        <span class="badge badge-light">@notifications.Count(c=>c.IsRead)</span>
+                    </button>
+                    <div class="notifications" id="box">
+                        @foreach (var notif in notifications)
+                        {
+                            <div class="notifications-item">
+                                <div class="text">
+                                    <h4>
+                                        @notif.Action  
+                                        @if (!notif.IsRead)
+                                    {<span class="badge rounded-pill bg-danger text-light">New</span>}
+                                    </h4>
+                                    <p>@notif.TicketName</p>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Statistic" asp-action="Index">
-                        <i class="fas fa-chart-line fa-fw"></i>
-                        <span class="link-text">Statistics</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Contract" asp-action="Index">
-                        <i class="fas fa-copy fa-fw"></i>
-                        <span class="link-text">Contracts</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Faq" asp-action="Index">
-                        <i class="fas fa-question-circle fa-fw"></i>
-                        <span class="link-text">FAQ</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <p>@ViewData["GebruikersNaam"]</p>
-                </li>
+            }
+
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Ticket" asp-action="Index">
+                    <i class="fas fa-ticket-alt fa-fw"></i>
+                    <span class="link-text">Tickets</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Statistic" asp-action="Index">
+                    <i class="fas fa-chart-line fa-fw"></i>
+                    <span class="link-text">Statistics</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Contract" asp-action="Index">
+                    <i class="fas fa-copy fa-fw"></i>
+                    <span class="link-text">Contracts</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Faq" asp-action="Index">
+                    <i class="fas fa-question-circle fa-fw"></i>
+                    <span class="link-text">FAQ</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <p>@ViewData["GebruikersNaam"]</p>
+            </li>
 
 
             <li class="nav-item">
@@ -91,7 +108,7 @@
 <script>
     $(document).ready(function () {
         var down = false;
-        $('#bell').click(function (e) {
+        $('#notif').click(function (e) {
             var color = $(this).text();
             if (down) {
                 $('#box').css('height', '0px');
