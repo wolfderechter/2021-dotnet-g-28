@@ -20,13 +20,13 @@
                 <img src="~/img/logo-actemuim.png" id="img1" />
             </li>
 
-            @if (User.IsInRole("Customer"))
+            @if (User.IsInRole("Customer") && ViewData["Notifications"] != null)
             {
                 var notifications = ViewData["Notifications"] as List<_2021_dotnet_g_28.Models.Domain.Notification>;
                 <li>
                     <button type="button" class="btn btn-primary " id="notif">
                         Notifications
-                        <span class="badge badge-light">@notifications.Count()</span>
+                        <span class="badge badge-light">@notifications.Count(c=>c.IsRead)</span>
                     </button>
                     <div class="notifications" id="box">
                         @foreach (var notif in notifications)
@@ -36,7 +36,7 @@
                                     <h4>
                                         @notif.Action  
                                         @if (!notif.IsRead)
-                                    {<span class="badge rounded-pill bg-danger">New</span>}
+                                    {<span class="badge rounded-pill bg-danger text-light">New</span>}
                                     </h4>
                                     <p>@notif.TicketName</p>
                                 </div>

@@ -8,51 +8,92 @@
     <div class="card-body">
         <h5 class="card-title">@ViewData["Title"]</h5>
         <h6 class="card-subtitle mb-2 text-muted">Contract info</h6>
-        <p class="card-text">@Model.Company</p>
+        <p class="card-text">@Model.Company.CompanyName</p>
+        <div class="row">
+            <div class="col-2">
+                @Html.DisplayNameFor(model => model.ContractNr)
+                :
+                @Html.DisplayFor(model => model.ContractNr)
+            </div>
+            <div class="col-2">
+                @Html.DisplayNameFor(model => model.StartDate)
+                :
+                @Html.DisplayFor(model => model.StartDate)
+            </div>
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.Duration)
+                :
+                @Html.DisplayFor(model => model.Duration)
+                 @if (Model.Duration > 1)
+                 { }
+                 
+                 else
+                 {<p>year</p> }
+            </div>
+            <div class="col-2">
+                @Html.DisplayNameFor(model => model.EndDate)
+                :
+                @Html.DisplayFor(model => model.EndDate)
+            </div>
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.Status)
+                :
+                @Html.DisplayFor(model => model.Status)
+            </div>
+        </div>
+        <div class="row">
+            
+        </div>
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">ContractType info</h6>
+            <div class="col-2">
+                @Html.DisplayNameFor(model => model.Type.Name)
+                @Html.DisplayFor(model=> model.Type.Name)
+            </div>
 
-    </div>
+            <div class="col-2" class="text-center">
+                @Html.DisplayNameFor(model => model.Type.MinDuration)
+                @Html.DisplayFor(model => model.Type.MinDuration)
+                
+            </div>
+            <div class="col-2">
+                @Html.DisplayNameFor(model => model.Type.MaxResponseTime)
+                @Html.DisplayFor(model => model.Type.MaxResponseTime)
+            </div>
+            <div class="col-2">
+                @Html.DisplayNameFor(model => model.Type.IsOutsideBusinessHours)
+                @if (Model.Type.IsOutsideBusinessHours)
+                {<p>24/7</p>}
+                else
+                {<p>Weekdays (8-17)</p>}
+            </div>
+            <div class="col-2">
+                @Html.DisplayNameFor(model => model.Type.Price)
+                @Html.DisplayFor(model => model.Type.Price)
+            </div>
+            <div class="col-2">
+                @Html.DisplayNameFor(model => model.Type.CreationMethod)
+                @Html.DisplayFor(model => model.Type.CreationMethod)
+            </div>
 
-    <h1></h1>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ContractNr)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ContractNr)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Duration)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Duration)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Type.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-    </dl>
-</div>
+            <td class="text-center">
+                
+            </td>
+            <td class="text-center">
+                
+            </td>
+            <td>
+
+                
+            </td>
+            <td class="text-center">
+                
+            </td>
+            <td>
+                
+            </td>
+            </tr>
+        </div>
     <div>
         <a class="btn btn-primary" asp-action="Index">Back to List</a>
     </div>
