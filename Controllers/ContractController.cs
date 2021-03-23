@@ -60,6 +60,7 @@ namespace _2021_dotnet_g_28.Controllers
             List<int> selectedDuration = model.DuurCheckbox.Where(c => c.IsSelected).Select(c => c.Duration).ToList();
             //getting contracts connected to statusses
             model.Contracts = _contractRepository.GetByIdAndStatusAndDuration(selectedStatusses, selectedDuration, contactPerson.Company.CompanyNr);
+            ViewData["Notifications"] = contactPerson.Notifications;
             return View(model);
         }
 
@@ -85,18 +86,22 @@ namespace _2021_dotnet_g_28.Controllers
             return Ok();
         }
 
-        public IActionResult Details(int contractNr)
+        public async Task<IActionResult> Details(int contractNr)
         {
             Contract contract = _contractRepository.GetById(contractNr);
+            ContactPerson contactPerson = await GetLoggedInContactPerson();
+            ViewData["Notifications"] = contactPerson.Notifications;
             return View(contract);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             ContractCreateViewModel model = new ContractCreateViewModel();
             model.ContractTypes= _contractTypeRepository.GetAllActive();
             ViewData["ContractTypeNames"] = GetCategoriesSelectList();
+            ContactPerson contactPerson = await GetLoggedInContactPerson();
+            ViewData["Notifications"] = contactPerson.Notifications;
             return View(model);
         }
 
@@ -108,6 +113,7 @@ namespace _2021_dotnet_g_28.Controllers
                 try
                 {
                     ContactPerson contactPerson = await GetLoggedInContactPerson();
+                    ViewData["Notifications"] = contactPerson.Notifications;
                     var contract = new Contract(_contractTypeRepository.GetByName(model.TypeName), model.duration, contactPerson.Company);
                     _contractRepository.Add(contract);
                     _contractRepository.SaveChanges();
@@ -125,8 +131,10 @@ namespace _2021_dotnet_g_28.Controllers
                     TempData["error"] = "Sorry, something went wrong, the Contract was not created...";
                     ViewData["ContractTypeNames"] = GetCategoriesSelectList();
                     model.ContractTypes = _contractTypeRepository.GetAllActive();
+
                     return View(model);
                 }
+                
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ContractTypeNames"] = GetCategoriesSelectList();

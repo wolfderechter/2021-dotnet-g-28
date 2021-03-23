@@ -7,7 +7,11 @@
     <link href="~/css/TicketIndex.css" rel="stylesheet" />
 }
 
-@{ ViewData["Title"] = "Tickets"; }
+@{ 
+    ViewData["Title"] = "Tickets";
+    
+
+}
 
 
 <h1>@ViewData["Title"]</h1>
@@ -32,7 +36,7 @@
                         </div>
                     }
                 </div>
-
+                
                 //<button type="submit" class="btn btn-primary ml-1">Filter</button>
                 <a asp-controller="Ticket" asp-action="Create" class="btn btn-primary text-decoration-none">Create New Ticket</a>
 
@@ -61,7 +65,7 @@
                         </h5>
                     </div>
 
-                    <div id="collapse@(item.TicketNr)" class="collapse" aria-labelledby="heading@(item.TicketNr)" data-parent="#accordion">
+                    <div id="collapse@(item.TicketNr)" class="@(Model.OpenedTicket != null?Model.OpenedTicket.Equals(item)?"collapse show":"collapse":"collapse")" aria-labelledby="heading@(item.TicketNr)" data-parent="#accordion" onclick="collapseClick(@item)">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -113,17 +117,17 @@
                             {
                                 <div class="row">
                                     <div class="btn-group w-100" role="toolbar">
-                                        <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="btn btn-primary col-md-2 col-sm-3">Edit</a>
+
+
                                         @*<a asp-controller="Ticket" asp-action="Stop" asp-route-ticketnr="@item.TicketNr" class="btn btn-danger col-md-2 col-sm-3">Cancel</a>*@
                                         @if (item.Status != TicketEnum.Status.Cancelled)
                                         {
-                                            <a class="btn btn-danger text-white" data-target="#confirm-delete" data-toggle="modal" data-item-id="@item.TicketNr">Cancel</a>
+                                            <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="btn btn-primary col-md-2 col-sm-3">Edit</a>
+                                            <a class="btn btn-danger col-md-2 col-sm-3" data-target="#confirm-delete" data-toggle="modal" data-item-id="@item.TicketNr">Cancel</a>
                                         }
                                         <input type="text" name="reaction" class=" col-md-9 col-sm-3" placeholder="Type reaction here" required>
-                                        <input type="hidden" name="model" value="@Model">
                                         <input type="hidden" name="ticketNr" value="@item.TicketNr">
                                         <button class="btn btn-primary col-md-2 col-sm-3" type="submit">React</button>
-
                                     </div>
                                 </div>
 
@@ -131,6 +135,7 @@
                         </div>
                     </div>
                 </div>
+                
             }
         </div>
 

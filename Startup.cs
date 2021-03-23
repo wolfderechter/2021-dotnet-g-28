@@ -110,12 +110,16 @@ namespace _2021_dotnet_g_28
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+
             var supportedCultures = new[] { "en-US", "fr-FR", "nl-NL" };
             var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
                 .AddSupportedCultures(supportedCultures)
                 .AddSupportedUICultures(supportedCultures);
 
             app.UseRequestLocalization(localizationOptions);
+
+
+            app.UseSession();
 
             app.UseRouting();
 

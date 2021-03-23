@@ -91,7 +91,11 @@ namespace _2021_dotnet_g_28.Data
 
                 //make notification
                 Notification notification = new Notification() { Action = "Reaction", TicketName = "Water Damage" };
-                contactPerson1.Notifications = new List<Notification>() { notification };
+                Notification notification2 = new Notification() { Action = "Reaction", TicketName = "Water Damage" };
+                Notification notification3 = new Notification() { Action = "Reaction", TicketName = "Water Damage" };
+                Notification notification4 = new Notification() { Action = "Reaction", TicketName = "Water Damage" };
+
+                contactPerson1.Notifications = new List<Notification>() { notification, notification2, notification3, notification4};
 
 
                 Faq faq1 = new Faq() { Problem = "HTTP ERROR 401 (UNAUTHORIZED)", Solution =  solution1};
