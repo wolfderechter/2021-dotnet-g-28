@@ -5,7 +5,11 @@
     <link href="~/css/TicketIndex.css" rel="stylesheet" />
 }
 
-@{ ViewData["Title"] = "Tickets"; }
+@{ 
+    ViewData["Title"] = "Tickets";
+    
+
+}
 
 
 <h1>@ViewData["Title"]</h1>
@@ -109,10 +113,8 @@
                                         <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="btn btn-primary col-md-2 col-sm-3">Edit</a>
                                         <a asp-controller="Ticket" asp-action="Stop" asp-route-ticketnr="@item.TicketNr" class="btn btn-danger col-md-2 col-sm-3">Cancel</a>
                                         <input type="text" name="reaction" class=" col-md-9 col-sm-3" placeholder="Type reaction here" required>
-                                        <input type="hidden" name="model" value="@Model">
                                         <input type="hidden" name="ticketNr" value="@item.TicketNr">
                                         <button class="btn btn-primary col-md-2 col-sm-3" type="submit">React</button>
-                                        @Html.HiddenFor(m => m.CheckBoxItems)
                                     </div>
                                 </div>
 
@@ -121,6 +123,8 @@
                     </div>
                 </div>
             }
+            
+            
         </div>
 
     </div>

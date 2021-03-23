@@ -95,7 +95,7 @@ namespace _2021_dotnet_g_28
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();

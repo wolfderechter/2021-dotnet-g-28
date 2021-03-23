@@ -7,23 +7,27 @@ using _2021_dotnet_g_28.Models.Domain;
 using _2021_dotnet_g_28.Models.Viewmodels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace _2021_dotnet_g_28.Controllers
 {
     [Authorize]
     public class TicketController : Controller
     {
+        #region variables
         private readonly ITicketRepository _ticketRepository;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IContactPersonRepository _contactPersonRepository;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly ISupportManagerRepository _supportManagerRepository;
         private readonly ICompanyRepository _companyRepository;
+        #endregion
 
-        public TicketController(ITicketRepository ticketRepository, UserManager<IdentityUser> userManager, IContactPersonRepository contactPersonRepository,IWebHostEnvironment hostingEnvironment,ISupportManagerRepository supportManagerRepository,ICompanyRepository companyRepository)
+        public TicketController(ITicketRepository ticketRepository, UserManager<IdentityUser> userManager, IContactPersonRepository contactPersonRepository, IWebHostEnvironment hostingEnvironment, ISupportManagerRepository supportManagerRepository, ICompanyRepository companyRepository)
         {
             _ticketRepository = ticketRepository;
             _userManager = userManager;
@@ -32,10 +36,15 @@ namespace _2021_dotnet_g_28.Controllers
             _supportManagerRepository = supportManagerRepository;
             _companyRepository = companyRepository;
         }
-  
+
         public async Task<IActionResult> Index(TicketIndexViewModel model)
         {
-            //TicketIndexViewModel model = new TicketIndexViewModel();
+
+            if (TempData["tempModel"] != null)
+            {
+                model = JsonConvert.DeserializeObject<TicketIndexViewModel>((string)TempData["tempModel"]);
+            }
+
             //get signed in user
             var user = await _userManager.GetUserAsync(User);
 
@@ -46,17 +55,17 @@ namespace _2021_dotnet_g_28.Controllers
                 ViewData["GebruikersNaam"] = supManager.FirstName + " " + supManager.LastName;
                 model.Tickets = _ticketRepository.GetAll();
             }
-            else 
+            else
             {
                 //get contactperson matching with signed in user
                 ContactPerson contactPerson = _contactPersonRepository.getById(user.Id);
                 ViewData["GebruikersNaam"] = contactPerson.FirstName + " " + contactPerson.LastName;
                 model.Tickets = _ticketRepository.GetByContactPersonId(contactPerson.Id);
-                ViewData["Notifications"] = contactPerson.Notifications.Where(n=>!n.IsRead).ToList();
+                ViewData["Notifications"] = contactPerson.Notifications.Where(n => !n.IsRead).ToList();
             }
-           
+
             //only do this when index gets called for first time
-            if(model.CheckBoxItems == null)
+            if (model.CheckBoxItems == null)
             {
                 //populate filter with checkbox options and setting 2 selected
                 model.CheckBoxItems = new List<StatusModelTicket>();
@@ -69,8 +78,9 @@ namespace _2021_dotnet_g_28.Controllers
 
                 //insert tickets with status created and in progress
                 model.Tickets = _ticketRepository.GetByStatus(new List<TicketEnum.Status> { TicketEnum.Status.Created, TicketEnum.Status.InProgress });
-            } else
-            {          
+            }
+            else
+            {
                 //reload tickets with new selected status
                 List<TicketEnum.Status> statusList = new List<TicketEnum.Status>();
                 foreach (var item in model.CheckBoxItems)
@@ -83,11 +93,14 @@ namespace _2021_dotnet_g_28.Controllers
                 model.Tickets = _ticketRepository.GetByStatus(statusList);
             }
 
+            WriteTicketIndexViewModelToSession(model);
+
             return View(model);
         }
 
         public async Task<IActionResult> Create()
         {
+            GetTicketIndexViewModelFromSessionAndPutInTempData();
             ViewData["IsEdit"] = false;
             ViewData["typeTickets"] = TypeTickets();
             if (User.IsInRole("SupportManager"))
@@ -99,6 +112,7 @@ namespace _2021_dotnet_g_28.Controllers
             }
             return View(nameof(Edit), new TicketEditViewModel());
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(TicketEditViewModel ticketEditViewModel)
         {
@@ -114,7 +128,7 @@ namespace _2021_dotnet_g_28.Controllers
                         ContactPerson contact = _contactPersonRepository.getById(user.Id);
                         company = contact.Company;
                     }
-                    else 
+                    else
                     {
                         company = _companyRepository.GetByNr(ticketEditViewModel.CompanyNr);
                     }
@@ -126,7 +140,7 @@ namespace _2021_dotnet_g_28.Controllers
                         string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                         ticketEditViewModel.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
                     }
-                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title, ticketEditViewModel.Remark, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.Status.Created,uniqueFileName);
+                    var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title, ticketEditViewModel.Remark, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.Status.Created, uniqueFileName);
                     _ticketRepository.Add(ticket);
                     company.AddTicket(ticket);
                     _ticketRepository.SaveChanges();
@@ -142,13 +156,23 @@ namespace _2021_dotnet_g_28.Controllers
             {
                 return View(nameof(Edit), ticketEditViewModel);
             }
-
-
         }
-        
-        [HttpPost]
-        public IActionResult Edit(int ticketNr, TicketEditViewModel ticketEditViewModel)
+
+        public IActionResult Edit(int ticketNr)
         {
+            GetTicketIndexViewModelFromSessionAndPutInTempData();
+            Ticket ticket = _ticketRepository.GetBy(ticketNr);
+            if (ticket == null)
+                return NotFound();
+            ViewData["IsEdit"] = true;
+            ViewData["typeTickets"] = TypeTickets();
+            return View(new TicketEditViewModel(ticket));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int ticketnr, TicketEditViewModel ticketEditViewModel)
+        {
+            
             if (ModelState.IsValid)
             {
                 try
@@ -161,7 +185,7 @@ namespace _2021_dotnet_g_28.Controllers
                         string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                         ticketEditViewModel.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
                     }
-                    Ticket ticket = _ticketRepository.GetBy(ticketNr);
+                    Ticket ticket = _ticketRepository.GetBy(ticketnr);
                     ticket.EditTicket(ticketEditViewModel.Title, ticketEditViewModel.Remark, ticketEditViewModel.Description, ticketEditViewModel.Type, uniqueFileName);
                     _ticketRepository.SaveChanges();
                     TempData["message"] = $"You successfully updated the ticket.";
@@ -181,6 +205,7 @@ namespace _2021_dotnet_g_28.Controllers
 
         public IActionResult Stop(int ticketNr)
         {
+            GetTicketIndexViewModelFromSessionAndPutInTempData();
             Ticket ticket = _ticketRepository.GetBy(ticketNr);
             if (ticket == null)
                 return NotFound();
@@ -189,17 +214,21 @@ namespace _2021_dotnet_g_28.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> AddReaction(int ticketNr, string reaction,TicketIndexViewModel model) 
+        [HttpPost]
+        public async Task<IActionResult> AddReaction(int ticketNr, string reaction)
         {
             var user = await _userManager.GetUserAsync(User);
             ContactPerson contact = _contactPersonRepository.getById(user.Id);
             Ticket ticket = _ticketRepository.GetBy(ticketNr);
             if (ticket == null)
                 return NotFound();
-            ticket.AddReaction(new Reaction(reaction, contact.FirstName + " " + contact.LastName,false, ticketNr));
+            ticket.AddReaction(new Reaction(reaction, contact.FirstName + " " + contact.LastName, false, ticketNr));
             _ticketRepository.SaveChanges();
             TempData["message"] = $"Your reaction has been succesfully added";
-            return RedirectToAction(nameof(Index),model);
+
+            GetTicketIndexViewModelFromSessionAndPutInTempData();
+
+            return RedirectToAction(nameof(Index));
         }
 
         private SelectList TypeTickets()
@@ -211,19 +240,43 @@ namespace _2021_dotnet_g_28.Controllers
             }
             return new SelectList(typeTickets);
         }
+
         private SelectList GetSelectListCompanies()
         {
             return new SelectList(
-                            _companyRepository.GetAll().OrderBy(c=>c.CompanyName),
+                            _companyRepository.GetAll().OrderBy(c => c.CompanyName),
                             nameof(Company.CompanyNr),
                             nameof(Company.CompanyName));
         }
-
+        
         private async Task<ContactPerson> GetLoggedInContactPerson()
         {
             var user = await _userManager.GetUserAsync(User);
             return _contactPersonRepository.getById(user.Id);
         }
-    }
 
+        //this method esures that our filter doesn't reset each time we leave index
+        //model gets saved in session when we leave index -> see index
+        //in this method session gets read and cleared and put the model in tempdata -> tempdata gets checked at the start of index
+        //this method gets called each time when our next request will be index
+        public void GetTicketIndexViewModelFromSessionAndPutInTempData()
+        {
+            var model = ReadTicketIndexViewModelFromSession();
+            HttpContext.Session.Clear();
+            TempData["tempModel"] = JsonConvert.SerializeObject(model);
+        }
+
+        //this method writes a ticketindexviewmodel into session
+        private void WriteTicketIndexViewModelToSession(TicketIndexViewModel model)
+        {
+            HttpContext.Session.SetString("model", JsonConvert.SerializeObject(model));
+        }
+
+        //this method reads and returns a ticketindexviewmodel from session
+        private TicketIndexViewModel ReadTicketIndexViewModelFromSession()
+        {
+            return JsonConvert.DeserializeObject<TicketIndexViewModel>(HttpContext.Session.GetString("model"));
+        }
+
+    }
 }
