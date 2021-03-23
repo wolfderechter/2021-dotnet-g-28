@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     font-size: 16px;
     font-family: 'Arial';
     --text-primary: black;
@@ -8,27 +8,27 @@
     --transition-speed: 600ms;
 }
 
-body{
+body {
     color: black;
     background-color: white;
     margin: 0;
     padding: 0;
 }
 
-body::-webkit-scrollbar{
-    width: 0.25rem;
-}
+    body::-webkit-scrollbar {
+        width: 0.25rem;
+    }
 
-body::-webkit-scrollbar-track{
-    background-color: white;
-}
+    body::-webkit-scrollbar-track {
+        background-color: white;
+    }
 
-body::-webkit-scrollbar-thumb{
-    background-color: blue;
-    border-radius: 5px;
-}
+    body::-webkit-scrollbar-thumb {
+        background-color: blue;
+        border-radius: 5px;
+    }
 
-main{
+main {
     margin-left: 5rem;
     padding: 1rem;
 }
@@ -40,13 +40,15 @@ main{
     transition: width 600ms ease;
     font-size: 23px;
     overflow: scroll;
+    padding: 0;
+    z-index: 2;
 }
 
-.navbar::-webkit-scrollbar{
-    display: none;
-}
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
 
-.navbar-nav{
+.navbar-nav {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -56,13 +58,17 @@ main{
     height: 100%;
 }
 
-.nav-item{
+.nav-item {
     width: 100%;
+    cursor: pointer;
 }
 
-.nav-item:last-child{
+.nav-item:nth-child(6) {
     margin-top: auto;
+    font-size: 12px;
 }
+
+
 
 .nav-link {
     display: flex;
@@ -73,13 +79,13 @@ main{
     transition: var(--transition-speed);
 }
 
-.nav-link:hover{
-    filter: grayscale(0%) opacity(1);
-    background: var(--bg-secondary);
-    color: var(--text-secondary);
-}
+    .nav-link:hover {
+        filter: grayscale(0%) opacity(1);
+        background: var(--bg-secondary);
+        color: var(--text-secondary);
+    }
 
-.link-text{
+.link-text {
     display: none;
     margin-left: 1rem;
 }
@@ -96,20 +102,19 @@ main{
     height: 5rem;
 }
 
-.logo img {
-    width: 50%;
-    height: 5rem;
-    margin-left: auto;
-    display: block;
-    margin-right: auto;
-    opacity: 0;
-    transition: 250ms;
-}
+    .logo img {
+        width: 50%;
+        height: 5rem;
+        margin-left: auto;
+        display: block;
+        margin-right: auto;
+        opacity: 0;
+        transition: 250ms;
+    }
 
 #navbar:hover #img1 {
     opacity: 1;
 }
-
 
 /*small screen*/
 @media only screen and (max-width: 600px) {
@@ -119,8 +124,13 @@ main{
         height: 5rem;
     }
 
-    .navbar-nav{
+    .nav-item {
+        width: 20%;
+    }
+
+    .navbar-nav {
         flex-direction: row;
+        width: 100%;
     }
 
     .nav-link i {
@@ -128,15 +138,16 @@ main{
         min-width: 1.5rem;
     }
 
-    .nav-link{
+    .nav-link {
         justify-content: center;
     }
 
-    main{
+    main {
         margin: 0;
+        margin-bottom: 5rem;
     }
 
-    .logo{
+    .logo {
         display: none;
     }
 }
@@ -149,11 +160,57 @@ main{
         height: 100vh;
     }
 
-    .navbar:hover {
-        width: 16rem;
+        .navbar:hover {
+            width: 16rem;
+        }
+
+            .navbar:hover .link-text {
+                display: inline;
+            }
+}
+
+/* for notifications pop-out*/
+.notifications {
+    width: 300px;
+    height: 0px;
+    opacity: 0;
+    position: absolute;
+    top: 63px;
+    left: 100px;
+    border-radius: 5px 0px 5px 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+    .notifications h2 {
+        font-size: 14px;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        color: #999
     }
 
-    .navbar:hover .link-text {
-        display: inline;
-    }
+        .notifications h2 span {
+            color: #f00
+        }
+
+.notifications-item {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: 6px 9px;
+    margin-bottom: 0px;
+    cursor: pointer
 }
+
+    .notifications-item:hover {
+        background-color: #eee
+    }
+    .notifications-item .text h4 {
+        color: #777;
+        font-size: 16px;
+        margin-top: 3px
+    }
+
+    .notifications-item .text p {
+        color: #aaa;
+        font-size: 12px
+    }

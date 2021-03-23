@@ -1,0 +1,91 @@
+﻿@model _2021_dotnet_g_28.Models.Viewmodels.ContractCreateViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["CreateContract"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="duration" class="control-label"></label>
+                <input asp-for="duration" class="form-control" />
+                <span asp-validation-for="duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeName"></label>
+                <select asp-for="TypeName" asp-items="@(ViewData["ContractTypeNames"] as SelectList)" class="form-control">
+                    <option disabled value="">@Localizer["ChooseContract"]</option>
+                </select>
+                <span asp-validation-for="TypeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<h3>@Localizer["ListOfContractTypes"]</h3>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>
+               @Localizer["ContractName"]
+            </th>
+            <th class="text-center">
+                @Localizer["MinDuration"]
+            </th>
+            <th class="text-center">
+                @Localizer["MaxRespons"]
+            </th>
+            <th>
+                @Localizer["Availability"]
+            </th>
+            <th class="text-center">
+                @Localizer["Price/Month"]
+            </th>
+            <th>
+                @Localizer["CreationMethod"]
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ContractTypes)
+        {
+            <tr class="table-hover">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.MinDuration)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.MaxResponseTime)
+                </td>
+                <td>
+                    <!--nog een oplossing vinden-->
+                    @if (item.IsOutsideBusinessHours)
+                    {<p>24/7</p>}
+                    else
+                    {<p>Weekdays (8-17)</p>}
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationMethod)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a class="btn btn-primary" asp-action="Index">@Localizer["BackToList"]</a>
+</div>
+

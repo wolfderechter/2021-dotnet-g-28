@@ -1,9 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-_2021_dotnet_g_28-C3212EEE-E751-4779-BA3E-5A21B2215E4B</UserSecretsId>
     <RootNamespace>_2021_dotnet_g_28</RootNamespace>
+	<LangVersion>latest</LangVersion>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +18,20 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="MimeKit" Version="2.11.0" />
     <PackageReference Include="Serilog" Version="2.10.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\attachments\" />
+  </ItemGroup>
+
+ 
+
+  
+
+  
+
+
 
 </Project>

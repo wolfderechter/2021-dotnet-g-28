@@ -1,5 +1,8 @@
 ﻿@using _2021_dotnet_g_28.Models.viewmodels;
 @model LoginViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 
 @{
     ViewBag.Title = "Login";
@@ -11,27 +14,38 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign in - Actemium</title>
+    <title>@Localizer["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     @*<link href="~/css/site.css" rel="stylesheet" />*@
     <link href="~/css/Login.css" rel="stylesheet" />
 </head>
 <body class="text-center">
-    
+
     <main class="form-signin">
-        
-        <form  method="post">
+        <div class="dropdown">
+            <button id="btnGroupLang"  class="btn btn-outline-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> EN </button>
+
+            <ul class="dropdown-menu" aria-labelledby="btnGroupLang">
+                <li>
+                    <a class="dropdown-item" href="#">NL</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">FR</a>
+                </li>
+            </ul>
+        </div>
+        <form method="post">
             <img class="mb-4" src="~/img/logo-actemuim.png" alt="Actemuim logo" width="300">
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <h1 class="h3 mb-3 fw-normal">@Localizer["PlsSignIn"]</h1>
             <div asp-validation-summary="All" class="text-danger"></div>
-            <input type="text" id="inputUsername"  asp-for="Username" class="form-control" placeholder="Username" autofocus>
-            <input type="password" id="inputPassword" asp-for="Password" class="form-control" placeholder="Password">
+            <input type="text" id="inputUsername" asp-for="Username" class="form-control" placeholder="@Localizer["Username"]" autofocus>
+            <input type="password" id="inputPassword" asp-for="Password" class="form-control" placeholder="@Localizer["Password"]">
             <div class="checkbox mb-3">
                 <label>
-                    <input type="checkbox" value="remember-me" asp-for="RememberMe"> Remember me
+                    <input type="checkbox" asp-for="RememberMe"> @Localizer["RememberMe"]
                 </label>
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">@Localizer["SignIn"]</button>
         </form>
     </main>
 

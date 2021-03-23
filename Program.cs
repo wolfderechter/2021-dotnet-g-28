@@ -15,13 +15,6 @@ namespace _2021_dotnet_g_28
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            
-            using(ApplicationDbContext context = new ApplicationDbContext())
-            {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-
-            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

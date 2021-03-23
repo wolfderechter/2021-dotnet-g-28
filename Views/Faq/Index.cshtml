@@ -1,0 +1,58 @@
+﻿@using _2021_dotnet_g_28.Models.Viewmodels;
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model FaqIndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>FAQ</h1>
+<div class="w-75 mx-auto">
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                <button type="submit" vamue="Search" class="btn btn-primary ml-1">@Localizer["Search"]</button>
+
+                <a asp-action="Index" class="btn btn-primary ml-1">@Localizer["BackToFullList"]</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+<div id="accordion" class="w-75 mx-auto">
+    @foreach (var item in Model.Faqs)
+    {
+        <div class="card">
+            <div class="card-header" id="heading@(item.Id)">
+                <h5 class="mb-0">
+                    <button class="btn btn-link w-100 text-decoration-none text-dark" data-toggle="collapse" data-target="#collapse@(item.Id)" aria-expanded="true" aria-controls="collapse@(item.Id)">
+                        <div class="row">
+                            <div class="col">
+                                @item.Problem
+                            </div>
+                        </div>
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapse@(item.Id)" class="collapse" aria-labelledby="heading@(item.Id)" data-parent="#accordion">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            @foreach (var sol in @item.Solution)
+                            {
+                                <p>@sol <br /></p>
+                            }
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>}
+</div>

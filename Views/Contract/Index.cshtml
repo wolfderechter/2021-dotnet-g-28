@@ -1,0 +1,145 @@
+﻿@using _2021_dotnet_g_28.Models.Viewmodels;
+@using _2021_dotnet_g_28.Models.Domain;
+@model ContractIndexViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{ ViewData["Title"] = Localizer["Contracts"]; }
+
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<!-- showing filter in a form so you can post and filter on Duration and Status-->
+<div class="row">
+    <div class="col-lg-3 text-left">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group border border-dark">
+                @Html.DisplayNameFor(model => model.CheckBoxItems[0].Status)
+                @for (int i = 0; Model.CheckBoxItems.Count > i; i++)
+                {
+                    <div class="form-check border ">
+                        @Html.CheckBoxFor(model => model.CheckBoxItems[i].IsSelected, new { htmlAttributes = new { @class = "form-check-input" } })
+                        @Html.DisplayFor(model => model.CheckBoxItems[i].Status, new { htmlAttributes = new { @class = "form-check-label" } })
+                        @Html.HiddenFor(model => model.CheckBoxItems[i].Status, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>          }
+            </div>
+            <div class="form-group border  border-dark">
+                @Html.DisplayNameFor(model => model.DuurCheckbox[0].Duration)
+                @for (int i = 0; Model.DuurCheckbox.Count > i; i++)
+                {
+                    <div class="form-check border">
+                        @Html.CheckBoxFor(model => model.DuurCheckbox[i].IsSelected, new { htmlAttributes = new { @class = "form-check-input" } })
+                        @Html.DisplayFor(model => model.DuurCheckbox[i].Duration, new { htmlAttributes = new { @class = "form-check-label" } })
+                        @Html.HiddenFor(model => model.DuurCheckbox[i].Duration, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>      }
+            </div>
+
+            <button type="submit" class="btn btn-primary ml-1">@Localizer["Filter"]</button>
+            <a class="btn btn-primary" asp-action="Create">@Localizer["CreateNewContract"]</a>}
+    </div>
+    <!--table that will showing all the items that accept the filter-->
+    <div class="col-lg-9">
+        <table class="table">
+            <thead class="thead-light">
+                <tr class="bg-primary">
+                    <th>
+                        @Localizer["ContractNr"]
+                        @*@Html.DisplayNameFor(model => model.Contracts.ElementAt(1).ContractNr)*@
+                    </th>
+                    <th>
+                        @Localizer["Status"]
+                    </th>
+                    <th>
+                        @Localizer["ContractType"]
+                    </th>
+                    <th>
+                        @Localizer["EndDate"]
+                    </th>
+                    <th class="text-left">
+                        @Localizer["Actions"]
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="table-hover">
+                @foreach (var item in Model.Contracts)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContractNr)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                        <td>
+                            <button class="btn btn-warning btn-sm">
+                                @Html.ActionLink("Details", "Details", new { contractNr = @item.ContractNr }, new { @class = "text-white text-decoration-none" })
+                            </button>
+                            @if (item.Status != ContractEnum.status.Cancelled)
+                            {
+                                <a class="btn btn-danger btn-sm text-white" data-target="#confirm-delete" data-toggle="modal" data-item-id="@item.ContractNr">@Localizer["Cancel"]</a>
+                            }
+                        </td>
+                    </tr>
+}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--modal that's gonna show the cancel confirmation-->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@Localizer["ConfirmCacel"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["No"]</button>
+                <input type="submit" value="Yes" class="btn btn-danger btn-ok" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+
+        $('#confirm-delete').on('click', '.btn-ok', function (event) {
+            var $modalDiv = $(event.delegateTarget);
+            var id = $(this).data('itemId');
+            $.ajax({
+                url: '/Contract/Delete/' + id,
+                type: 'DELETE',
+                success: function (result) {
+                    window.location.reload();
+                }
+            });
+        });
+
+        $('#confirm-delete').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var contractid = button.data('item-id') //getting contractid from modal
+            // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-body').text(@Localizer["AreYouSure"] + contractid)
+            $('.btn-ok', this).data('itemId', contractid);
+        })
+
+    </script>
+}
+
