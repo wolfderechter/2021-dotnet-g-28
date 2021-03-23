@@ -39,7 +39,7 @@ namespace _2021_dotnet_g_28.Controllers
 
         public async Task<IActionResult> Index(TicketIndexViewModel model)
         {
-
+            //if tempdata is filled with a model -> use this model (gets emptied when read)
             if (TempData["tempModel"] != null)
             {
                 model = JsonConvert.DeserializeObject<TicketIndexViewModel>((string)TempData["tempModel"]);
@@ -93,6 +93,7 @@ namespace _2021_dotnet_g_28.Controllers
                 model.Tickets = _ticketRepository.GetByStatus(statusList);
             }
 
+            //writes model to session so that in next request it can get read and put into tempdata
             WriteTicketIndexViewModelToSession(model);
 
             return View(model);
