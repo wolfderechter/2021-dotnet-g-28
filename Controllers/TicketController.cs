@@ -93,9 +93,14 @@ namespace _2021_dotnet_g_28.Controllers
                 model.Tickets = _ticketRepository.GetByStatus(statusList);
             }
 
+            if(TempData["openTicket"] != null)
+            {
+                model.OpenedTicket = _ticketRepository.GetBy((int)TempData["openTicket"]);
+            }
+            
             //writes model to session so that in next request it can get read and put into tempdata
             WriteTicketIndexViewModelToSession(model);
-
+            
             return View(model);
         }
 
@@ -161,6 +166,7 @@ namespace _2021_dotnet_g_28.Controllers
 
         public IActionResult Edit(int ticketNr)
         {
+            TempData["openTicket"] = ticketNr;
             GetTicketIndexViewModelFromSessionAndPutInTempData();
             Ticket ticket = _ticketRepository.GetBy(ticketNr);
             if (ticket == null)
@@ -227,6 +233,7 @@ namespace _2021_dotnet_g_28.Controllers
             _ticketRepository.SaveChanges();
             TempData["message"] = $"Your reaction has been succesfully added";
 
+            TempData["openTicket"] = ticketNr;
             GetTicketIndexViewModelFromSessionAndPutInTempData();
 
             return RedirectToAction(nameof(Index));

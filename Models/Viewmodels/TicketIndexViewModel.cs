@@ -13,7 +13,7 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
         public IEnumerable<Ticket> Tickets;
         
         public List<StatusModelTicket> CheckBoxItems { get; set; }
-
-        
+        [TempData]
+        public Ticket OpenedTicket { get; set; }
     }
 }
