@@ -96,7 +96,7 @@ namespace _2021_dotnet_g_28.Controllers
                 model.CheckBoxItemsType.SingleOrDefault(c => c.Type == TicketEnum.Type.ProductionWillStop).IsSelected = true;
 
 
-                //insert tickets with status created and in progress
+                //insert tickets with status created,  in progress and type production stopped and production will stop
                 model.Tickets = _ticketRepository.GetByStatusAndType(new List<TicketEnum.Status> { TicketEnum.Status.Created, TicketEnum.Status.InProgress },
                     new List<TicketEnum.Type> { TicketEnum.Type.ProductionStopped, TicketEnum.Type.ProductionWillStop });
             }
