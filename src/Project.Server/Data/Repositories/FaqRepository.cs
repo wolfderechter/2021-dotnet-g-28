@@ -25,7 +25,7 @@ namespace _2021_dotnet_g_28.Data.Repositories
 
         public IEnumerable<Faq> GetBySearchstring(string searchstring)
         {
-            return _faqs.Where(f => f.Problem.Contains(searchstring));
+            return _faqs.AsEnumerable().Where(f => f.Problem.ToLower().Contains(searchstring.ToLower()) || f.Solution.AsEnumerable().Any(s => s.ToLower().Contains(searchstring.ToLower()))).ToList();
         }
     }
 }
