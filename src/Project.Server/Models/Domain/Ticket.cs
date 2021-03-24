@@ -38,14 +38,27 @@ namespace _2021_dotnet_g_28.Models.Domain
             Status = status;
             Attachments = new List<string>();
         }
-  
 
 
-        public void EditTicket(string title, string description, TicketEnum.Type type)
+
+        public void EditTicket(string title, string description, TicketEnum.Type type, List<string> files)
         {
+            if (string.IsNullOrWhiteSpace(title))
+                throw new ArgumentException("Ticket must have a title, and the name should contain between 5 and 100 characters");
+           
+
+            if (string.IsNullOrWhiteSpace(description))
+                throw new ArgumentException("Ticket must have a description");
+
             Title = title;
             Description = description;
             Type = type;
+            if (files.Count > 0)
+            {
+                Attachments = files;
+            }
+
+          
 
         }
 
