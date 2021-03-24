@@ -20,7 +20,6 @@ namespace _2021_dotnet_g_28.Models.Domain
         public ICollection<Reaction> Reactions { get; set; }
         public List<string> Attachments { get; set; }
         public DateTime Now { get; }
-        public TicketEnum.Type Type1 { get; }
         public TicketEnum.Status Created { get; }
 
         public Ticket()

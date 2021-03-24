@@ -28,7 +28,11 @@ namespace _2021_dotnet_g_28.Data.Repositories
         {
 
             return _contactPeople.Include(c => c.Company).ThenInclude(c=>c.Contracts).Include(c=>c.Notifications).SingleOrDefault(c => c.User.Id == userId);
+        }
 
+        public void SaveChanges() 
+        {
+            _dbContext.SaveChanges();
         }
     }
 }
