@@ -142,6 +142,7 @@ namespace _2021_dotnet_g_28.Controllers
             return View(model);
         }
 
+        //index post is nodig voor laatst geselecteerde filters bij te houden (query string was te groot om get te kunnen gebruiken)
         [HttpPost]
         public ActionResult Index(TicketIndexViewModel model)
         {
