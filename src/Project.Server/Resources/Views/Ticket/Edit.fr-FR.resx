@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="rememberMe" xml:space="preserve">
-    <value>Remember me</value>
+  <data name="Acceptable" xml:space="preserve">
+    <value>Les types de fichiers acceptés sont pdf/png/jpg/jpeg.</value>
+  </data>
+  <data name="Attachment" xml:space="preserve">
+    <value>Attachement :</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="MaxAmount" xml:space="preserve">
+    <value>Le nombre maximum de attachements : est de 5 !</value>
+  </data>
+  <data name="MaxFilesize" xml:space="preserve">
+    <value>La taille maximale des fichiers est de 5MB !</value>
+  </data>
+  <data name="SelectTypeOfTicket" xml:space="preserve">
+    <value>Sélectionnez le type de ticket</value>
   </data>
 </root>

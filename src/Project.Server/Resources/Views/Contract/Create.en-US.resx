@@ -139,7 +139,7 @@
     <value>List of contract types</value>
   </data>
   <data name="MaxRespons" xml:space="preserve">
-    <value>Ma. Respons time</value>
+    <value>Max. Response time</value>
   </data>
   <data name="MinDuration" xml:space="preserve">
     <value>Min. Duration</value>

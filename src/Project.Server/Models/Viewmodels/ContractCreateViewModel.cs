@@ -9,10 +9,10 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
     {
         [Required]
         [Range(1, 3, ErrorMessage = "The duration has to be 1,2 or 3 years")]
-         [Display(Name = "duration")]
+         [Display(Name = "Duration of contract in years (1, 2 or 3")]
         public int duration { get; set; }
         [Required]
-         [Display(Name = "typeName")]
+         [Display(Name = "Choose one of the contracttypes shown below")]
         public string TypeName { get; set; }
         
         public IEnumerable<ContractType> ContractTypes { get; set; }

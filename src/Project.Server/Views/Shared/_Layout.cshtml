@@ -64,7 +64,7 @@
                     <span class="link-text">Statistics</span>
                 </a>
             </li>
-            @if (!(bool)ViewData["isSupportManager"])
+            @if (!User.IsInRole("SupportManager"))
             {
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Contract" asp-action="Index">

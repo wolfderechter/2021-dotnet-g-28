@@ -117,46 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActemiumContract" xml:space="preserve">
-    <value>Contracts</value>
+  <data name="Hello" xml:space="preserve">
+    <value>Bonjour</value>
   </data>
-  <data name="Actions" xml:space="preserve">
-    <value>Actions</value>
+  <data name="LogIn" xml:space="preserve">
+    <value>Se connecter</value>
   </data>
-  <data name="AreYouSure" xml:space="preserve">
-    <value>Are you sure you wanna cancel the contract with contractNr</value>
+  <data name="LogOut" xml:space="preserve">
+    <value>Se déconnecter</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="ConfirmCacel" xml:space="preserve">
-    <value>Confirm cancel</value>
-  </data>
-  <data name="ContractNr" xml:space="preserve">
-    <value>ContractNr</value>
-  </data>
-  <data name="Contracts" xml:space="preserve">
-    <value>Contracts</value>
-  </data>
-  <data name="ContractType" xml:space="preserve">
-    <value>ContractType</value>
-  </data>
-  <data name="CreateNewContract" xml:space="preserve">
-    <value>Create new contract</value>
-  </data>
-  <data name="Details" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="EndDate" xml:space="preserve">
-    <value>End date</value>
-  </data>
-  <data name="Filter" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="No" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="Status" xml:space="preserve">
-    <value>Status</value>
+  <data name="Register" xml:space="preserve">
+    <value>Registre</value>
   </data>
 </root>

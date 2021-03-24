@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AssignedTechnician" xml:space="preserve">
-    <value>Assignd technician: </value>
+    <value>Assigned technician: </value>
   </data>
   <data name="Attachment" xml:space="preserve">
     <value>Attachment: No attachment</value>
@@ -130,13 +130,13 @@
     <value>Cancel</value>
   </data>
   <data name="ConfirmCancel" xml:space="preserve">
-    <value>Confirm Cancel</value>
+    <value>Confirm cancel</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
   </data>
   <data name="CreateNewTicket" xml:space="preserve">
-    <value>Create New Ticket</value>
+    <value>Create new ticket</value>
   </data>
   <data name="DateCreated" xml:space="preserve">
     <value>Date created:</value>
