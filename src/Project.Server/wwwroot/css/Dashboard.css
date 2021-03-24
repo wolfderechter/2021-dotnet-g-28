@@ -172,6 +172,10 @@ main {
     font-size: 12px
 }
 
+.navbar-nav li button {
+    display: none;
+}
+
 /*small screen*/
 @media only screen and (max-width: 600px) {
     .navbar {
@@ -229,6 +233,14 @@ main {
     }
 
     .navbar:hover .gebruikersnaam {
+        display: inline;
+    }
+
+    #notificationLi {
+        height: 5rem;
+    }
+
+    .navbar:hover .navbar-nav li button {
         display: inline;
     }
 }
