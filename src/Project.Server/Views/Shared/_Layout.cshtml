@@ -28,7 +28,7 @@
             @if (User.IsInRole("Customer") && ViewData["Notifications"] != null)
             {
                 var notifications = ViewData["Notifications"] as List<_2021_dotnet_g_28.Models.Domain.Notification>;
-                <li>
+                <li id="notificationLi">
                     <button type="button" class="btn btn-primary" id="open-notif">
                         <span>@Localizer["Notifications"]</span>
                         <span class="badge badge-light">@notifications.Count(n => !n.IsRead)</span>
@@ -47,7 +47,6 @@
                                 </div>
                             </div>
                         }
-
                     </div>
                 </li>
             }
