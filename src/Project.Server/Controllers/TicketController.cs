@@ -152,7 +152,7 @@ namespace _2021_dotnet_g_28.Controllers
 
         //index post is nodig voor laatst geselecteerde filters bij te houden (query string was te groot om get te kunnen gebruiken)
         [HttpPost]
-        public ActionResult Index(TicketIndexViewModel model)
+        public async Task<ActionResult> Index(TicketIndexViewModel model)
         {
             //reload tickets with new selected status
             List<TicketEnum.Status> statusList = new List<TicketEnum.Status>();
@@ -191,6 +191,24 @@ namespace _2021_dotnet_g_28.Controllers
             else
             {
                 ViewData["noTickets"] = false;
+            }
+
+            //notification and username doesn't dissapear when new checkbox in filter is selected
+            //get signed in user
+            var user = await _userManager.GetUserAsync(User);
+
+            if (User.IsInRole("SupportManager"))
+            {
+                //get support manager connected 
+                var supManager = _supportManagerRepository.GetById(user.Id);
+                ViewData["GebruikersNaam"] = supManager.FirstName + ' ' + supManager.LastName;
+            }
+            else
+            {
+                //get contactperson matching with signed in user
+                ContactPerson contactPerson = _contactPersonRepository.getById(user.Id);
+                ViewData["GebruikersNaam"] = contactPerson.FirstName + ' ' + contactPerson.LastName;
+                ViewData["Notifications"] = contactPerson.Notifications.Where(n => !n.IsRead).ToList();
             }
 
             return View(model);
