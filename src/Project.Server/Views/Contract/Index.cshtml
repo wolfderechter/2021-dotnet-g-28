@@ -17,7 +17,7 @@
         @using (Html.BeginForm())
         {
             <div class="form-group border border-dark">
-                @Html.DisplayNameFor(model => model.CheckBoxItems[0].Status)
+                <div class="text-center"> @Html.DisplayNameFor(model => model.CheckBoxItems[0].Status)</div>
                 @for (int i = 0; Model.CheckBoxItems.Count > i; i++)
                 {
                     <div class="form-check border ">
@@ -27,7 +27,7 @@
                     </div>}
             </div>
             <div class="form-group border  border-dark">
-                @Html.DisplayNameFor(model => model.DuurCheckbox[0].Duration)
+                <div class="text-center">@Html.DisplayNameFor(model => model.DuurCheckbox[0].Duration)</div>
                 @for (int i = 0; Model.DuurCheckbox.Count > i; i++)
                 {
                     <div class="form-check border">
