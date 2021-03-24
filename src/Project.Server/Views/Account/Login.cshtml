@@ -20,8 +20,9 @@
     <link href="~/css/Login.css" rel="stylesheet" />
 </head>
 <body class="text-center">
-
+    
     <main class="form-signin">
+        @await Html.PartialAsync("_LanguagePartial")
         <form method="post">
             <img class="mb-4" src="~/img/logo-actemuim.png" alt="Actemuim logo" width="300">
             <h1 class="h3 mb-3 fw-normal">@Localizer["PlsSignIn"]</h1>
