@@ -15,7 +15,7 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
         public List<StatusModelTicket> CheckBoxItemsStatus { get; set; }
         public List<TypeModelTicket> CheckBoxItemsType { get; set; }
 
-        [TempData]
+ 
         public Ticket OpenedTicket { get; set; }
 
     }

@@ -74,7 +74,7 @@ namespace _2021_dotnet_g_28.Controllers
             }
 
             //only do this when index gets called for first time
-            if (model.CheckBoxItemsStatus == null)
+            if (model.CheckBoxItemsStatus == null && model.CheckBoxItemsType == null)
             {
                 //Filteren op STATUS
                 //populate filter with checkbox options and setting 2 selected
@@ -112,16 +112,15 @@ namespace _2021_dotnet_g_28.Controllers
                     }
                 }
 
-
                 //reload tickets with new selected type
                 List<TicketEnum.Type> typeList = new List<TicketEnum.Type>();
-                //foreach (var item in model.CheckBoxItemsType)
-                //{
-                //    if (item.IsSelected)
-                //    {
-                //        typeList.Add(item.Type);
-                //    }
-                //}
+                foreach (var item in model.CheckBoxItemsType)
+                {
+                    if (item.IsSelected)
+                    {
+                        typeList.Add(item.Type);
+                    }
+                }
                 model.Tickets = _ticketRepository.GetByStatusAndType(statusList, typeList);
             }
 
@@ -247,6 +246,8 @@ namespace _2021_dotnet_g_28.Controllers
 
         public IActionResult Edit(int ticketNr)
         {
+            TempData["openTicket"] = ticketNr;
+            GetTicketIndexViewModelFromSessionAndPutInTempData();
             Ticket ticket = _ticketRepository.GetBy(ticketNr);
             if (ticket == null)
                 return NotFound();
@@ -350,6 +351,9 @@ namespace _2021_dotnet_g_28.Controllers
             ticket.AddReaction(new Reaction(reaction, contact.FirstName + " " + contact.LastName, false, ticketNr));
             _ticketRepository.SaveChanges();
             TempData["message"] = $"Your reaction has been succesfully added";
+            TempData["openTicket"] = ticketNr;
+            GetTicketIndexViewModelFromSessionAndPutInTempData();
+
             return RedirectToAction(nameof(Index), model);
         }
 

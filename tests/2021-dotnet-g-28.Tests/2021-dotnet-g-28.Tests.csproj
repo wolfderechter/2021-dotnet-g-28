@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\2021-dotnet-g-28\2021-dotnet-g-28.csproj" />
+    <ProjectReference Include="..\..\src\Project.Server\2021-dotnet-g-28.csproj" />
   </ItemGroup>
 
   <ItemGroup>

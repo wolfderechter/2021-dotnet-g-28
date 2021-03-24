@@ -24,7 +24,7 @@ body {
     }
 
     body::-webkit-scrollbar-thumb {
-        background-color: blue;
+        background-color: gray;
         border-radius: 5px;
     }
 
@@ -63,9 +63,8 @@ main {
     cursor: pointer;
 }
 
-.nav-item:nth-child(5) {
+.nav-item:nth-last-child(2) {
     margin-top: auto;
-    font-size: 12px;
 }
 
 
@@ -179,7 +178,8 @@ main {
     left: 100px;
     border-radius: 5px 0px 5px 5px;
     background-color: #fff;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 5;
 }
 
     .notifications h2 {
@@ -198,7 +198,7 @@ main {
     border-bottom: 1px solid #eee;
     padding: 6px 9px;
     margin-bottom: 0px;
-    cursor: pointer
+    cursor: pointer;
 }
 
     .notifications-item:hover {
