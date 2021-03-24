@@ -94,7 +94,6 @@ namespace _2021_dotnet_g_28.Controllers
             return View(contract);
         }
 
-        [HttpGet]
         public async Task<IActionResult> Create()
         {
             ContractCreateViewModel model = new ContractCreateViewModel();
@@ -114,14 +113,16 @@ namespace _2021_dotnet_g_28.Controllers
                 {
                     ContactPerson contactPerson = await GetLoggedInContactPerson();
                     ViewData["Notifications"] = contactPerson.Notifications;
+                   
                     var contract = new Contract(_contractTypeRepository.GetByName(model.TypeName), model.duration, contactPerson.Company);
                     _contractRepository.Add(contract);
                     _contractRepository.SaveChanges();
                     TempData["message"] = $"You successfully created a new contract .";
                 }
-                catch (ArgumentException)
+                catch (ArgumentException ex)
                 {
-                    TempData["error"] = "Sorry, you can only have one contract that's either running or in progress";
+                   
+                    TempData["error"] = ex.Message;
                     ViewData["ContractTypeNames"] = GetCategoriesSelectList();
                     model.ContractTypes = _contractTypeRepository.GetAllActive();
                     return View(model);

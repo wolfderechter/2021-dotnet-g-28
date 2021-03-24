@@ -32,8 +32,9 @@ namespace _2021_dotnet_g_28.Models.Domain
             if (contract.Status == ContractEnum.status.InProgress || contract.Status == ContractEnum.status.Running) 
             {
                 if (Contracts.Where(c=>c.Type == contract.Type).Any(c => c.Status == ContractEnum.status.InProgress || c.Status == ContractEnum.status.Running))
-                    throw new ArgumentException($"A company can only have one contract with status {contract.Status}.");
+                    throw new ArgumentException($"You can only have one contract that's either running or in progress");
             }
+            
             Contracts.Add(contract);
         }
 

@@ -82,61 +82,61 @@
                             </h5>
                         </div>
 
-                        <div id="collapse@(item.TicketNr)" class="@(Model.OpenedTicket != null?Model.OpenedTicket.Equals(item)?"collapse show":"collapse":"collapse")" aria-labelledby="heading@(item.TicketNr)" data-parent="#accordion" onclick="collapseClick(@item)">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <p>Date created: @item.DateCreation</p>
-                                        <p>Type: @Html.DisplayFor(model => item.Type)</p>
-                                        <p>Assigned technician: </p>
-                                        @{ if (item.Attachments.Count < 1)
+                    <div id="collapse@(item.TicketNr)" class="@(Model.OpenedTicket != null?Model.OpenedTicket.Equals(item)?"collapse show":"collapse":"collapse")" aria-labelledby="heading@(item.TicketNr)" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Date created: @item.DateCreation</p>
+                                    <p>Type: @Html.DisplayFor(model => item.Type)</p>
+                                    <p>Assigned technician: </p>
+                                    @{ if (item.Attachments.Count < 1)
+                                        {
+                                            <p>Attachment: No attachment </p> }
+                                        else
+                                        {
+                                            <p>Attachment: </p>
+                                            @foreach (var attachm in @item.Attachments)
                                             {
-                                                <p>Attachment: No attachment </p> }
-                                            else
-                                            {
-                                                <p>Attachment: </p>
-                                                @foreach (var attachm in @item.Attachments)
-                                                {
-                                                    <a asp-controller="Ticket" asp-action="Download" asp-route-filename="@attachm">@attachm.Substring(attachm.IndexOf("_") + 1)</a> <br>
-                                                }
+                                                <a asp-controller="Ticket" asp-action="Download" asp-route-filename="@attachm">@attachm.Substring(attachm.IndexOf("_") + 1)</a> <br>
                                             }
                                         }
-                                    </div>
-                                    <div class="col">
-                                        <p>Description: @item.Description</p>
-                                    </div>
+                                    }
                                 </div>
+                                <div class="col">
+                                    <p>Description: @item.Description</p>
+                                </div>
+                            </div>
 
-                                @foreach (var reaction in item.Reactions)
+                            @foreach (var reaction in item.Reactions)
+                            {
+                                if (reaction.ReactionSup)
                                 {
-                                    if (reaction.ReactionSup)
-                                    {
-                                        <div class="col-md-12 mb-3 d-inline-flex">
-                                            <p class=" bg-primary rounded-pill text-white p-2 mr-3 border">
-                                                @reaction.NameUserReaction
-                                            </p>
-                                            <p class=" rounded-pill p-2 border">
-                                                @reaction.Text
-                                            </p>
-                                        </div>
-                                    }
-                                    else
-                                    {
-
-                                        <div class="col-md-12 mb-3 text-right d-inline-flex flex-row-reverse">
-                                            <p class=" bg-primary rounded-pill text-white p-2 mr-3 border text-nowrap fit-content">
-                                                @reaction.NameUserReaction
-                                            </p>
-                                            <p class=" rounded-pill p-2 border">
-                                                @reaction.Text
-                                            </p>
-                                        </div>
-                                    }
+                                    <div class="col-md-12 mb-1 d-inline-flex">
+                                        <p class=" bg-primary rounded-pill text-white p-2 mr-2 border">
+                                            @reaction.NameUserReaction
+                                        </p>
+                                        <p class=" rounded-pill p-2 border gray-bg">
+                                            @reaction.Text
+                                        </p>
+                                    </div>
                                 }
-                                @using (@Html.BeginForm("AddReaction", "Ticket", FormMethod.Post))
+                                else
                                 {
-                                    <div class="row">
-                                        <div class="btn-group w-100" role="toolbar">
+
+                                    <div class="col-md-12 mb-3 text-right d-inline-flex flex-row-reverse">
+                                        <p class=" bg-primary rounded-pill text-white p-2 ml-2 border text-nowrap fit-content">
+                                            @reaction.NameUserReaction
+                                        </p>
+                                        <p class=" rounded-pill p-2 border gray-bg">
+                                            @reaction.Text
+                                        </p>
+                                    </div>
+                                }
+                            }
+                            @using (@Html.BeginForm("AddReaction", "Ticket", FormMethod.Post))
+                            {
+                                <div class="row">
+                                    <div class="btn-group w-100" role="toolbar">
 
 
                                             @*<a asp-controller="Ticket" asp-action="Stop" asp-route-ticketnr="@item.TicketNr" class="btn btn-danger col-md-2 col-sm-3">Cancel</a>*@

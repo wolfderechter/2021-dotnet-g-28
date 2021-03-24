@@ -37,12 +37,14 @@ namespace _2021_dotnet_g_28.Models.Domain
             
         }
 
-        public Contract(ContractType type,int Duration,Company company)
+        public Contract(ContractType type,int duration,Company company)
         {
+            
+            if (duration < type.MinDuration) throw new ArgumentException("The duration has to be atleast equal to the min duration of their contractype");
             Type = type;
             Company = company;
             StartDate = DateTime.Now;
-            EndDate = DateTime.Now.AddYears(Duration);
+            EndDate = DateTime.Now.AddYears(duration);
             Status = ContractEnum.status.InProgress;
             Company = company;
             company.AddContract(this);
