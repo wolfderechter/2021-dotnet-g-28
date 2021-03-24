@@ -49,6 +49,19 @@ namespace _2021_dotnet_g_28.Tests.Controllers
             
 
         }
+
+        #region -- Delete GET --
+        [Fact]
+        public void DeleteHttpGet_RedirectsToIndex()
+        {
+            var ticket1 = new Ticket() { DateCreation = DateTime.Now, Title = "Malfunction in main line", Status = TicketEnum.Status.Created, Type = TicketEnum.Type.NoImpact, Description = "The factory stopped producing because of a fault in the main line ", Attachments = new List<string>() };
+            _mockTicketRepository.Setup(t => t.GetBy(ticket1.TicketNr)).Returns(ticket1);
+            _mockTicketRepository.Setup(t => t.Delete(It.IsAny<Ticket>()));
+            var result = Assert.IsType<ViewResult>(_ticketController.Delete(ticket1.TicketNr));
+            Ticket ticket = (Ticket)result.Model;
+            Assert.Equal("Malfunction in main line", ticket.Title);
+        }
+        #endregion
     }
- }
+}
 
