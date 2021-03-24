@@ -45,7 +45,7 @@
                             @Html.DisplayFor(model => model.CheckBoxItemsType[i].Type, new { htmlAttributes = new { @class = "form-check-label" } })
                             @Html.HiddenFor(model => model.CheckBoxItemsType[i].Type, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
-                     }
+                    }
 
                 </div>
                 //<button type="submit" class="btn btn-primary ml-1">Filter</button>
@@ -55,102 +55,110 @@
         </div>
 
         <div id="accordion" class="col-xl-9 pr-0">
-            @foreach (var item in Model.Tickets)
+            @if ((bool)ViewData["noTickets"])
             {
-                <div class="card @(item.Type == TicketEnum.Type.NoImpact ? "border-no-impact" : item.Type == TicketEnum.Type.ProductionStopped ? "border-production-stopped" : item.Type == TicketEnum.Type.ProductionWillStop ? "border-production-will-stop" : "") mr-3">
-                    <div class="card-header" id="heading@(item.TicketNr)">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link w-100 text-decoration-none text-dark" data-toggle="collapse" data-target="#collapse@(item.TicketNr)" aria-expanded="true" aria-controls="collapse@(item.TicketNr)">
+                <h1>No tickets available</h1>
+            }
+            else
+            {
+                @foreach (var item in Model.Tickets)
+                {
+                    <div class="card @(item.Type == TicketEnum.Type.NoImpact ? "border-no-impact" : item.Type == TicketEnum.Type.ProductionStopped ? "border-production-stopped" : item.Type == TicketEnum.Type.ProductionWillStop ? "border-production-will-stop" : "") mr-3">
+                        <div class="card-header" id="heading@(item.TicketNr)">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link w-100 text-decoration-none text-dark" data-toggle="collapse" data-target="#collapse@(item.TicketNr)" aria-expanded="true" aria-controls="collapse@(item.TicketNr)">
+                                    <div class="row">
+                                        <div class="col">
+                                            @item.TicketNr
+                                        </div>
+                                        <div class="col">
+                                            @item.Title
+                                        </div>
+                                        <div class="col">
+                                            @Html.DisplayFor(model => item.Status)
+                                        </div>
+                                    </div>
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapse@(item.TicketNr)" class="@(Model.OpenedTicket != null?Model.OpenedTicket.Equals(item)?"collapse show":"collapse":"collapse")" aria-labelledby="heading@(item.TicketNr)" data-parent="#accordion" onclick="collapseClick(@item)">
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        @item.TicketNr
-                                    </div>
-                                    <div class="col">
-                                        @item.Title
-                                    </div>
-                                    <div class="col">
-                                        @Html.DisplayFor(model => item.Status)
-                                    </div>
-                                </div>
-                            </button>
-                        </h5>
-                    </div>
-
-                    <div id="collapse@(item.TicketNr)" class="@(Model.OpenedTicket != null?Model.OpenedTicket.Equals(item)?"collapse show":"collapse":"collapse")" aria-labelledby="heading@(item.TicketNr)" data-parent="#accordion" onclick="collapseClick(@item)">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <p>Date created: @item.DateCreation</p>
-                                    <p>Type: @Html.DisplayFor(model => item.Type)</p>
-                                    <p>Assigned technician: </p>
-                                    @{ if (item.Attachments.Count < 1)
-                                        {
-                                            <p>Attachment: No attachment </p> }
-                                        else
-                                        {
-                                            <p>Attachment: </p>
-                                            @foreach (var attachm in @item.Attachments)
+                                        <p>Date created: @item.DateCreation</p>
+                                        <p>Type: @Html.DisplayFor(model => item.Type)</p>
+                                        <p>Assigned technician: </p>
+                                        @{ if (item.Attachments.Count < 1)
                                             {
-                                                <a asp-controller="Ticket" asp-action="Download" asp-route-filename="@attachm">@attachm.Substring(attachm.IndexOf("_") + 1)</a> <br>
+                                                <p>Attachment: No attachment </p> }
+                                            else
+                                            {
+                                                <p>Attachment: </p>
+                                                @foreach (var attachm in @item.Attachments)
+                                                {
+                                                    <a asp-controller="Ticket" asp-action="Download" asp-route-filename="@attachm">@attachm.Substring(attachm.IndexOf("_") + 1)</a> <br>
+                                                }
                                             }
                                         }
+                                    </div>
+                                    <div class="col">
+                                        <p>Description: @item.Description</p>
+                                    </div>
+                                </div>
+
+                                @foreach (var reaction in item.Reactions)
+                                {
+                                    if (reaction.ReactionSup)
+                                    {
+                                        <div class="col-md-12 mb-3 d-inline-flex">
+                                            <p class=" bg-primary rounded-pill text-white p-2 mr-3 border">
+                                                @reaction.NameUserReaction
+                                            </p>
+                                            <p class=" rounded-pill p-2 border">
+                                                @reaction.Text
+                                            </p>
+                                        </div>
                                     }
-                                </div>
-                                <div class="col">
-                                    <p>Description: @item.Description</p>
-                                </div>
+                                    else
+                                    {
+
+                                        <div class="col-md-12 mb-3 text-right d-inline-flex flex-row-reverse">
+                                            <p class=" bg-primary rounded-pill text-white p-2 mr-3 border text-nowrap fit-content">
+                                                @reaction.NameUserReaction
+                                            </p>
+                                            <p class=" rounded-pill p-2 border">
+                                                @reaction.Text
+                                            </p>
+                                        </div>
+                                    }
+                                }
+                                @using (@Html.BeginForm("AddReaction", "Ticket", FormMethod.Post))
+                                {
+                                    <div class="row">
+                                        <div class="btn-group w-100" role="toolbar">
+
+
+                                            @*<a asp-controller="Ticket" asp-action="Stop" asp-route-ticketnr="@item.TicketNr" class="btn btn-danger col-md-2 col-sm-3">Cancel</a>*@
+                                            @if (item.Status != TicketEnum.Status.Cancelled)
+                                            {
+                                                <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="btn btn-primary col-md-2 col-sm-3">Edit</a>
+                                                <a class="btn btn-danger col-md-2 col-sm-3 text-white" data-target="#confirm-delete" data-toggle="modal" data-item-id="@item.TicketNr">Cancel</a>
+                                            }
+                                            <input type="text" name="reaction" class=" col-md-9 col-sm-3" placeholder="Type reaction here" required>
+                                            <input type="hidden" name="ticketNr" value="@item.TicketNr">
+                                            <button class="btn btn-primary col-md-2 col-sm-3" type="submit">React</button>
+                                        </div>
+                                    </div>
+
+                                }
                             </div>
-
-                            @foreach (var reaction in item.Reactions)
-                            {
-                                if (reaction.ReactionSup)
-                                {
-                                    <div class="col-md-12 mb-3 d-inline-flex">
-                                        <p class=" bg-primary rounded-pill text-white p-2 mr-3 border">
-                                            @reaction.NameUserReaction
-                                        </p>
-                                        <p class=" rounded-pill p-2 border">
-                                            @reaction.Text
-                                        </p>
-                                    </div>
-                                }
-                                else
-                                {
-                                
-                                <div class="col-md-12 mb-3 text-right d-inline-flex flex-row-reverse">
-                                    <p class=" bg-primary rounded-pill text-white p-2 mr-3 border text-nowrap fit-content">
-                                        @reaction.NameUserReaction
-                                    </p>
-                                    <p class=" rounded-pill p-2 border">
-                                        @reaction.Text
-                                    </p>
-                                </div>
-                                }
-                            }
-                            @using (@Html.BeginForm("AddReaction", "Ticket", FormMethod.Post))
-                            {
-                                <div class="row">
-                                    <div class="btn-group w-100" role="toolbar">
-
-
-                                        @*<a asp-controller="Ticket" asp-action="Stop" asp-route-ticketnr="@item.TicketNr" class="btn btn-danger col-md-2 col-sm-3">Cancel</a>*@
-                                        @if (item.Status != TicketEnum.Status.Cancelled)
-                                        {
-                                            <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="btn btn-primary col-md-2 col-sm-3">Edit</a>
-                                            <a class="btn btn-danger col-md-2 col-sm-3 text-white" data-target="#confirm-delete" data-toggle="modal" data-item-id="@item.TicketNr">Cancel</a>
-                                        }
-                                        <input type="text" name="reaction" class=" col-md-9 col-sm-3" placeholder="Type reaction here" required>
-                                        <input type="hidden" name="ticketNr" value="@item.TicketNr">
-                                        <button class="btn btn-primary col-md-2 col-sm-3" type="submit">React</button>
-                                    </div>
-                                </div>
-
-                            }
                         </div>
                     </div>
-                </div>
 
+                }
             }
+
         </div>
 
     </div>
