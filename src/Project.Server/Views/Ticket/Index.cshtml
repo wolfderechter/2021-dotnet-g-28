@@ -97,7 +97,7 @@
                                             <p>Attachment: </p>
                                             @foreach (var attachm in @item.Attachments)
                                             {
-                                                <a asp-controller="Ticket" asp-action="Download" asp-route-filename="@attachm">@attachm.Substring(attachm.IndexOf("_") + 1)</a> <br>
+                                                <a class="text-decoration-none btn btn-outline-primary mb-2" asp-controller="Ticket" asp-action="Download" asp-route-filename="@attachm">@attachm.Substring(attachm.IndexOf("_") + 1)</a>
                                             }
                                         }
                                     }
