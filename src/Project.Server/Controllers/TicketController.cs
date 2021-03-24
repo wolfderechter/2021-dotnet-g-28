@@ -292,10 +292,11 @@ namespace _2021_dotnet_g_28.Controllers
                 try
                 {
                     Ticket ticket = _ticketRepository.GetBy(ticketNr);
-
+                    List<string> files = new List<string>();
                     if (ticketEditViewModel.Attachments != null)
                     {
-                        ticket.Attachments = new List<string>();
+
+                        
                         foreach (IFormFile attachm in ticketEditViewModel.Attachments)
                         {
                             string uniqueFileName = Guid.NewGuid().ToString() + "_" + attachm.FileName;
@@ -327,11 +328,11 @@ namespace _2021_dotnet_g_28.Controllers
 
                             }
                             attachm.CopyTo(stream);
-                            ticket.Attachments.Add(uniqueFileName);
+                            files.Add(uniqueFileName);
                         }
                     }
 
-                    ticket.EditTicket(ticketEditViewModel.Title, ticketEditViewModel.Description, ticketEditViewModel.Type);
+                    ticket.EditTicket(ticketEditViewModel.Title, ticketEditViewModel.Description, ticketEditViewModel.Type, files);
                     _ticketRepository.SaveChanges();
                     TempData["message"] = $"You successfully updated the ticket.";
                 }
