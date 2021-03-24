@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="_2021_dotnet_g_28.Models.Domain.Company">
+    <Position X="10.5" Y="0.5" Width="3.75" />
+    <AssociationLine Name="ContactPersons" Type="_2021_dotnet_g_28.Models.Domain.ContactPerson" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.938" Y="3.786" />
+        <Point X="10.938" Y="5.75" />
+        <Point X="7" Y="5.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAQBAAAAAAAAAAAAEAAAQAAAIAAAAAggAKCAAAAEA=</HashCode>
+      <FileName>Models\Domain\Company.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Tickets" />
+      <Property Name="ContactPersons" />
+      <Property Name="Contracts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.ContactPerson">
+    <Position X="3.75" Y="5" Width="3.25" />
+    <AssociationLine Name="Company" Type="_2021_dotnet_g_28.Models.Domain.Company" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7" Y="6.188" />
+        <Point X="11.312" Y="6.188" />
+        <Point X="11.312" Y="3.786" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAADAEAAAAAgAAAAAAAAAAAAAAAAAAAAAAAABAAAAAg=</HashCode>
+      <FileName>Models\Domain\ContactPerson.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Company" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Notifications" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.Contract">
+    <Position X="14" Y="6" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAACAAAAAAAAAAAgAIAAAAAAAQAABEAAAAA=</HashCode>
+      <FileName>Models\Domain\Contract.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Company" />
+      <Property Name="Type" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.Faq">
+    <Position X="7.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\Faq.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.Ticket">
+    <Position X="15.5" Y="0.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEIAggAEEAAAEAAAAAACIAAAQAAQABoAAAIAA=</HashCode>
+      <FileName>Models\Domain\Ticket.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Reactions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.Notification">
+    <Position X="7.25" Y="2.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAEAAAAAAAAACAAAAAgAAAAAQ=</HashCode>
+      <FileName>Models\Domain\Notification.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.Reaction">
+    <Position X="17.5" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAIAAADAAAAAACAEAAAA=</HashCode>
+      <FileName>Models\Domain\Reaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.ContractType">
+    <Position X="7.75" Y="6.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAEAAAAARAAAAAIAAAIAACAAAACAA=</HashCode>
+      <FileName>Models\Domain\ContractType.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="contracts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.ContractTypeEnum">
+    <Position X="1.25" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="_2021_dotnet_g_28.Models.Domain.ContractTypeEnum.CreationMethod">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Domain\ContractTypeEnum.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\ContractTypeEnum.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.ContractEnum">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="_2021_dotnet_g_28.Models.Domain.ContractEnum.status">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Domain\ContractEnum.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\ContractEnum.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.SupportManager">
+    <Position X="5.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACDAEAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\Domain\SupportManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_2021_dotnet_g_28.Models.Domain.TicketEnum">
+    <Position X="1.25" Y="3.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="_2021_dotnet_g_28.Models.Domain.TicketEnum.Status">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Domain\TicketEnum.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="_2021_dotnet_g_28.Models.Domain.TicketEnum.Type">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Domain\TicketEnum.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\TicketEnum.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
