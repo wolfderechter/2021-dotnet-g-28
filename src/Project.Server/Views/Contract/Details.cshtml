@@ -13,40 +13,40 @@
 
 <div class="row">
     <div class="col-4">
-        @Html.DisplayNameFor(model => model.ContractNr)
+        @Localizer["ContractNr"]
         :
         @Html.DisplayFor(model => model.ContractNr)
     </div>
     <div class="col-4">
-        @Html.DisplayNameFor(model => model.StartDate)
+        @Localizer["StartDate"]
         :
         @Html.DisplayFor(model => model.StartDate)
     </div>
     <div class="col-4">
-        @Html.DisplayNameFor(model => model.Duration)
+        @Localizer["Duration"]
         :
         @Html.DisplayFor(model => model.Duration)
         @if (Model.Duration > 1)
-        {<span>years</span>}
+        {<span>@Localizer["Years"]</span>}
 
         else
-        {<span>year</span>}
+        {<span>@Localizer["Year"]</span>}
     </div>
 
 
 </div>
 <div class="row">
     <div class="col-4">
-        <p>Company: @Model.Company.CompanyName</p>
+        <p>@Localizer["Company"]: @Model.Company.CompanyName</p>
 
     </div>
     <div class="col-4">
-        @Html.DisplayNameFor(model => model.EndDate)
+        @Localizer["EndDate"]
         :
         @Html.DisplayFor(model => model.EndDate)
     </div>
     <div class="col-4">
-        @Html.DisplayNameFor(model => model.Status)
+        @Localizer["Status"]
         :
         @Html.DisplayFor(model => model.Status)
     </div>
@@ -57,38 +57,38 @@
 
     <div class="row">
         <div class="col-5 ">
-            @Html.DisplayNameFor(model => model.Type.Name):
+            @Localizer["NameOfContract"]:
             @Html.DisplayFor(model => model.Type.Name)
         </div>
         <div class="col-5">
-            @Html.DisplayNameFor(model => model.Type.MinDuration):
+            @Localizer["MinDuration"]:
             @Html.DisplayFor(model => model.Type.MinDuration)
 
         </div>
     </div>
     <div class="row">
         <div class="col-5">
-            @Html.DisplayNameFor(model => model.Type.MaxResponseTime):
+            @Localizer["MaxResponseTime"]:
             @Html.DisplayFor(model => model.Type.MaxResponseTime)
         </div>
         <div class="col-5">
-            @Html.DisplayNameFor(model => model.Type.IsOutsideBusinessHours):
+            @Localizer["Availability"]:
             @if (Model.Type.IsOutsideBusinessHours)
             {<span>24/7</span>}
             else
-            {<span>Weekdays (8-17)</span>}
+            {<span>@Localizer["Weekdays"] (8-17)</span>}
         </div>
     </div>
     <div class="row">
         <div class="col-5">
-            @Html.DisplayNameFor(model => model.Type.Price):
+            @Localizer["PriceMonth"]:
             @Html.DisplayFor(model => model.Type.Price)
         </div>
         <div class="col-5">
-            @Html.DisplayNameFor(model => model.Type.CreationMethod):
+            @Localizer["CreationMethod"]:
             @Html.DisplayFor(model => model.Type.CreationMethod)
         </div>
     </div>
 </div>
-<a class="btn btn-primary" asp-action="Index">Back to List</a>
+<a class="btn btn-primary" asp-action="Index">@Localizer["BackToList"]</a>
 

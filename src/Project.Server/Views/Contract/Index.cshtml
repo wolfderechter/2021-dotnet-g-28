@@ -17,7 +17,7 @@
         @using (Html.BeginForm())
         {
             <div class="form-group border border-dark">
-                <div class="text-center"> @Html.DisplayNameFor(model => model.CheckBoxItems[0].Status)</div>
+                <div class="text-center">@Localizer["Status"]</div>
                 @for (int i = 0; Model.CheckBoxItems.Count > i; i++)
                 {
                     <div class="form-check border ">
@@ -27,7 +27,7 @@
                     </div>}
             </div>
             <div class="form-group border  border-dark">
-                <div class="text-center">@Html.DisplayNameFor(model => model.DuurCheckbox[0].Duration)</div>
+                <div class="text-center">@Localizer["Duration"]</div>
                 @for (int i = 0; Model.DuurCheckbox.Count > i; i++)
                 {
                     <div class="form-check border">
@@ -107,15 +107,14 @@
             <div class="modal-body"></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["No"]</button>
-                <input type="submit" value="Yes" class="btn btn-danger btn-ok" />
+                <input type="submit" value=@Localizer["Yes"] class="btn btn-danger btn-ok" />
             </div>
         </div>
     </div>
 </div>
 
 @section scripts {
-    <script>
-        $('#confirm-delete').on('click', '.btn-ok', function (event) {
+    <script>$('#confirm-delete').on('click', '.btn-ok', function (event) {
             var $modalDiv = $(event.delegateTarget);
             var id = $(this).data('itemId');
             $.ajax({
@@ -132,10 +131,9 @@
             var contractid = button.data('item-id') //getting ticketid from modal
 
             var modal = $(this)
-            modal.find('.modal-body').text("Are you sure you wanna cancel the contract with contractNr  " + contractid)
+            modal.find('.modal-body').text("Are you sure you wanna cancel the contract with contractNr " + contractid)
             $('.btn-ok', this).data('itemId', contractid);
-        })
-    </script>
+        })</script>
 }
 
 

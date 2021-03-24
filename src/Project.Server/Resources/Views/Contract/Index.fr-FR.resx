@@ -126,6 +126,9 @@
   <data name="AreYouSure" xml:space="preserve">
     <value>Vous êtes sûr</value>
   </data>
+  <data name="AreYouSureWannaCancelContract" xml:space="preserve">
+    <value>Vous êtes sûr de vouloir annuler le contrat avec</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="Details" xml:space="preserve">
     <value>Détails</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Durée</value>
   </data>
   <data name="EndDate" xml:space="preserve">
     <value>Date d'expiration</value>

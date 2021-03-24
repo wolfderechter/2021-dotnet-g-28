@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Availability" xml:space="preserve">
+    <value>Disponibilité</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>Retour à la liste</value>
   </data>
+  <data name="Company" xml:space="preserve">
+    <value>Compagnie</value>
+  </data>
   <data name="ContractNr" xml:space="preserve">
     <value>N° de contrat</value>
+  </data>
+  <data name="CreationMethod" xml:space="preserve">
+    <value>Méthode de création</value>
   </data>
   <data name="DetailsContract" xml:space="preserve">
     <value>Détails du contrat</value>
@@ -132,13 +141,31 @@
   <data name="EndDate" xml:space="preserve">
     <value>Date d'expiration</value>
   </data>
+  <data name="MaxResponseTime" xml:space="preserve">
+    <value>Durée minimale</value>
+  </data>
+  <data name="MinDuration" xml:space="preserve">
+    <value>Durée min</value>
+  </data>
   <data name="NameOfContract" xml:space="preserve">
     <value>Nom du contrat</value>
+  </data>
+  <data name="PriceMonth" xml:space="preserve">
+    <value>Prix/mois</value>
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>Date de début</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Statut</value>
+  </data>
+  <data name="Weekdays" xml:space="preserve">
+    <value>Les jours de la semaine</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>année</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>années</value>
   </data>
 </root>

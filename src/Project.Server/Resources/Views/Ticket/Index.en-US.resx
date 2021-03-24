@@ -156,7 +156,16 @@
   <data name="React" xml:space="preserve">
     <value>React</value>
   </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="Type" xml:space="preserve">
     <value>Type:</value>
+  </data>
+  <data name="Type2" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

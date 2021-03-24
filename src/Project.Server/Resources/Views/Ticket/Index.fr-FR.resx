@@ -154,9 +154,18 @@
     <value>Non</value>
   </data>
   <data name="React" xml:space="preserve">
-    <value>React</value>
+    <value>Réagir</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type:</value>
+  </data>
+  <data name="Type2" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Oui</value>
   </data>
 </root>

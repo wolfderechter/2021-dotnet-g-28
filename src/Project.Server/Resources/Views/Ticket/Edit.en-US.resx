@@ -126,6 +126,21 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Company" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="CreateTicket" xml:space="preserve">
+    <value>Create a new ticket</value>
+  </data>
+  <data name="CreateTicket2" xml:space="preserve">
+    <value>Create ticket</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="EditTicket" xml:space="preserve">
+    <value>Edit ticket</value>
+  </data>
   <data name="MaxAmount" xml:space="preserve">
     <value>Max amount of attachments is 5!</value>
   </data>
@@ -134,5 +149,11 @@
   </data>
   <data name="SelectTypeOfTicket" xml:space="preserve">
     <value>Select type of ticket</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
   </data>
 </root>
