@@ -79,7 +79,6 @@ namespace _2021_dotnet_g_28.Tests
             List<string> files = new List<string>();
             files.Add("image.jpg");
             ticket.EditTicket(ticket.Title, ticket.Description, ticket.Type, files);
-
             Assert.Equal(files, ticket.Attachments);
         }
 

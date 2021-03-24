@@ -16,5 +16,6 @@ namespace _2021_dotnet_g_28.Models.Viewmodels
         public string TypeName { get; set; }
         
         public IEnumerable<ContractType> ContractTypes { get; set; }
+
     }
 }
