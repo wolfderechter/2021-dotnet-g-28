@@ -46,12 +46,19 @@ namespace _2021_dotnet_g_28.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(TicketIndexViewModel model)
+        public async Task<IActionResult> Index()
         {
+            TicketIndexViewModel model = new TicketIndexViewModel();
+
             //if tempdata is filled with a model -> use this model (gets emptied when read)
             if (TempData["tempModel"] != null)
             {
                 model = JsonConvert.DeserializeObject<TicketIndexViewModel>((string)TempData["tempModel"]);
+            }
+
+            if(HttpContext.Session.GetString("model") != null)
+            {
+                model = JsonConvert.DeserializeObject<TicketIndexViewModel>(HttpContext.Session.GetString("model"));
             }
 
             //get signed in user
@@ -135,21 +142,41 @@ namespace _2021_dotnet_g_28.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<ActionResult> Index(TicketIndexViewModel model)
-        //{
-        //    //getting contactperson from the signedin user
-        //    ContactPerson contactPerson = await GetLoggedInContactPerson();
-        //    //getting the selected statusses/
-        //    List<TicketEnum.Status> selectedStatusses = model.CheckBoxItemsStatus.Where(c => c.IsSelected).Select(c => c.Status).ToList();
+        [HttpPost]
+        public ActionResult Index(TicketIndexViewModel model)
+        {
+            //reload tickets with new selected status
+            List<TicketEnum.Status> statusList = new List<TicketEnum.Status>();
+            foreach (var item in model.CheckBoxItemsStatus)
+            {
+                if (item.IsSelected)
+                {
+                    statusList.Add(item.Status);
+                }
+            }
 
-        //    //getting the selected types/
-        //    List<TicketEnum.Type> selectedTypes = model.CheckBoxItemsType.Where(c => c.IsSelected).Select(c => c.Type).ToList();
+            //reload tickets with new selected type
+            List<TicketEnum.Type> typeList = new List<TicketEnum.Type>();
+            foreach (var item in model.CheckBoxItemsType)
+            {
+                if (item.IsSelected)
+                {
+                    typeList.Add(item.Type);
+                }
+            }
+            model.Tickets = _ticketRepository.GetByStatusAndType(statusList, typeList);
 
-        //    //getting contracts connected to statusses
-        //    model.Tickets = _ticketRepository.GetByStatusAndType(selectedStatusses, selectedTypes);
-        //    return View(model);
-        //}
+
+            if (TempData["openTicket"] != null)
+            {
+                model.OpenedTicket = _ticketRepository.GetBy((int)TempData["openTicket"]);
+            }
+
+            //writes model to session so that in next request it can get read and put into tempdata
+            WriteTicketIndexViewModelToSession(model);
+
+            return View(model);
+        }
 
         public async Task<IActionResult> Create()
         {
@@ -354,10 +381,10 @@ namespace _2021_dotnet_g_28.Controllers
             TempData["openTicket"] = ticketNr;
             GetTicketIndexViewModelFromSessionAndPutInTempData();
 
-            return RedirectToAction(nameof(Index), model);
+            return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Download(TicketEditViewModel ticketEditViewModel, string filename)
+        public IActionResult Download(string filename)
         {
             //byte[] fileBytes = System.IO.File.ReadAllBytes(Path.Combine(_hostingEnvironment.WebRootPath, "attachments", filename));
             //var vpath = filepath.Replace(filepath, "~/attachments").Replace(@"\", "/");
