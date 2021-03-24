@@ -46,16 +46,16 @@ namespace _2021_dotnet_g_28
             });
 
 
-            #region snippet1
+
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
-            #endregion
+
             services.Configure<RequestLocalizationOptions>(options =>
             {
-                var supportedCultures = new[] { "en-US", "fr-Fr", "nl-NL" };
+                var supportedCultures = new[] { "en-US", "fr-FR", "nl-NL" };
                 options.SetDefaultCulture(supportedCultures[0])
                     .AddSupportedCultures(supportedCultures)
                     .AddSupportedUICultures(supportedCultures);
