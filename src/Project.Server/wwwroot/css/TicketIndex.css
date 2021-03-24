@@ -82,3 +82,7 @@ button:focus {
 .border-production-will-stop {
     border-left: 4px solid orange;
 }
+
+.fit-content {
+    height: fit-content;
+}

@@ -7,9 +7,9 @@
     <link href="~/css/TicketIndex.css" rel="stylesheet" />
 }
 
-@{ 
+@{
     ViewData["Title"] = "Tickets";
-    
+
 
 }
 
@@ -52,8 +52,6 @@
                 <a asp-controller="Ticket" asp-action="Create" class="btn btn-primary text-decoration-none">Create New Ticket</a>
 
             }
-
-
         </div>
 
         <div id="accordion" class="col-xl-9 pr-0">
@@ -93,13 +91,13 @@
                                             <p>Attachment: </p>
                                             @foreach (var attachm in @item.Attachments)
                                             {
-                                            <a asp-controller="Ticket" asp-action="Download" asp-route-filename="@attachm">@attachm.Substring(attachm.IndexOf("_") + 1)</a> <br>
+                                                <a asp-controller="Ticket" asp-action="Download" asp-route-filename="@attachm">@attachm.Substring(attachm.IndexOf("_") + 1)</a> <br>
                                             }
-                                        } 
+                                        }
                                     }
                                 </div>
                                 <div class="col">
-                                    <p>Description: </p>@item.Description
+                                    <p>Description: @item.Description</p>
                                 </div>
                             </div>
 
@@ -107,24 +105,27 @@
                             {
                                 if (reaction.ReactionSup)
                                 {
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text bg-primary rounded-pill text-white mr-2" id="">@reaction.NameUserReaction</span>
-                                        </div>
-                                        <input type="text" class="form-control rounded-pill " disabled value="@reaction.Text">
+                                    <div class="col-md-12 mb-3 d-inline-flex">
+                                        <p class=" bg-primary rounded-pill text-white p-2 mr-3 border">
+                                            @reaction.NameUserReaction
+                                        </p>
+                                        <p class=" rounded-pill p-2 border">
+                                            @reaction.Text
+                                        </p>
                                     </div>
                                 }
                                 else
                                 {
-                                    <div class="row input-group mb-3">
-                                        <input type="text" class="form-control rounded-pill text-right" disabled value="@reaction.Text">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text bg-primary rounded-pill text-white ml-2" id="">@reaction.NameUserReaction</span>
-                                        </div>
-                                    </div>
+                                
+                                <div class="col-md-12 mb-3 text-right d-inline-flex flex-row-reverse">
+                                    <p class=" bg-primary rounded-pill text-white p-2 mr-3 border text-nowrap fit-content">
+                                        @reaction.NameUserReaction
+                                    </p>
+                                    <p class=" rounded-pill p-2 border">
+                                        @reaction.Text
+                                    </p>
+                                </div>
                                 }
-
-
                             }
                             @using (@Html.BeginForm("AddReaction", "Ticket", FormMethod.Post))
                             {
@@ -148,7 +149,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             }
         </div>
 

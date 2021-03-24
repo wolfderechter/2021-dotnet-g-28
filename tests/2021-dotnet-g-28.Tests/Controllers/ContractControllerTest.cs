@@ -20,32 +20,32 @@
 //        private Mock<IContactPersonRepository> _contactPersonRepository;
 //        //private Mock<UserManager<IdentityUser>> _userManager;
 
-//        public ContractControllerTest()
-//        {
-//            _contractRepository = new Mock<IContractRepository>();
-//            _contactPersonRepository = new Mock<IContactPersonRepository>();
-//            //_userManager = new Mock<UserManager<IdentityUser>>();
-//            _controller = new ContractCon   troller(_contractRepository.Object, null, _contactPersonRepository.Object)
-//            {
-//                TempData = new Mock<ITempDataDictionary>().Object
-//            };
+        public ContractControllerTest()
+        {
+            _contractRepository = new Mock<IContractRepository>();
+            _contactPersonRepository = new Mock<IContactPersonRepository>();
+            //_userManager = new Mock<UserManager<IdentityUser>>();
+            _controller = new ContractController(_contractRepository.Object, null, _contactPersonRepository.Object,null)
+            {
+                TempData = new Mock<ITempDataDictionary>().Object
+            };
 
-//        }
-//        [Fact(Skip ="Navragen leerkracht meer informatie")]
-//        public void Index_PassedOrderedListOfContractsFromUsersCompanyInViewResultModel()
-//        {
-//           // je moet identity framework niet testen
-//           // arrange
-//            //string userId = "1234";
-//            //IdentityUser user = new IdentityUser() { Id = userId };
-//           //_userManager.Setup(u => u.GetUserAsync(It.IsAny<ClaimsPrincipal>())).Returns(await user);
-//            int companyNr = 12;
-//            ContactPerson person = new ContactPerson() { User = user, Company = new Company() { CompanyNr = companyNr } };
-//            _contactPersonRepository.Setup(c => c.getById(It.IsAny<String>())).Returns(person);
-//            Contract contract1 = new Contract() { ContractNr = 1, Company = new Company() { CompanyNr = companyNr } };
-//            Contract contract2 = new Contract() { ContractNr = 2, Company = new Company() { CompanyNr = companyNr } };
-//            List<Contract> contracts = new List<Contract>() { contract1, contract2 };
-//            _contractRepository.Setup(c => c.GetByIdAndStatus(new List<ContractEnum.status>() { ContractEnum.status.InProgress, ContractEnum.status.Running }, 12)).Returns(contracts);
+        }
+        [Fact(Skip ="Navragen leerkracht meer informatie")]
+        public void Index_PassedOrderedListOfContractsFromUsersCompanyInViewResultModel()
+        {
+           // je moet identity framework niet testen
+           // arrange
+            //string userId = "1234";
+            //IdentityUser user = new IdentityUser() { Id = userId };
+           //_userManager.Setup(u => u.GetUserAsync(It.IsAny<ClaimsPrincipal>())).Returns(await user);
+            int companyNr = 12;
+            ContactPerson person = new ContactPerson() { User = user, Company = new Company() { CompanyNr = companyNr } };
+            _contactPersonRepository.Setup(c => c.getById(It.IsAny<String>())).Returns(person);
+            Contract contract1 = new Contract() { ContractNr = 1, Company = new Company() { CompanyNr = companyNr } };
+            Contract contract2 = new Contract() { ContractNr = 2, Company = new Company() { CompanyNr = companyNr } };
+            List<Contract> contracts = new List<Contract>() { contract1, contract2 };
+            _contractRepository.Setup(c => c.GetByIdAndStatusAndDuration(new List<ContractEnum.status>() { ContractEnum.status.InProgress, ContractEnum.status.Running }, new List<int> { 1,2,3},12)).Returns(contracts);
             
 //            //act
 //            var result = Assert.IsType<ViewResult>(_controller.Index());
@@ -81,10 +81,10 @@
 //        {
 //            _contractRepository.Setup(c => c.GetById(1)).Throws<ArgumentException>();
             
-//            var result = Assert.IsType<RedirectToActionResult>(_controller.Delete(1));
-//            Assert.Equal("Index", result?.ActionName);
-//           // Assert.Equal("Sorry, something went wrong, Contract 1 was not deleted…", _controller.TempData["error"]);
-//        }
+            var result = Assert.IsType<RedirectToActionResult>(_controller.Delete(1));
+            Assert.Equal("Index", result?.ActionName);
+           //Assert.Equal("Sorry, something went wrong, Contract 1 was not deleted…", _controller.TempData["error"]);
+        }
 
 
 //        #endregion

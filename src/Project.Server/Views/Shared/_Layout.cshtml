@@ -29,8 +29,8 @@
             {
                 var notifications = ViewData["Notifications"] as List<_2021_dotnet_g_28.Models.Domain.Notification>;
                 <li>
-                    <button type="button" class="btn btn-primary " id="notif">
-                        Notifications
+                    <button type="button" class="btn btn-primary" id="open-notif">
+                        <span >Notifications</span>
                         <span class="badge badge-light">@notifications.Count(c=>c.IsRead)</span>
                     </button>
                     <div class="notifications" id="box">
@@ -116,17 +116,16 @@
 <script>
     $(document).ready(function () {
         var down = false;
-        $('#notif').click(function (e) {
+        $('#open-notif').click(function (e) {
             var color = $(this).text();
+            console.log("dropped");
+
             if (down) {
-                $('#box').css('height', '0px');
-                $('#box').css('opacity', '0');
+                $('#box').css('display', 'none');
                 down = false;
             } else {
-                $('#box').css('height', 'auto');
-                $('#box').css('opacity', '1');
+                $('#box').css('display', 'inherit');
                 down = true;
-                console.log("dropped");
 
             }
         });
