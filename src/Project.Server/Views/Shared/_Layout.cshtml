@@ -31,7 +31,7 @@
                 <li>
                     <button type="button" class="btn btn-primary" id="open-notif">
                         <span >Notifications</span>
-                        <span class="badge badge-light">@notifications.Count(c=>c.IsRead)</span>
+                        <span class="badge badge-light">@notifications.Count(n=>!n.IsRead)</span>
                     </button>
                     <div class="notifications" id="box">
                         @foreach (var notif in notifications)
