@@ -68,14 +68,14 @@ namespace _2021_dotnet_g_28.Controllers
             {
                 //get support manager connected 
                 var supManager = _supportManagerRepository.GetById(user.Id);
-                ViewData["GebruikersNaam"] = supManager.FirstName + " " + supManager.LastName;
+                ViewData["GebruikersNaam"] = supManager.FirstName + ' ' + supManager.LastName;
                 model.Tickets = _ticketRepository.GetAll();
             }
             else
             {
                 //get contactperson matching with signed in user
                 ContactPerson contactPerson = _contactPersonRepository.getById(user.Id);
-                ViewData["GebruikersNaam"] = contactPerson.FirstName + " " + contactPerson.LastName;
+                ViewData["GebruikersNaam"] = contactPerson.FirstName + ' ' + contactPerson.LastName;
                 model.Tickets = _ticketRepository.GetByContactPersonId(contactPerson.Id);
                 ViewData["Notifications"] = contactPerson.Notifications.Where(n => !n.IsRead).ToList();
             }

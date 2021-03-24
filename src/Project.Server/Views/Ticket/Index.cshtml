@@ -136,7 +136,7 @@
                                         @if (item.Status != TicketEnum.Status.Cancelled)
                                         {
                                             <a asp-controller="Ticket" asp-action="Edit" asp-route-ticketnr="@item.TicketNr" class="btn btn-primary col-md-2 col-sm-3">Edit</a>
-                                            <a class="btn btn-danger col-md-2 col-sm-3" data-target="#confirm-delete" data-toggle="modal" data-item-id="@item.TicketNr">Cancel</a>
+                                            <a class="btn btn-danger col-md-2 col-sm-3 text-white" data-target="#confirm-delete" data-toggle="modal" data-item-id="@item.TicketNr">Cancel</a>
                                         }
                                         <input type="text" name="reaction" class=" col-md-9 col-sm-3" placeholder="Type reaction here" required>
                                         <input type="hidden" name="ticketNr" value="@item.TicketNr">

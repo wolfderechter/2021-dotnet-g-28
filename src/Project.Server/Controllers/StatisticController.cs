@@ -13,11 +13,13 @@ namespace _2021_dotnet_g_28.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IContactPersonRepository _contactPersonRepository;
+        private readonly ISupportManagerRepository _supportManagerRepository;
 
-        public StatisticController(UserManager<IdentityUser> userManager, IContactPersonRepository contactPersonRepository)
+        public StatisticController(UserManager<IdentityUser> userManager, IContactPersonRepository contactPersonRepository, ISupportManagerRepository supportManagerRepository)
         {
             _userManager = userManager;
             _contactPersonRepository = contactPersonRepository;
+            _supportManagerRepository = supportManagerRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -32,11 +34,15 @@ namespace _2021_dotnet_g_28.Controllers
                 Company company = contactPerson.Company;
                 //give companynr to viewdata to display company specific statistics
                 ViewData["CompanyNr"] = company.CompanyNr;
+                ViewData["GebruikersNaam"] = contactPerson.FirstName + ' ' + contactPerson.LastName;
+                ViewData["Notifications"] = contactPerson.Notifications.Where(n => !n.IsRead).ToList();
             } else
             {
                 //give and empty string to viewdata -> filter won't filter
                 //support manager sees statistics from all companies combined
                 ViewData["CompanyNr"] = "";
+                var supManager = _supportManagerRepository.GetById(user.Id);
+                ViewData["GebruikersNaam"] = supManager.FirstName + ' ' + supManager.LastName;
             }
 
             return View();

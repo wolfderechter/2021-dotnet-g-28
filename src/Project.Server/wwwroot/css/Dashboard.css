@@ -15,18 +15,18 @@ body {
     padding: 0;
 }
 
-    body::-webkit-scrollbar {
-        width: 0.25rem;
-    }
+body::-webkit-scrollbar {
+    width: 0.25rem;
+}
 
-    body::-webkit-scrollbar-track {
-        background-color: white;
-    }
+body::-webkit-scrollbar-track {
+    background-color: white;
+}
 
-    body::-webkit-scrollbar-thumb {
-        background-color: gray;
-        border-radius: 5px;
-    }
+body::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 5px;
+}
 
 main {
     margin-left: 5rem;
@@ -44,9 +44,9 @@ main {
     z-index: 2;
 }
 
-    .navbar::-webkit-scrollbar {
-        display: none;
-    }
+.navbar::-webkit-scrollbar {
+    display: none;
+}
 
 .navbar-nav {
     list-style: none;
@@ -63,11 +63,14 @@ main {
     cursor: pointer;
 }
 
-.nav-item:nth-last-child(2) {
+.gebrEnLogout {
     margin-top: auto;
+    width: 100%;
 }
 
-
+.gebrEnLogout .navbar-nav {
+    align-items: unset;
+}
 
 .nav-link {
     display: flex;
@@ -78,11 +81,11 @@ main {
     transition: var(--transition-speed);
 }
 
-    .nav-link:hover {
-        filter: grayscale(0%) opacity(1);
-        background: var(--bg-secondary);
-        color: var(--text-secondary);
-    }
+.nav-link:hover {
+    filter: grayscale(0%) opacity(1);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
 
 .link-text {
     display: none;
@@ -96,23 +99,77 @@ main {
     color: blue;
 }
 
+.gebruikersnaam {
+    margin-left: 2rem;
+    display: none;
+    color: #777;
+}
+
 .logo {
     width: 100%;
     height: 5rem;
 }
 
-    .logo img {
-        width: 50%;
-        height: 5rem;
-        margin-left: auto;
-        display: block;
-        margin-right: auto;
-        opacity: 0;
-        transition: 250ms;
-    }
+.logo img {
+    width: 50%;
+    height: 5rem;
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+    opacity: 0;
+    transition: 250ms;
+}
 
 #navbar:hover #img1 {
     opacity: 1;
+}
+
+/* for notifications pop-out*/
+.notifications {
+    /* width: 300px;*/
+    height: 0px;
+    opacity: 0;
+    position: absolute;
+    top: 63px;
+    left: 100px;
+    border-radius: 5px 0px 5px 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 5;
+}
+
+.notifications h2 {
+    font-size: 14px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    color: #999
+}
+
+.notifications h2 span {
+    color: #f00
+}
+
+.notifications-item {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: 6px 9px;
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+
+.notifications-item:hover {
+    background-color: #eee
+}
+
+.notifications-item .text h4 {
+    color: #777;
+    font-size: 16px;
+    margin-top: 3px
+}
+
+.notifications-item .text p {
+    color: #aaa;
+    font-size: 12px
 }
 
 /*small screen*/
@@ -149,6 +206,10 @@ main {
     .logo {
         display: none;
     }
+
+    .gebruikersnaam {
+        display: none;
+    }
 }
 
 /*large screens*/
@@ -159,58 +220,17 @@ main {
         height: 100vh;
     }
 
-        .navbar:hover {
-            width: 16rem;
-        }
+    .navbar:hover {
+        width: 16rem;
+    }
 
-            .navbar:hover .link-text {
-                display: inline;
-            }
+    .navbar:hover .link-text {
+        display: inline;
+    }
+
+    .navbar:hover .gebruikersnaam {
+        display: inline;
+    }
 }
 
-/* for notifications pop-out*/
-.notifications {
-    width: 300px;
-    height: 0px;
-    opacity: 0;
-    position: absolute;
-    top: 63px;
-    left: 100px;
-    border-radius: 5px 0px 5px 5px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    z-index: 5;
-}
 
-    .notifications h2 {
-        font-size: 14px;
-        padding: 10px;
-        border-bottom: 1px solid #eee;
-        color: #999
-    }
-
-        .notifications h2 span {
-            color: #f00
-        }
-
-.notifications-item {
-    display: flex;
-    border-bottom: 1px solid #eee;
-    padding: 6px 9px;
-    margin-bottom: 0px;
-    cursor: pointer;
-}
-
-    .notifications-item:hover {
-        background-color: #eee
-    }
-    .notifications-item .text h4 {
-        color: #777;
-        font-size: 16px;
-        margin-top: 3px
-    }
-
-    .notifications-item .text p {
-        color: #aaa;
-        font-size: 12px
-    }

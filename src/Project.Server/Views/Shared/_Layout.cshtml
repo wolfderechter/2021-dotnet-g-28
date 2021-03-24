@@ -76,16 +76,19 @@
                     <span class="link-text">FAQ</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <p>@ViewData["GebruikersNaam"]</p>
-            </li>
+            <li class="gebrEnLogout">
+                <ul class="navbar-nav">
+                    <li class="gebruikersnaam">
+                        @ViewData["gebruikersnaam"]
+                    </li>
 
-
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Account" asp-action="Logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span class="link-text">@Localizer["SignOut"]</span>
-                </a>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="Logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span class="link-text">@Localizer["SignOut"]</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </nav>
