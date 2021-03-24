@@ -36,6 +36,7 @@ namespace _2021_dotnet_g_28.Controllers
                 ViewData["CompanyNr"] = company.CompanyNr;
                 ViewData["GebruikersNaam"] = contactPerson.FirstName + ' ' + contactPerson.LastName;
                 ViewData["Notifications"] = contactPerson.Notifications.Where(n => !n.IsRead).ToList();
+                ViewData["isSupportManager"] = false;
             } else
             {
                 //give and empty string to viewdata -> filter won't filter
@@ -43,6 +44,7 @@ namespace _2021_dotnet_g_28.Controllers
                 ViewData["CompanyNr"] = "";
                 var supManager = _supportManagerRepository.GetById(user.Id);
                 ViewData["GebruikersNaam"] = supManager.FirstName + ' ' + supManager.LastName;
+                ViewData["isSupportManager"] = true;
             }
 
             return View();

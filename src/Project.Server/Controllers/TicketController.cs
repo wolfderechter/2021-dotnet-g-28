@@ -31,7 +31,6 @@ namespace _2021_dotnet_g_28.Controllers
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly ISupportManagerRepository _supportManagerRepository;
         private readonly ICompanyRepository _companyRepository;
-        private readonly IHtmlLocalizer<TicketController> _localizor;
         #endregion
 
 
@@ -70,6 +69,7 @@ namespace _2021_dotnet_g_28.Controllers
                 var supManager = _supportManagerRepository.GetById(user.Id);
                 ViewData["GebruikersNaam"] = supManager.FirstName + ' ' + supManager.LastName;
                 model.Tickets = _ticketRepository.GetAll();
+                ViewData["isSupportManager"] = true;
             }
             else
             {
@@ -78,6 +78,7 @@ namespace _2021_dotnet_g_28.Controllers
                 ViewData["GebruikersNaam"] = contactPerson.FirstName + ' ' + contactPerson.LastName;
                 model.Tickets = _ticketRepository.GetByContactPersonId(contactPerson.Id);
                 ViewData["Notifications"] = contactPerson.Notifications.Where(n => !n.IsRead).ToList();
+                ViewData["isSupportManager"] = false;
             }
 
             //only do this when index gets called for first time
@@ -202,6 +203,7 @@ namespace _2021_dotnet_g_28.Controllers
                 //get support manager connected 
                 var supManager = _supportManagerRepository.GetById(user.Id);
                 ViewData["GebruikersNaam"] = supManager.FirstName + ' ' + supManager.LastName;
+                ViewData["isSupportManager"] = true;
             }
             else
             {
@@ -209,6 +211,7 @@ namespace _2021_dotnet_g_28.Controllers
                 ContactPerson contactPerson = _contactPersonRepository.getById(user.Id);
                 ViewData["GebruikersNaam"] = contactPerson.FirstName + ' ' + contactPerson.LastName;
                 ViewData["Notifications"] = contactPerson.Notifications.Where(n => !n.IsRead).ToList();
+                ViewData["isSupportManager"] = false;
             }
 
             return View(model);
@@ -225,6 +228,10 @@ namespace _2021_dotnet_g_28.Controllers
                 var user = await _userManager.GetUserAsync(User);
                 var supManager = _supportManagerRepository.GetById(user.Id);
                 ViewData["Customers"] = GetSelectListCompanies();
+                ViewData["isSupportManager"] = true;
+            } else
+            {
+                ViewData["isSupportManager"] = false;
             }
             return View(nameof(Edit), new TicketEditViewModel());
         }
@@ -244,10 +251,12 @@ namespace _2021_dotnet_g_28.Controllers
                         var user = await _userManager.GetUserAsync(User);
                         ContactPerson contact = _contactPersonRepository.getById(user.Id);
                         company = contact.Company;
+                        ViewData["isSupportManager"] = true;
                     }
                     else
                     {
                         company = _companyRepository.GetByNr(ticketEditViewModel.CompanyNr);
+                        ViewData["isSupportManager"] = false;
                     }
                     var ticket = new Ticket(DateTime.Now, ticketEditViewModel.Title, ticketEditViewModel.Description, ticketEditViewModel.Type, TicketEnum.Status.Created);
 
