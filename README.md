@@ -5,7 +5,7 @@ The project is about a help desk application where the customer can log-in, view
 
 ## Table of contents
 
-> - [Group members](#Group members)
+> - [Group members](#Group-members)
 > - [Trello](#trello)
 
 ## Group members
