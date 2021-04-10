@@ -16,11 +16,13 @@ namespace _2021_dotnet_g_28.Controllers
     public class AccountController : Controller
     {
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IHtmlLocalizer<AccountController> _localizor;
 
-        public AccountController(SignInManager<IdentityUser> signInm, IHtmlLocalizer<AccountController> localizor)
+        public AccountController(SignInManager<IdentityUser> signInm, UserManager<IdentityUser> userm, IHtmlLocalizer<AccountController> localizor)
         {
             this.signInManager = signInm;
+            _userManager = userm;
             _localizor = localizor;
         }
         [HttpGet]
@@ -71,6 +73,20 @@ namespace _2021_dotnet_g_28.Controllers
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
             );
             return LocalRedirect(returnUrl);
+        }
+
+        [HttpGet]
+        [Route("Account/IsValidUserJava/{username}/{password}")]
+        public async Task<String> IsValidUserJava(string username, string password)
+        {
+            var result = await signInManager.PasswordSignInAsync(username, password, false, false);
+            if (result.Succeeded)
+            {
+                return "true";
+            } else
+            {
+                return "false";
+            }
         }
     }
 }
