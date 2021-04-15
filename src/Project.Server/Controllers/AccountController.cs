@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,16 +78,36 @@ namespace _2021_dotnet_g_28.Controllers
 
         [HttpGet]
         [Route("Account/IsValidUserJava/{username}/{password}")]
-        public async Task<String> IsValidUserJava(string username, string password)
+        public async Task<string> IsValidUserJava(string username, string password)
         {
             var result = await signInManager.PasswordSignInAsync(username, password, false, false);
-            if (result.Succeeded)
+            string role = "";
+           
+            if (User.IsInRole("SupportManager"))
             {
-                return "true";
+                role = "supportmanager";
             } else
             {
-                return "false";
+                role = "contactperson";
             }
+
+            if (result.Succeeded)
+            {
+                return "true" + "-" + role;
+            } else
+            {
+                return "false" + "-" + role;
+            }
+        }
+
+        [HttpGet]
+        [Route("Account/getUserDataJava")]
+        public async Task<string> GetUserDataJava()
+        {
+            //get signed in user
+            var user = await _userManager.GetUserAsync(User);
+
+            return JsonConvert.SerializeObject(user);
         }
     }
 }
