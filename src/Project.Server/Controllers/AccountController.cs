@@ -82,6 +82,9 @@ namespace _2021_dotnet_g_28.Controllers
         {
             var result = await signInManager.PasswordSignInAsync(username, password, false, false);
             string role = "";
+            var fd = result;
+
+            Task.WaitAll();
            
             if (User.IsInRole("SupportManager"))
             {
