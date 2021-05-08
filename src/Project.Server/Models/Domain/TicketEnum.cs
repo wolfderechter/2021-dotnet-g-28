@@ -11,18 +11,18 @@ namespace _2021_dotnet_g_28.Models.Domain
 
         public enum Status
         {
-            Created = 1,
+            Created = 0,
             [Display(Name = "In progress")]
-            InProgress = 2,
-            Closed = 3,
-            Discontinued = 4,
-            Cancelled = 5,
+            InProgress = 1,
+            Closed = 2,
+            Discontinued = 3,
+            Cancelled = 4,
             [Display(Name = "Waiting for response customer")]
-            WaitingCustomerResponse = 6,
+            WaitingCustomerResponse = 5,
             [Display(Name = "Received response")]
-            ResponseReceived = 7,
+            ResponseReceived = 6,
             [Display(Name = "In development")]
-            InDevelopment = 8
+            InDevelopment = 7
 
 
         }
