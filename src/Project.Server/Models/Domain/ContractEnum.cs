@@ -10,11 +10,11 @@ namespace _2021_dotnet_g_28.Models.Domain
     {
         public enum status
         {
-            Running = 1,
+            Running = 0,
             [Display(Name = "In Progress")]
-            InProgress = 2,
-            Ended = 3,
-            Cancelled = 4,
+            InProgress = 1,
+            Ended = 2,
+            Cancelled = 3,
         }
     }
 }

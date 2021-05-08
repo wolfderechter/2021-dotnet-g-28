@@ -11,11 +11,11 @@ namespace _2021_dotnet_g_28.Models.Domain
         public enum CreationMethod
         {
             [Display(Name = "E-mail")]
-            Email,
+            Email = 0,
             [Display(Name = "Telephone")]
-            phone,
+            phone = 1,
             [Display(Name = "Application")]
-            app
+            app = 2
         }
     }
 }
