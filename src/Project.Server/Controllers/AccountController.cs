@@ -80,27 +80,18 @@ namespace _2021_dotnet_g_28.Controllers
         [Route("Account/IsValidUserJava/{username}/{password}")]
         public async Task<string> IsValidUserJava(string username, string password)
         {
-            var result = await signInManager.PasswordSignInAsync(username, password, false, false);
-            string role = "";
-            var fd = result;
 
-            Task.WaitAll();
-           
-            if (User.IsInRole("SupportManager"))
-            {
-                role = "supportmanager";
-            } else
-            {
-                role = "contactperson";
-            }
+            var result = await signInManager.PasswordSignInAsync(username, password, false, false);
 
             if (result.Succeeded)
             {
-                return "true" + "-" + role;
+                return "true";
             } else
             {
-                return "false" + "-" + role;
+                return "false";
             }
+
+            return "verkeerde inloggegevens";
         }
 
         [HttpGet]
