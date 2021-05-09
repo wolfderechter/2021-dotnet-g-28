@@ -31,11 +31,11 @@ namespace _2021_dotnet_g_28.Models.Domain
         {
 
             [Display(Name = "Production impacted (<2h solution)")]
-            ProductionStopped = 1,
+            ProductionStopped = 0,
             [Display(Name = "Production will stop (<4h solution)")]
-            ProductionWillStop = 2,
+            ProductionWillStop = 1,
             [Display(Name = "No production impact (<3d solution)")]  
-            NoImpact = 3
+            NoImpact = 2
         }
     }
 }
