@@ -12,7 +12,7 @@ namespace _2021_dotnet_g_28.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<SupportManager> builder)
         {
-            builder.ToTable("SupportManagers");
+            builder.ToTable("Employees");
             builder.HasKey(t => t.Id);
 
             
