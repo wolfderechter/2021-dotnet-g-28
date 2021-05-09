@@ -45,7 +45,7 @@ namespace _2021_dotnet_g_28.Data.Repositories
 
         public IEnumerable<Ticket> GetByContactPersonId(int companyNr)
         {
-            return _tickets.Include(t=>t.Reactions).Where(t => t.CompanyNr == companyNr).ToList();
+            return _tickets.Include(t=>t.Reactions).Where(t => t.Company.CompanyNr == companyNr).ToList();
             //return _tickets.Include(t => t.Reactions).Where(t => t.ContactPersonId == contactPersonId).ToList();
         }
 

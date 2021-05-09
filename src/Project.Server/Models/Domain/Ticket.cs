@@ -14,7 +14,7 @@ namespace _2021_dotnet_g_28.Models.Domain
         public String Title { get; set; }
         public String Description { get; set; }
         public TicketEnum.Type Type { get; set; }
-        public int CompanyNr { get; set; }
+        public Company Company { get; set; }
         public int ContactPersonId { get; set; }
         public string PicturePath { get; set; }
         public ICollection<Reaction> Reactions { get; set; }
