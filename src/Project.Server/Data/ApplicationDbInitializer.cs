@@ -64,16 +64,16 @@ namespace _2021_dotnet_g_28.Data
                 SupportManager supportManager = new SupportManager { User = user2, FirstName = "Stef", LastName = "Boerjan", DateInService = DateTime.Now, Adress = "lamstraat 15, 9100"};
                 await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "SupportManager"));
 
-				Username = "ZowieV";
-				IdentityUser user3 = new IdentityUser { UserName = Username, Email = "zowie.verschuere@student.hogent.be", PhoneNumber = "0465201859" };
-				await _userManager.CreateAsync(user3, "Paswoord_1");
-				ContactPerson contactPerson2 = new ContactPerson { User = user3, Company = HansAnders, FirstName = "Zowie", LastName = "Verschuere" };
-				await _userManager.AddClaimAsync(user3, new Claim(ClaimTypes.Role, "Customer"));
-
                 Username = "WolfD";
                 IdentityUser user4 = new IdentityUser { UserName = Username, Email = "wolf.derechter@student.hogent.be", PhoneNumber = "0463206812" };
                 await _userManager.CreateAsync(user4, "Paswoord_1");
                 SupportManager supportManager2 = new SupportManager { User = user4, FirstName = "Wolf", LastName = "De Rechter", DateInService = DateTime.Now, Adress = "Warandestraat 19, 9140"};
+                await _userManager.AddClaimAsync(user4, new Claim(ClaimTypes.Role, "SupportManager"));
+
+                Username = "ZowieV";
+                IdentityUser user3 = new IdentityUser { UserName = Username, Email = "zowie.verschuere@student.hogent.be", PhoneNumber = "0463206812" };
+                await _userManager.CreateAsync(user3, "Paswoord_1");
+                SupportManager supportManager3 = new SupportManager { User = user3, FirstName = "Zowie", LastName = "Verschuere", DateInService = DateTime.Now, Adress = "Warandestraat 19, 9140" };
                 await _userManager.AddClaimAsync(user4, new Claim(ClaimTypes.Role, "SupportManager"));
                 //makes tickets
 
@@ -119,9 +119,10 @@ namespace _2021_dotnet_g_28.Data
                 DovyKeukens.AddTicket(ticket7);
 
                 _dbContext.ContactPeople.Add(contactPerson1);
-                _dbContext.ContactPeople.Add(contactPerson2);
+              
                 _dbContext.SupportManagers.Add(supportManager);
                 _dbContext.SupportManagers.Add(supportManager2);
+                _dbContext.SupportManagers.Add(supportManager3);
 
 
                 _dbContext.SaveChanges();
