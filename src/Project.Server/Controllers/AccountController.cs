@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace _2021_dotnet_g_28.Controllers
@@ -92,6 +93,17 @@ namespace _2021_dotnet_g_28.Controllers
             }
 
             return "verkeerde inloggegevens";
+        }
+
+        [HttpGet]
+        [Route("Account/CreateUserJava/{username}/{email}/{phonenumber}/{role}")]
+        public async Task<string> CreateUserJava(string username, string email, string phoneNumber, string role)
+        {
+            IdentityUser user = new IdentityUser { UserName = username, Email = email, PhoneNumber = phoneNumber};
+            await _userManager.CreateAsync(user, "Paswoord_1");
+            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, role));
+            return "true";
+
         }
 
         [HttpGet]
