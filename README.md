@@ -25,5 +25,5 @@ The project is about a help desk application where the customer can log-in, view
 > - [Information about sprint 3 on Trello](https://trello.com/b/svtLigG4/projectendotnetsprint3)
 
 ## inloggegevens
-Support manager inlog => Username: stefB , Paswoord_1
-contactperson inlog (klant) => Username: NathanT , Paswoord_1
+> - Support manager inlog => Username: stefB , Paswoord_1
+> - contactperson inlog (klant) => Username: NathanT , Paswoord_1
