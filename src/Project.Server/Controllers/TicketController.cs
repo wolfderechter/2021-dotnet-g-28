@@ -456,6 +456,7 @@ namespace _2021_dotnet_g_28.Controllers
         //this method writes a ticketindexviewmodel into session
         private void WriteTicketIndexViewModelToSession(TicketIndexViewModel model)
         {
+            HttpContext.Session.Clear();
             HttpContext.Session.SetString("model", JsonConvert.SerializeObject(model));
         }
 
