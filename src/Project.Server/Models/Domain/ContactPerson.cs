@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace _2021_dotnet_g_28.Models.Domain
         public int Id { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
+        [JsonIgnore]
         public Company Company { get; set; }
         public IdentityUser User { get; set; }
         public IEnumerable<Notification> Notifications { get; set; }

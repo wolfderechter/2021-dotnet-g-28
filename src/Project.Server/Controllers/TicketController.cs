@@ -12,10 +12,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MimeKit;
-using Microsoft.AspNetCore.Mvc.Localization;
-using Microsoft.AspNetCore.Localization;
-using System.Threading;
-using System.Globalization;
 using Newtonsoft.Json;
 
 
@@ -48,7 +44,6 @@ namespace _2021_dotnet_g_28.Controllers
         public async Task<IActionResult> Index()
         {
             TicketIndexViewModel model = new TicketIndexViewModel();
-
             //if tempdata is filled with a model -> use this model (gets emptied when read)
             if (TempData["tempModel"] != null)
             {
@@ -138,14 +133,7 @@ namespace _2021_dotnet_g_28.Controllers
             //writes model to session so that in next request it can get read and put into tempdata
             WriteTicketIndexViewModelToSession(model);
 
-            if(model.Tickets.Count() == 0)
-            {
-                ViewData["noTickets"] = true;
-            } else
-            {
-                ViewData["noTickets"] = false;
-            }
-
+                ViewData["noTickets"] = model.Tickets.Count() == 0;
             return View(model);
         }
 
