@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,9 +25,12 @@ namespace _2021_dotnet_g_28.Models.Domain
         [Required]
         [Display(Name ="Contract Type")]
         public ContractType Type { get; set; }
+        
         [Required]
         [Display(Name = "Company Info")]
+        [JsonIgnore]
         public Company Company { get; set; }
+
         [NotMapped]
         public int Duration { get { return EndDate.Year - StartDate.Year; } }
         #endregion

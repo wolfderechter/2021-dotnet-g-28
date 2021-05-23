@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace _2021_dotnet_g_28.Models.Domain
         public DateTime CustomerInitDate { get; set; }
         public ICollection<Contract> Contracts { get; set; }
         public ICollection<ContactPerson> ContactPersons { get; set; }
-
+        [JsonIgnore]
         public ICollection<Ticket> Tickets { get; set; }
         //public ICollection<String> TelNrs { get; set; }
         #endregion
