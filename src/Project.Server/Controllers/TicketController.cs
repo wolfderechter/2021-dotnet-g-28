@@ -45,15 +45,16 @@ namespace _2021_dotnet_g_28.Controllers
         {
             TicketIndexViewModel model = new TicketIndexViewModel();
             //if tempdata is filled with a model -> use this model (gets emptied when read)
-            if (TempData["tempModel"] != null)
-            {
-                model = JsonConvert.DeserializeObject<TicketIndexViewModel>((string)TempData["tempModel"]);
-            }
+            //if (TempData["tempModel"] != null)
+            //{
+            //    model = JsonConvert.DeserializeObject<TicketIndexViewModel>((string)TempData["tempModel"]);
+            //    TempData.Remove("tempModel");
+            //}
 
-            if(HttpContext.Session.GetString("model") != null)
-            {
-                model = JsonConvert.DeserializeObject<TicketIndexViewModel>(HttpContext.Session.GetString("model"));
-            }
+            //if(HttpContext.Session.GetString("model") != null)
+            //{
+            //    model = JsonConvert.DeserializeObject<TicketIndexViewModel>(HttpContext.Session.GetString("model"));
+            //}
 
             //get signed in user
             var user = await _userManager.GetUserAsync(User);
@@ -131,7 +132,7 @@ namespace _2021_dotnet_g_28.Controllers
             }
 
             //writes model to session so that in next request it can get read and put into tempdata
-            WriteTicketIndexViewModelToSession(model);
+           // WriteTicketIndexViewModelToSession(model);
 
                 ViewData["noTickets"] = model.Tickets.Count() == 0;
             return View(model);
@@ -169,7 +170,7 @@ namespace _2021_dotnet_g_28.Controllers
             }
 
             //writes model to session so that in next request it can get read and put into tempdata
-            WriteTicketIndexViewModelToSession(model);
+            //WriteTicketIndexViewModelToSession(model);
 
             if (model.Tickets.Count() == 0)
             {
@@ -203,7 +204,7 @@ namespace _2021_dotnet_g_28.Controllers
 
         public async Task<IActionResult> Create()
         {
-            GetTicketIndexViewModelFromSessionAndPutInTempData();
+           // GetTicketIndexViewModelFromSessionAndPutInTempData();
             ViewData["IsEdit"] = false;
             ViewData["typeTickets"] = TypeTickets();
             if (User.IsInRole("SupportManager"))
@@ -296,8 +297,8 @@ namespace _2021_dotnet_g_28.Controllers
 
         public IActionResult Edit(int ticketNr)
         {
-            TempData["openTicket"] = ticketNr;
-            GetTicketIndexViewModelFromSessionAndPutInTempData();
+            //TempData["openTicket"] = ticketNr;
+            //GetTicketIndexViewModelFromSessionAndPutInTempData();
             Ticket ticket = _ticketRepository.GetBy(ticketNr);
             if (ticket == null)
                 return NotFound();
@@ -402,8 +403,8 @@ namespace _2021_dotnet_g_28.Controllers
             ticket.AddReaction(new Reaction(reaction, contact.FirstName + " " + contact.LastName, false, ticketNr));
             _ticketRepository.SaveChanges();
             TempData["message"] = $"Your reaction has been succesfully added";
-            TempData["openTicket"] = ticketNr;
-            GetTicketIndexViewModelFromSessionAndPutInTempData();
+            //TempData["openTicket"] = ticketNr;
+            //GetTicketIndexViewModelFromSessionAndPutInTempData();
 
             return RedirectToAction(nameof(Index));
         }
@@ -446,24 +447,25 @@ namespace _2021_dotnet_g_28.Controllers
         //model gets saved in session when we leave index -> see index
         //in this method session gets read and cleared and put the model in tempdata -> tempdata gets checked at the start of index
         //this method gets called each time when our next request will be index
-        public void GetTicketIndexViewModelFromSessionAndPutInTempData()
-        {
-            var model = ReadTicketIndexViewModelFromSession();
-            HttpContext.Session.Clear();
-            TempData["tempModel"] = JsonConvert.SerializeObject(model);
-        }
+       // public void GetTicketIndexViewModelFromSessionAndPutInTempData()
+        //{
+        //    var model = ReadTicketIndexViewModelFromSession();
+        //    HttpContext.Session.Clear();
+        //    TempData["tempModel"] = JsonConvert.SerializeObject(model);
+        //}
 
-        //this method writes a ticketindexviewmodel into session
-        private void WriteTicketIndexViewModelToSession(TicketIndexViewModel model)
-        {
-            HttpContext.Session.Clear();
-            HttpContext.Session.SetString("model", JsonConvert.SerializeObject(model));
-        }
+        ////this method writes a ticketindexviewmodel into session
+        ////private void WriteTicketIndexViewModelToSession(TicketIndexViewModel model)
+        //{
+        //    HttpContext.Session.Clear();
+        //    HttpContext.Session.SetString("model", JsonConvert.SerializeObject(model));
+        //}
 
-        //this method reads and returns a ticketindexviewmodel from session
-        private TicketIndexViewModel ReadTicketIndexViewModelFromSession()
-        {
-            return JsonConvert.DeserializeObject<TicketIndexViewModel>(HttpContext.Session.GetString("model"));
-        }
+        ////this method reads and returns a ticketindexviewmodel from session
+        ////private TicketIndexViewModel ReadTicketIndexViewModelFromSession()
+        //{
+        //    return JsonConvert.DeserializeObject<TicketIndexViewModel>(HttpContext.Session.GetString("model"));
+            
+        //}
     }
 }
