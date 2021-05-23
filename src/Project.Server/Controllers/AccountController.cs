@@ -80,7 +80,6 @@ namespace _2021_dotnet_g_28.Controllers
         [Route("Account/IsValidUserJava/{username}/{password}")]
         public async Task<string> IsValidUserJava(string username, string password)
         {
-
             var result = await signInManager.PasswordSignInAsync(username, password, false, false);
 
             if (result.Succeeded)
@@ -100,7 +99,6 @@ namespace _2021_dotnet_g_28.Controllers
         {
             //get signed in user
             var user = await _userManager.GetUserAsync(User);
-
             return JsonConvert.SerializeObject(user);
         }
     }
