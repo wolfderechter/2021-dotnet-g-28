@@ -132,9 +132,9 @@ namespace _2021_dotnet_g_28.Controllers
             }
 
             //writes model to session so that in next request it can get read and put into tempdata
-           // WriteTicketIndexViewModelToSession(model);
 
-                ViewData["noTickets"] = model.Tickets.Count() == 0;
+
+            ViewData["noTickets"] = model.Tickets.Count() == 0;
             return View(model);
         }
 
