@@ -51,13 +51,14 @@ namespace _2021_dotnet_g_28.Data.Repositories
 
         public IEnumerable<Ticket> GetByStatusAndType(IEnumerable<TicketEnum.Status> statusses, IEnumerable<TicketEnum.Type> types, int companyNr)
         {
-            if (companyNr == -1)
+            if(companyNr == -1)
             {
-                IEnumerable<Ticket> companyTickets = GetByContactPersonId(companyNr);
-                return companyTickets.Where(c => statusses.Contains(c.Status) && types.Contains(c.Type)).ToList();
+                return _tickets.Include(t => t.Reactions).Where(c => statusses.Contains(c.Status) && types.Contains(c.Type)).ToList();
             }
             else {
-                return _tickets.Include(t => t.Reactions).Where(c => statusses.Contains(c.Status) && types.Contains(c.Type)).ToList();
+                IEnumerable<Ticket> companyTickets = GetByContactPersonId(companyNr);
+                return companyTickets.Where(c => statusses.Contains(c.Status) && types.Contains(c.Type)).ToList();
+                
             }
             
             
