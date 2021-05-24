@@ -49,9 +49,18 @@ namespace _2021_dotnet_g_28.Data.Repositories
             //return _tickets.Include(t => t.Reactions).Where(t => t.ContactPersonId == contactPersonId).ToList();
         }
 
-        public IEnumerable<Ticket> GetByStatusAndType(IEnumerable<TicketEnum.Status> statusses, IEnumerable<TicketEnum.Type> types)
+        public IEnumerable<Ticket> GetByStatusAndType(IEnumerable<TicketEnum.Status> statusses, IEnumerable<TicketEnum.Type> types, int companyNr)
         {
-            return _tickets.Include(t => t.Reactions).Where(c => statusses.Contains(c.Status) && types.Contains(c.Type)).ToList();
+            if (companyNr == -1)
+            {
+                IEnumerable<Ticket> companyTickets = GetByContactPersonId(companyNr);
+                return companyTickets.Where(c => statusses.Contains(c.Status) && types.Contains(c.Type)).ToList();
+            }
+            else {
+                return _tickets.Include(t => t.Reactions).Where(c => statusses.Contains(c.Status) && types.Contains(c.Type)).ToList();
+            }
+            
+            
         }
     }
 }

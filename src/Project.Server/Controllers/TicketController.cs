@@ -45,11 +45,13 @@ namespace _2021_dotnet_g_28.Controllers
         {
             TicketIndexViewModel model = new TicketIndexViewModel();
             //if tempdata is filled with a model -> use this model (gets emptied when read)
+
             //if (TempData["tempModel"] != null)
             //{
             //    model = JsonConvert.DeserializeObject<TicketIndexViewModel>((string)TempData["tempModel"]);
             //    TempData.Remove("tempModel");
             //}
+
 
             //if(HttpContext.Session.GetString("model") != null)
             //{
@@ -64,16 +66,16 @@ namespace _2021_dotnet_g_28.Controllers
                 //get support manager connected 
                 var supManager = _supportManagerRepository.GetById(user.Id);
                 ViewData["GebruikersNaam"] = supManager.FirstName + ' ' + supManager.LastName;
-                model.Tickets = _ticketRepository.GetAll();
             }
             else
             {
                 //get contactperson matching with signed in user
                 ContactPerson contactPerson = _contactPersonRepository.getById(user.Id);
                 ViewData["GebruikersNaam"] = contactPerson.FirstName + ' ' + contactPerson.LastName;
-                model.Tickets = _ticketRepository.GetByContactPersonId(contactPerson.Id);
                 ViewData["Notifications"] = contactPerson.Notifications.Where(n => !n.IsRead).ToList();
             }
+
+           
 
             //only do this when index gets called for first time
             if (model.CheckBoxItemsStatus == null && model.CheckBoxItemsType == null)
@@ -100,7 +102,7 @@ namespace _2021_dotnet_g_28.Controllers
 
                 //insert tickets with status created,  in progress and type production stopped and production will stop
                 model.Tickets = _ticketRepository.GetByStatusAndType(new List<TicketEnum.Status> { TicketEnum.Status.Created, TicketEnum.Status.InProgress },
-                    new List<TicketEnum.Type> { TicketEnum.Type.ProductionStopped, TicketEnum.Type.ProductionWillStop });
+                    new List<TicketEnum.Type> { TicketEnum.Type.ProductionStopped, TicketEnum.Type.ProductionWillStop }, await getCompanyNr());
             }
             else
             {
@@ -123,7 +125,7 @@ namespace _2021_dotnet_g_28.Controllers
                         typeList.Add(item.Type);
                     }
                 }
-                model.Tickets = _ticketRepository.GetByStatusAndType(statusList, typeList);
+                model.Tickets = _ticketRepository.GetByStatusAndType(statusList, typeList, await getCompanyNr());
             }
 
             if (TempData["openTicket"] != null)
@@ -133,10 +135,13 @@ namespace _2021_dotnet_g_28.Controllers
 
             //writes model to session so that in next request it can get read and put into tempdata
 
+            //WriteTicketIndexViewModelToSession(model);
 
             ViewData["noTickets"] = model.Tickets.Count() == 0;
             return View(model);
         }
+
+        
 
         //index post is nodig voor laatst geselecteerde filters bij te houden (query string was te groot om get te kunnen gebruiken)
         [HttpPost]
@@ -161,8 +166,8 @@ namespace _2021_dotnet_g_28.Controllers
                     typeList.Add(item.Type);
                 }
             }
-            model.Tickets = _ticketRepository.GetByStatusAndType(statusList, typeList);
 
+            model.Tickets = _ticketRepository.GetByStatusAndType(statusList, typeList, await getCompanyNr());
 
             if (TempData["openTicket"] != null)
             {
@@ -171,15 +176,8 @@ namespace _2021_dotnet_g_28.Controllers
 
             //writes model to session so that in next request it can get read and put into tempdata
             //WriteTicketIndexViewModelToSession(model);
-
-            if (model.Tickets.Count() == 0)
-            {
-                ViewData["noTickets"] = true;
-            }
-            else
-            {
-                ViewData["noTickets"] = false;
-            }
+            ViewData["noTickets"] = model.Tickets.Count() == 0;
+           
 
             //notification and username doesn't dissapear when new checkbox in filter is selected
             //get signed in user
@@ -466,10 +464,27 @@ namespace _2021_dotnet_g_28.Controllers
         }
 
         //this method reads and returns a ticketindexviewmodel from session
-/*        private TicketIndexViewModel ReadTicketIndexViewModelFromSession()
+        /*        private TicketIndexViewModel ReadTicketIndexViewModelFromSession()
+                {
+                    return JsonConvert.DeserializeObject<TicketIndexViewModel>(HttpContext.Session.GetString("model"));
+                }*/
+        private async Task<int>  getCompanyNr()
         {
-            return JsonConvert.DeserializeObject<TicketIndexViewModel>(HttpContext.Session.GetString("model"));
-        }*/
+
+            var user = await _userManager.GetUserAsync(User);
+            if (User.IsInRole("SupportManager"))
+            {
+                //get support manager connected 
+                return -1;
+            }
+            else
+            {
+                //get contactperson matching with signed in user
+                ContactPerson contactPerson = _contactPersonRepository.getById(user.Id);
+                return contactPerson.Company.CompanyNr;
+            }
+        }
+
 
     }
 }
